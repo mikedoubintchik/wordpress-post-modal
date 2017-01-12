@@ -31,3 +31,6 @@ Only the content of the page you write in the WordPress WYSIWYG editor will appe
 
 = 1.0 =
 * Initial release
+
+== Upgrade Notice ==
+This is the initial release
