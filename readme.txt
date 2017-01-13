@@ -8,15 +8,17 @@ Stable tag: 1.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin allows you to open up page content inside a modal window from another page.
+This plugin allows you to open up page or post content inside a modal window from another page.
 
 == Description ==
-This plugin allows you to open up page content inside a modal window from another page.
+This plugin allows you to open up page or post content inside a modal window from another page.
 
 == Installation ==
 1. Upload `wordpress-post-modal.zip` to the `/wp-content/plugins/` directory and extract
 2. Activate the plugin through the \'Plugins\' menu in WordPress
 3. Add the class `modal-link` to open the href of that link into a modal window.
+4. If you want to show an external page in the modal, add the attribute `data-div="#id"` to your .modal-link where the <strong>id</strong> is the container on the target external page that you would like to display inside the modal
+5. A page can have multiple modal links
 
 == Frequently Asked Questions ==
 

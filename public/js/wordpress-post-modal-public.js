@@ -29,6 +29,16 @@
      * practising this, we should strive to set a better example in our own work.
      */
 
+
+    $.fn.isExternal = function () {
+
+        var host = new RegExp('/' + window.location.host + '/');
+        var link = 'http://' + window.location.host + this.attr('href');
+
+        return !host.test(link);
+
+    };
+
     $(function () {
         // Close modal
         $('.close-modal').click(function () {
@@ -41,20 +51,41 @@
         function checkWidth() {
             var windowsize = $window.width();
 
+            var $pluginUrl = $('#modal-ready').attr('data-plugin-path');
+
             // if the window is greater than 767px wide then do below. we don't want the modal to show on mobile devices and instead the link will be followed.
             if (windowsize > 767) {
                 $('.modal-link').click(function (e) {
+
+                    // Define variables
                     var modalContent = $('#modal-content');
-                    var post_link = $(this).attr('href'); // this can be used in WordPress and it will pull the content of the page in the href
+                    var $this = $(this);
+                    var postLink = $this.attr('href');
+                    var dataDiv = $this.attr('data-div');
 
-                    e.preventDefault(); // prevent link from being followed
+                    // prevent link from being followed
+                    e.preventDefault();
 
-                    $('.modal').addClass('show', 1000, 'easeOutSine'); // show class to display the previously hidden modal
-                    modalContent.html('loading...'); // display loading animation or in this case static content
-                    modalContent.load(post_link + ' #modal-ready'); // for dynamic content, change this to use the load() function instead of html()
-                    $('html, body').animate({ // if you're below the fold this will animate and scroll to the modal
+                    // show class to display the previously hidden modal
+                    $('.modal').addClass('show', 1000, 'easeOutSine');
+
+                    // display loading animation or in this case static content
+                    modalContent.html('<img class="loading" src="' + $pluginUrl + '/wordpress-post-modal/public/images/loading.gif" />');
+
+                    // Load content from external
+                    if ($this.isExternal()) {
+                        modalContent.load($pluginUrl + '/wordpress-post-modal/public/includes/proxy.php?url=' + encodeURI($this.attr('href')) + ' #' + dataDiv);
+                    }
+                    // Load content from internal
+                    else {
+                        modalContent.load(postLink + ' #modal-ready');
+                    }
+
+                    // if you're below the fold this will animate and scroll to the modal
+                    $('html, body').animate({
                         scrollTop: 0
                     }, 'slow');
+
                     return false;
                 });
             }

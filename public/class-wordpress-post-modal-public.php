@@ -132,9 +132,7 @@ class Wordpress_Post_Modal_Public
      */
     public function wrap_content($content)
     {
-
-        return '<div id="modal-ready">' . $content . '</div>';
-
+        return '<div id="modal-ready" data-plugin-path="' . plugins_url() . '">' . $content . '</div>';
     }
 
 }

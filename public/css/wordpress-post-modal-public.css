@@ -10,8 +10,8 @@
     .modal-wrapper {
         z-index: 999;
         position: absolute;
-        top: calc((100vh - 600px)/2);
-        left: calc((100vw - 600px)/2);
+        top: calc((100vh - 600px) / 2);
+        left: calc((100vw - 600px) / 2);
     }
 
     .modal {
@@ -24,17 +24,25 @@
         color: #000000;
         text-align: center;
     }
+
     .modal .close-modal {
         position: absolute;
         top: 20px;
         right: 15px;
         cursor: pointer;
     }
+
     .modal h1 {
         font-size: 56px;
         margin: 35px 0;
     }
+
     .modal .entry-content p {
         font-size: 16px;
+    }
+
+    .modal .loading {
+        width: 100px;
+        margin-top: 50px;
     }
 }
