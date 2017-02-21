@@ -6,8 +6,8 @@
  * @link       https://allurewebsolutions.com
  * @since      1.0.0
  *
- * @package    Wordpress_Post_Modal
- * @subpackage Wordpress_Post_Modal/includes
+ * @package    WP_Post_Modal
+ * @subpackage WP_Post_Modal/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  * This class defines all code necessary to run during the plugin's activation.
  *
  * @since      1.0.0
- * @package    Wordpress_Post_Modal
- * @subpackage Wordpress_Post_Modal/includes
+ * @package    WP_Post_Modal
+ * @subpackage WP_Post_Modal/includes
  * @author     Allure Web Solutions <info@allurewebsolutions.com>
  */
-class Wordpress_Post_Modal_Activator {
+class WP_Post_Modal_Activator {
 
 	/**
 	 * Short Description. (use period)

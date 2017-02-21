@@ -1,28 +1,32 @@
 @media only screen and (min-width: 768px) {
-    .hide {
-        display: none;
-    }
-
-    .show {
-        display: block !important;
-    }
-
     .modal-wrapper {
         z-index: 999;
         position: absolute;
-        top: calc((100vh - 600px) / 2);
+        top: 0;
         left: calc((100vw - 600px) / 2);
+        transition: all 2s ease;
+        overflow: hidden;
+    }
+
+    .modal-wrapper.show {
+        top: calc((100vh - 600px) / 2);
     }
 
     .modal {
         display: none;
         position: relative;
         width: 600px;
-        min-height: 300px;
         padding: 20px 15px;
         background: #EEEEEE;
         color: #000000;
         text-align: center;
+        transition: all 2s ease;
+        max-height: 200px;
+    }
+
+    .modal.show {
+        display: block;
+        max-height: 100000px;
     }
 
     .modal .close-modal {
@@ -43,6 +47,6 @@
 
     .modal .loading {
         width: 100px;
-        margin-top: 50px;
+        margin-top: 20px;
     }
 }

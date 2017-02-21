@@ -8,8 +8,8 @@
  * @link       https://allurewebsolutions.com
  * @since      1.0.0
  *
- * @package    Wordpress_Post_Modal
- * @subpackage Wordpress_Post_Modal/admin/partials
+ * @package    WP_Post_Modal
+ * @subpackage WP_Post_Modal/admin/partials
  */
 ?>
 

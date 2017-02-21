@@ -22,7 +22,7 @@
  * @link       https://allurewebsolutions.com
  * @since      1.0.0
  *
- * @package    Wordpress_Post_Modal
+ * @package    WP_Post_Modal
  */
 
 // If uninstall not called from WordPress, then exit.

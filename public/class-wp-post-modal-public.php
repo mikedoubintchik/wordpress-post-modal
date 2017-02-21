@@ -6,8 +6,8 @@
  * @link       https://allurewebsolutions.com
  * @since      1.0.0
  *
- * @package    Wordpress_Post_Modal
- * @subpackage Wordpress_Post_Modal/public
+ * @package    WP_Post_Modal
+ * @subpackage WP_Post_Modal/public
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Wordpress_Post_Modal
- * @subpackage Wordpress_Post_Modal/public
+ * @package    WP_Post_Modal
+ * @subpackage WP_Post_Modal/public
  * @author     Allure Web Solutions <info@allurewebsolutions.com>
  */
-class Wordpress_Post_Modal_Public
+class WP_Post_Modal_Public
 {
 
     /**
@@ -68,15 +68,15 @@ class Wordpress_Post_Modal_Public
          * This function is provided for demonstration purposes only.
          *
          * An instance of this class should be passed to the run() function
-         * defined in Wordpress_Post_Modal_Loader as all of the hooks are defined
+         * defined in WP_Post_Modal_Loader as all of the hooks are defined
          * in that particular class.
          *
-         * The Wordpress_Post_Modal_Loader will then create the relationship
+         * The WP_Post_Modal_Loader will then create the relationship
          * between the defined hooks and the functions defined in this
          * class.
          */
 
-        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/wordpress-post-modal-public.css', array(), $this->version, 'all');
+        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/wp-post-modal-public.css', array(), $this->version, 'all');
 
     }
 
@@ -92,15 +92,15 @@ class Wordpress_Post_Modal_Public
          * This function is provided for demonstration purposes only.
          *
          * An instance of this class should be passed to the run() function
-         * defined in Wordpress_Post_Modal_Loader as all of the hooks are defined
+         * defined in WP_Post_Modal_Loader as all of the hooks are defined
          * in that particular class.
          *
-         * The Wordpress_Post_Modal_Loader will then create the relationship
+         * The WP_Post_Modal_Loader will then create the relationship
          * between the defined hooks and the functions defined in this
          * class.
          */
 
-        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/wordpress-post-modal-public.js', array('jquery'), $this->version, false);
+        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/wp-post-modal-public.js', array('jquery'), $this->version, false);
 
     }
 

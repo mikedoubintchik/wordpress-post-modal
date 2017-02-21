@@ -1,4 +1,4 @@
-#WordPress Post Modal
+#WP Post Modal
 Contributors: allurewebsolutions  
 Donate link: https://allurewebsolutions.com/product/donation 
 Tags: modal, popup
@@ -17,7 +17,7 @@ This plugin allows you to open up page content inside a modal window from anothe
 
 == Installation ==
 
-1. Upload `wordpress-post-modal.zip` to the `/wp-content/plugins/` directory and extract
+1. Upload `wp-post-modal.zip` to the `/wp-content/plugins/` directory and extract
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Add the class `modal-link` to open the href of that link into a modal window
 4. If you want to show an external page in the modal, add the attribute `data-div="#id"` to your .modal-link where the <strong>id</strong> is the container on the target external page that you would like to display inside the modal

@@ -6,8 +6,8 @@
  * @link       https://allurewebsolutions.com
  * @since      1.0.0
  *
- * @package    Wordpress_Post_Modal
- * @subpackage Wordpress_Post_Modal/includes
+ * @package    WP_Post_Modal
+ * @subpackage WP_Post_Modal/includes
  */
 
 /**
@@ -17,11 +17,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Wordpress_Post_Modal
- * @subpackage Wordpress_Post_Modal/includes
+ * @package    WP_Post_Modal
+ * @subpackage WP_Post_Modal/includes
  * @author     Allure Web Solutions <info@allurewebsolutions.com>
  */
-class Wordpress_Post_Modal_Loader {
+class WP_Post_Modal_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

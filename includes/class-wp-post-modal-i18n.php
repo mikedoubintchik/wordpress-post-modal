@@ -9,8 +9,8 @@
  * @link       https://allurewebsolutions.com
  * @since      1.0.0
  *
- * @package    Wordpress_Post_Modal
- * @subpackage Wordpress_Post_Modal/includes
+ * @package    WP_Post_Modal
+ * @subpackage WP_Post_Modal/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Wordpress_Post_Modal
- * @subpackage Wordpress_Post_Modal/includes
+ * @package    WP_Post_Modal
+ * @subpackage WP_Post_Modal/includes
  * @author     Allure Web Solutions <info@allurewebsolutions.com>
  */
-class Wordpress_Post_Modal_i18n {
+class WP_Post_Modal_i18n {
 
 
 	/**
@@ -35,7 +35,7 @@ class Wordpress_Post_Modal_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'wordpress-post-modal',
+			'wp-post-modal',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

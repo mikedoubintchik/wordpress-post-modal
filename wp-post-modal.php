@@ -10,10 +10,10 @@
  *
  * @link              https://allurewebsolutions.com
  * @since             1.0.0
- * @package           Wordpress_Post_Modal
+ * @package           WP_Post_Modal
  *
- * @wordpress-plugin
- * Plugin Name:       WordPress Post Modal
+ * @wp-plugin
+ * Plugin Name:       WP Post Modal
  * Plugin URI:        https://allurewebsolutions.com
  * Description:       This plugin allows any content to be pulled into a modal window dynamically. To use, just create a link with class "modal-link".
  * Version:           1.0.0
@@ -21,7 +21,7 @@
  * Author URI:        https://allurewebsolutions.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       wordpress-post-modal
+ * Text Domain:       wp-post-modal
  * Domain Path:       /languages
  */
 
@@ -32,30 +32,30 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-wordpress-post-modal-activator.php
+ * This action is documented in includes/class-wp-post-modal-activator.php
  */
-function activate_wordpress_post_modal() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wordpress-post-modal-activator.php';
-	Wordpress_Post_Modal_Activator::activate();
+function activate_wp_post_modal() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-post-modal-activator.php';
+	WP_Post_Modal_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-wordpress-post-modal-deactivator.php
+ * This action is documented in includes/class-wp-post-modal-deactivator.php
  */
-function deactivate_wordpress_post_modal() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wordpress-post-modal-deactivator.php';
-	Wordpress_Post_Modal_Deactivator::deactivate();
+function deactivate_wp_post_modal() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-post-modal-deactivator.php';
+	WP_Post_Modal_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_wordpress_post_modal' );
-register_deactivation_hook( __FILE__, 'deactivate_wordpress_post_modal' );
+register_activation_hook( __FILE__, 'activate_wp_post_modal' );
+register_deactivation_hook( __FILE__, 'deactivate_wp_post_modal' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-wordpress-post-modal.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-wp-post-modal.php';
 
 /**
  * Begins execution of the plugin.
@@ -66,10 +66,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-wordpress-post-modal.php';
  *
  * @since    1.0.0
  */
-function run_wordpress_post_modal() {
+function run_wp_post_modal() {
 
-	$plugin = new Wordpress_Post_Modal();
+	$plugin = new WP_Post_Modal();
 	$plugin->run();
 
 }
-run_wordpress_post_modal();
+run_wp_post_modal();

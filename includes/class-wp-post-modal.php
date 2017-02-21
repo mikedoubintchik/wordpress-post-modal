@@ -9,8 +9,8 @@
  * @link       https://allurewebsolutions.com
  * @since      1.0.0
  *
- * @package    Wordpress_Post_Modal
- * @subpackage Wordpress_Post_Modal/includes
+ * @package    WP_Post_Modal
+ * @subpackage WP_Post_Modal/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Wordpress_Post_Modal
- * @subpackage Wordpress_Post_Modal/includes
+ * @package    WP_Post_Modal
+ * @subpackage WP_Post_Modal/includes
  * @author     Allure Web Solutions <info@allurewebsolutions.com>
  */
-class Wordpress_Post_Modal
+class WP_Post_Modal
 {
 
     /**
@@ -36,7 +36,7 @@ class Wordpress_Post_Modal
      *
      * @since    1.0.0
      * @access   protected
-     * @var      Wordpress_Post_Modal_Loader $loader Maintains and registers all hooks for the plugin.
+     * @var      WP_Post_Modal_Loader $loader Maintains and registers all hooks for the plugin.
      */
     protected $loader;
 
@@ -70,7 +70,7 @@ class Wordpress_Post_Modal
     public function __construct()
     {
 
-        $this->plugin_name = 'wordpress-post-modal';
+        $this->plugin_name = 'wp-post-modal';
         $this->version = '1.0.0';
 
         $this->load_dependencies();
@@ -85,10 +85,10 @@ class Wordpress_Post_Modal
      *
      * Include the following files that make up the plugin:
      *
-     * - Wordpress_Post_Modal_Loader. Orchestrates the hooks of the plugin.
-     * - Wordpress_Post_Modal_i18n. Defines internationalization functionality.
-     * - Wordpress_Post_Modal_Admin. Defines all hooks for the admin area.
-     * - Wordpress_Post_Modal_Public. Defines all hooks for the public side of the site.
+     * - WP_Post_Modal_Loader. Orchestrates the hooks of the plugin.
+     * - WP_Post_Modal_i18n. Defines internationalization functionality.
+     * - WP_Post_Modal_Admin. Defines all hooks for the admin area.
+     * - WP_Post_Modal_Public. Defines all hooks for the public side of the site.
      *
      * Create an instance of the loader which will be used to register the hooks
      * with WordPress.
@@ -103,33 +103,33 @@ class Wordpress_Post_Modal
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-wordpress-post-modal-loader.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-wp-post-modal-loader.php';
 
         /**
          * The class responsible for defining internationalization functionality
          * of the plugin.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-wordpress-post-modal-i18n.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-wp-post-modal-i18n.php';
 
         /**
          * The class responsible for defining all actions that occur in the admin area.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-wordpress-post-modal-admin.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-wp-post-modal-admin.php';
 
         /**
          * The class responsible for defining all actions that occur in the public-facing
          * side of the site.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-wordpress-post-modal-public.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-wp-post-modal-public.php';
 
-        $this->loader = new Wordpress_Post_Modal_Loader();
+        $this->loader = new WP_Post_Modal_Loader();
 
     }
 
     /**
      * Define the locale for this plugin for internationalization.
      *
-     * Uses the Wordpress_Post_Modal_i18n class in order to set the domain and to register the hook
+     * Uses the WP_Post_Modal_i18n class in order to set the domain and to register the hook
      * with WordPress.
      *
      * @since    1.0.0
@@ -138,7 +138,7 @@ class Wordpress_Post_Modal
     private function set_locale()
     {
 
-        $plugin_i18n = new Wordpress_Post_Modal_i18n();
+        $plugin_i18n = new WP_Post_Modal_i18n();
 
         $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
 
@@ -154,7 +154,7 @@ class Wordpress_Post_Modal
     private function define_admin_hooks()
     {
 
-        $plugin_admin = new Wordpress_Post_Modal_Admin($this->get_plugin_name(), $this->get_version());
+        $plugin_admin = new WP_Post_Modal_Admin($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
@@ -171,7 +171,7 @@ class Wordpress_Post_Modal
     private function define_public_hooks()
     {
 
-        $plugin_public = new Wordpress_Post_Modal_Public($this->get_plugin_name(), $this->get_version());
+        $plugin_public = new WP_Post_Modal_Public($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
@@ -207,7 +207,7 @@ class Wordpress_Post_Modal
      * The reference to the class that orchestrates the hooks with the plugin.
      *
      * @since     1.0.0
-     * @return    Wordpress_Post_Modal_Loader    Orchestrates the hooks of the plugin.
+     * @return    WP_Post_Modal_Loader    Orchestrates the hooks of the plugin.
      */
     public function get_loader()
     {
