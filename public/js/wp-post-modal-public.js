@@ -32,12 +32,9 @@
 
     $.fn.isExternal = function() {
 
-        var host = window.location.host;
-        var link = $('<a>', {
-            href: this.attr('href')
-        })[0].hostname;
-
-        return (link !== host);
+        var host = new RegExp('/' + window.location.host + '/');
+        var link = 'http://' + window.location.host + this.attr('href');
+        return !host.test(link);
 
     };
 
