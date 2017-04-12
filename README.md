@@ -3,8 +3,8 @@ Contributors: allurewebsolutions
 Donate link: https://allurewebsolutions.com/product/donation 
 Tags: modal, popup
 Requires at least: 3.4  
-Tested up to: 4.7.1  
-Stable tag: 1.0  
+Tested up to: 4.7.3  
+Stable tag: 1.1  
 License: GPLv2 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -37,5 +37,8 @@ Only the content of the page you write in the WordPress WYSIWYG editor will appe
 
 = 1.0 =
 * Initial release
+
+= 1.3 =
+* Added color overlay
 
 == Upgrade Notice ==
