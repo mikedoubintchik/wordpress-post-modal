@@ -45,9 +45,12 @@
     $(function () {
 
         // Close modal
-        $('.close-modal').click(function () {
-            $('.modal-wrapper').removeClass('show')
+        function closeModal() {
+            $('.modal-wrapper').removeClass('show').hide();
             $('.modal').removeClass('show');
+        }
+        $(document).on('click', '.close-modal', function () {
+            closeModal();
         });
 
         // Detect windows width function
@@ -84,7 +87,7 @@
                     }
 
                     // show class to display the previously hidden modal
-                    $('.modal-wrapper').slideDown("slow", function () {
+                    $('.modal-wrapper').slideDown('slow', function () {
                         $(this).addClass('show');
                         $('.modal').addClass('show');
                     });
