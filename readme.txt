@@ -4,7 +4,7 @@ Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.4
 Tested up to: 4.7.3
-Stable tag: 1.3
+Stable tag: 1.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,4 +31,4 @@ Only the content of the page you write in the WordPress WYSIWYG editor will appe
 
 == Changelog ==
 1.0: Initial release
-1.3: Add color overlay
+1.4: Add color overlay
