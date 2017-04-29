@@ -61,7 +61,7 @@
 
             // if the window is greater than 767px wide then do below. we don't want the modal to show on mobile devices and instead the link will be followed.
             if (windowsize > 767) {
-                $('.modal-link').click(function (e) {
+                $('body').on('click', '.modal-link', function (e) {
 
                     // Define variables
                     var modalContent = $('#modal-content');
