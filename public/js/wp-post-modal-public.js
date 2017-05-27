@@ -65,7 +65,7 @@
 
                     // Define variables
                     var modalContent = $('#modal-content');
-                    var $this = $(this);
+                    var $this = ($(this).attr('href') != null) ? $(this) : $(this).children("a").first();
                     var postLink = $this.attr('href');
                     var dataDivID = ' #' + $this.attr('data-div');
                     var $pluginUrl = $('#modal-ready').attr('data-plugin-path');
