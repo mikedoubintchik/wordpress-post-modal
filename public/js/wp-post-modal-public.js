@@ -100,7 +100,7 @@
                     return false;
                 });
             }
-        };
+        }
 
         checkWidth(); // excute function to check width on load
         $(window).resize(checkWidth); // execute function to check width on resize
