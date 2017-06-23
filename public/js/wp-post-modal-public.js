@@ -44,17 +44,15 @@
 
     $(function () {
 
-        // Close modal
-        function closeModal() {
-            $('.modal-wrapper').removeClass('show').hide();
-            $('.modal').removeClass('show');
-        }
-        $(document).on('click', '.close-modal', function () {
-            closeModal();
-        });
-
         // Detect windows width function
         var $window = $(window);
+
+        // Close modal
+        $(document).on('click', '.close-modal', function () {
+            $('.modal-wrapper').removeClass('show').hide();
+            $('.modal').removeClass('show');
+            $('#modal-content').html('');
+        });
 
         function checkWidth() {
             var windowsize = $window.width();
@@ -92,18 +90,13 @@
                         $('.modal').addClass('show');
                     });
 
-                    // if you're below the fold this will animate and scroll to the modal
-                    $('html, body').animate({
-                        scrollTop: 0
-                    }, 'slow');
-
                     return false;
                 });
             }
         }
 
-        checkWidth(); // excute function to check width on load
-        $(window).resize(checkWidth); // execute function to check width on resize
+        checkWidth();
+        $(window).resize(checkWidth);
     });
 
 
