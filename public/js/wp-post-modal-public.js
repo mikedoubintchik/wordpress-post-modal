@@ -54,6 +54,17 @@
             $('#modal-content').html('');
         });
 
+        $(window).on('click', function () {
+            $('.modal-wrapper').removeClass('show').hide();
+            $('.modal').removeClass('show');
+            $('#modal-content').html('');
+        });
+
+        $(document).on('click', '.modal', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+
         function checkWidth() {
             var windowsize = $window.width();
 
