@@ -33,3 +33,4 @@ Only the content of the page you write in the WordPress WYSIWYG editor will appe
 1.0: Initial release
 1.4: Add color overlay
 1.4.1: Bug fix
+1.4.2: Add click outside modal functionality
