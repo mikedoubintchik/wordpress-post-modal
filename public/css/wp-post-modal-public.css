@@ -29,7 +29,6 @@
         padding: 20px;
         border: 1px solid #888;
         width: 70%; /* Could be more or less, depending on screen size */
-        text-align: center;
         transition: all 2s ease;
         opacity: 0;
     }
