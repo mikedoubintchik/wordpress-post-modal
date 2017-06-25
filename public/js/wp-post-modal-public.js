@@ -61,7 +61,6 @@
         });
 
         $(document).on('click', '.modal', function (e) {
-            e.preventDefault();
             e.stopPropagation();
         });
 
