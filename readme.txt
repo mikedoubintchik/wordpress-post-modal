@@ -1,4 +1,4 @@
-=== WP Post Modal ===
+=== WP Post Popup ===
 Contributors: allurewebsolutions
 Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
@@ -8,10 +8,24 @@ Stable tag: 1.4.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin allows you to open up page or post content inside a modal window from another page.
+Turn any page or post into a popup instantly!
 
 == Description ==
-This plugin allows you to open up page or post content inside a modal window from another page.
+Turn any page or post into a popup instantly! Add a link anywhere, with a simple change, and the page or post (or any other post type) becomes a popup window. You can also have external web pages show in the popup as well.
+
+Just the content of the page or post will show, the part you put into the editor when creating the page or post. No headers, footers, nor sidebars. Perfect for showing the Website Policy, or making an FAQ, etc., anywhere you need a user triggered popup window.
+
+How simple is it? First, add a link to the page you want to show into your post (or page or widget or ...) and it will look like this in the text editor:
+
+`<a href="http://my-site.com/privacy-policy/>Our Privacy Policy</a>`
+
+Next, edit that link in the text editor by adding class="modal-link" into the link to make this:
+
+`<a class="modal-link" href="http://my-site.com/privacy-policy/>Our Privacy Policy</a>`
+
+[CLICK FOR DEMO](http://spedfaq.com/pop-up-test/)
+
+And now you have a popup!
 
 == Installation ==
 1. Upload `wp-post-modal.zip` to the `/wp-content/plugins/` directory and extract

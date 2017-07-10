@@ -13,7 +13,7 @@
  * @package           WP_Post_Modal
  *
  * @wp-plugin
- * Plugin Name:       WP Post Modal
+ * Plugin Name:       WP Post Popup
  * Plugin URI:        https://allurewebsolutions.com
  * Description:       This plugin allows any content to be pulled into a modal window dynamically. To use, just create a link with class "modal-link".
  * Version:           1.4.2
