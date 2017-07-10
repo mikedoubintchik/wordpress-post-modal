@@ -13,8 +13,6 @@
         width: 100%; /* Full width */
         height: 100%; /* Full height */
         overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0, 0, 0); /* Fallback color */
-        background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
     }
 
     .modal-wrapper.show {
@@ -23,19 +21,10 @@
 
     .modal {
         display: none;
-        position: relative;
-        background-color: #fefefe;
-        margin: 10vh auto; /* 10vh from the top and centered */
-        padding: 20px;
-        border: 1px solid #888;
-        width: 70%; /* Could be more or less, depending on screen size */
-        transition: all 2s ease;
-        opacity: 0;
     }
 
     .modal.show {
         display: block;
-        opacity: 1;
     }
 
     .modal .close-modal {
@@ -49,16 +38,32 @@
         display: block;
     }
 
-    .modal h1 {
+    /** styled **/
+    .modal-wrapper.styled {
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+    }
+
+    .modal-wrapper.styled .modal {
+        position: relative;
+        background-color: #fefefe;
+        margin: 10vh auto; /* 10vh from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 70%; /* Could be more or less, depending on screen size */
+        transition: all 2s ease;
+    }
+
+    .modal-wrapper.styled .modal h1 {
         font-size: 56px;
         margin: 35px 0;
     }
 
-    .modal .entry-content p {
+    .modal-wrapper.styled .modal .entry-content p {
         font-size: 16px;
     }
 
-    .modal .loading {
+    .modal-wrapper.styled .modal .loading {
         display: block;
         width: 100px;
         margin: auto;

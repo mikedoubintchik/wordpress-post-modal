@@ -111,8 +111,11 @@ class WP_Post_Modal_Public
      */
     public function modal_wrapper()
     {
+
+        $styled = (get_option('wp_post_modal_styling') === 'styling' ? 'styled' : '');
+
         $HTML = '';
-        $HTML .= '<div class="modal-wrapper">';
+        $HTML .= '<div class="modal-wrapper ' . $styled . '">';
         $HTML .= '<div class="modal">';
         $HTML .= '<div class="close-modal">X</div>';
         $HTML .= '<div id="modal-content"></div>';
