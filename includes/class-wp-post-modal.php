@@ -161,6 +161,9 @@ class WP_Post_Modal
 
         $this->loader->add_action('admin_menu', $plugin_admin, 'add_options_page');
         $this->loader->add_action('admin_init', $plugin_admin, 'register_setting');
+
+        $this->loader->add_filter('mce_buttons', $plugin_admin, 'register_custom_mce_buttons');
+        $this->loader->add_filter("mce_external_plugins", $plugin_admin, "enqueue_custom_mce_scripts");
     }
 
     /**
