@@ -7,7 +7,7 @@
             ed.addButton('modal_link', {
                 title: "Insert/Edit Popup Link",
                 cmd: "add_modal_link",
-                image: "https://cdn3.iconfinder.com/data/icons/softwaredemo/PNG/32x32/Circle_Green.png"
+                image: "https://maxcdn.icons8.com/Share/icon/Dusk/User_Interface//details_popup1600.png"
             });
 
             ed.addCommand('add_modal_link', function () {
@@ -33,7 +33,7 @@
                             type: 'textbox',
                             name: 'text',
                             value: (anchorText ? anchorText : ''),
-                            label: 'Anchor Text'
+                            label: 'Link Text'
                         },
                         {
                             type: 'container',
