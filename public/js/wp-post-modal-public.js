@@ -38,10 +38,6 @@
 
     };
 
-
-    // console.log('referrer: ' + document.referrer.split('/')[2]);
-    // console.log('host: ' + window.location.host);
-
     $(function () {
 
         // Detect windows width function
@@ -77,13 +73,16 @@
                     var postLink = $this.attr('href');
                     var dataDivID = ' #' + $this.attr('data-div');
                     var $pluginUrl = $('#modal-ready').attr('data-plugin-path');
+                    var styled = ($('.modal-wrapper').hasClass('styled') ? 'yes' : null);
                     var loader = '<img class="loading" src="' + $pluginUrl + '/wp-post-modal/public/images/loading.gif" />';
 
                     // prevent link from being followed
                     e.preventDefault();
 
                     // display loading animation or in this case static content
-                    modalContent.html(loader);
+                    if (styled) {
+                        modalContent.html(loader);
+                    }
 
                     // Load content from external
                     if ($this.isExternal()) {
@@ -109,5 +108,20 @@
         $(window).resize(checkWidth);
     });
 
+    // Suppress modal link redirect in WP Customizer
+    $(window).on('load', function () {
+        if ($('#customize-preview')) {
+            var body = $('body');
+            body.off('click.preview');
+
+            body.on('click.preview', 'a[href]:not(.modal-link)', function (e) {
+                var link = $(this);
+                e.preventDefault();
+                wp.customize.preview.send('scroll', 0);
+                wp.customize.preview.send('url', link.prop('href'));
+            });
+
+        }
+    });
 
 })(jQuery);
