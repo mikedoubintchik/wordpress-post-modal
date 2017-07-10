@@ -72,6 +72,9 @@ As many as you like.
 
 == Screenshots ==
 1. How the modal looks with simple text page content
+2. Style the popup within the WP Customizer
+3. Activate basic styling in plugin settings
+4. Easily insert popup link with custom button
 
 == Changelog ==
 1.0: Initial release
