@@ -109,8 +109,8 @@
     });
 
     // Suppress modal link redirect in WP Customizer
-    $(window).on('load', function () {
-        if ($('#customize-preview')) {
+    function modalCustomizer() {
+        if (wp.customize) {
             var body = $('body');
             body.off('click.preview');
 
@@ -120,8 +120,11 @@
                 wp.customize.preview.send('scroll', 0);
                 wp.customize.preview.send('url', link.prop('href'));
             });
-
         }
+    }
+
+    $(window).on('load', function () {
+        modalCustomizer();
     });
 
 })(jQuery);

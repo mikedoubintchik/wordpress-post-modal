@@ -57,12 +57,10 @@ If you link to your privacy policy with a link like this:
 Then edit that link in the text editor by adding class="modal-link" into the link to make this:
 `<a class="modal-link" href="http://my-site.com/privacy-policy/>Our Privacy Policy</a>`
 
-If the link goes to a page on an external site, you need to find the name of the DIV container that has the content you want. Once you know that, you need to add data-div="xx" to the link, where xx is the content container.
-`<a class="modal-link" href="https://en.wikipedia.org/wiki/Apple" data-div="bodyContent">What is an apple?</a>`
+If the link goes to a page on an external site, you need to find the name of the DIV container that has the content you want. Once you know that, you need to add data-div="xx" to the link, where xx is the content container. `<a class="modal-link" href="https://en.wikipedia.org/wiki/Apple" data-div="bodyContent">What is an apple?</a>`
 
 = Can I change the look of trigger link? =
-Absolutely, any way you want. You can turn it into a button like this:
-`<a class="modal-link" href="http://my-site/privacy-policy/"><button type="button">Our Privacy Policy</button></a>`
+Absolutely, any way you want. You can turn it into a button like this: `<a class="modal-link" href="http://my-site/privacy-policy/"><button type="button">Our Privacy Policy</button></a>`
 
 = How do I change the look of the popup it self? =
 You can change the look of the popup with CSS. That will be explained another time with documentation, etc.
