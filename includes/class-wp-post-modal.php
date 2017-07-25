@@ -82,7 +82,7 @@ class WP_Post_Modal
 
     /**
      * Load the required dependencies for this plugin.
-     *
+     *q
      * Include the following files that make up the plugin:
      *
      * - WP_Post_Modal_Loader. Orchestrates the hooks of the plugin.
@@ -91,7 +91,7 @@ class WP_Post_Modal
      * - WP_Post_Modal_Public. Defines all hooks for the public side of the site.
      *
      * Create an instance of the loader which will be used to register the hooks
-     * with WordPress.
+     * with WordPress.`
      *
      * @since    1.0.0
      * @access   private
@@ -162,6 +162,12 @@ class WP_Post_Modal
         $this->loader->add_action('admin_menu', $plugin_admin, 'add_options_page');
         $this->loader->add_action('admin_init', $plugin_admin, 'register_setting');
 
+        $this->loader->add_filter('plugin_action_links_' . plugin_basename(plugin_dir_path(__DIR__) . $this->plugin_name . '.php'), $plugin_admin, 'add_settings_link');
+
+        $this->loader->add_filter('admin_notices', $plugin_admin, 'admin_notice');
+        $this->loader->add_filter('network_admin_notices', $plugin_admin, 'admin_notice');
+
+
         $this->loader->add_filter('mce_buttons', $plugin_admin, 'register_custom_mce_buttons');
         $this->loader->add_filter("mce_external_plugins", $plugin_admin, "enqueue_custom_mce_scripts");
     }
@@ -181,8 +187,9 @@ class WP_Post_Modal
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
-        $this->loader->add_action('the_content', $plugin_public, 'wrap_content');
         $this->loader->add_action('wp_footer', $plugin_public, 'modal_wrapper');
+
+        $this->loader->add_action('rest_api_init', $plugin_public, 'any_post_api_route');
 
     }
 

@@ -176,6 +176,7 @@ class WP_Post_Modal_Admin
             array('label_for' => $this->option_name . '_styling')
         );
 
+        // styling example
         add_settings_section(
             $this->option_name . '_styling_example',
             __('Styling Example', 'wp-post-modal'),
@@ -186,6 +187,8 @@ class WP_Post_Modal_Admin
         register_setting($this->plugin_name, $this->option_name . '_close', array($this, $this->option_name . '_sanitize_close'));
         register_setting($this->plugin_name, $this->option_name . '_breakpoint', array($this, $this->option_name . '_sanitize_breakpoint'));
         register_setting($this->plugin_name, $this->option_name . '_styling', array($this, $this->option_name . '_sanitize_styling'));
+        register_setting($this->plugin_name, $this->option_name . '_notice');
+
     }
 
     /**
@@ -222,7 +225,8 @@ class WP_Post_Modal_Admin
                        id="<?php echo $this->option_name . '_breakpoint' ?>"
                        value="<?php echo $breakpoint ?>" placeholder="Enter number without 'px'"/>
             </label>
-            <p>Below this value, the popup link will redirect to the page instead of opening the popup. Enter "0" if you want the popup to work on all screen sizes. If left blank, the default breakpoint is 768px.</p>
+            <p>Below this value, the popup link will redirect to the page instead of opening the popup. Enter "0" if you
+                want the popup to work on all screen sizes. If left blank, the default breakpoint is 768px.</p>
         </fieldset>
         <?php
     }
@@ -235,13 +239,13 @@ class WP_Post_Modal_Admin
      */
     public function wp_post_modal_styling_cb()
     {
-        $styling = get_option($this->option_name . '_styling');
+        $styling = get_option($this->option_name . '_styling', true);
         ?>
         <fieldset>
             <label>
                 <input type="checkbox" name="<?php echo $this->option_name . '_styling' ?>"
                        id="<?php echo $this->option_name . '_styling' ?>"
-                       value="styling" <?php checked($styling, 'styling'); ?>
+                       value="1" <?php echo checked($styling, '1'); ?> />
             </label>
         </fieldset>
         <a href="https://wp-post-modal.allureprojects.com/modal-css/" target="_blank">See CSS used for basic styling</a>
@@ -285,7 +289,7 @@ class WP_Post_Modal_Admin
      * @param $links
      * @return mixed
      */
-    public function plugin_add_settings_link($links)
+    public function add_settings_link($links)
     {
         $settings_link = '<a href="options-general.php?page=wp-post-modal">' . __('Settings') . '</a>';
         array_push($links, $settings_link);
@@ -310,5 +314,25 @@ class WP_Post_Modal_Admin
         //enqueue TinyMCE plugin script with its ID.
         $plugin_array['wp_post_modal'] = plugin_dir_url(__FILE__) . "js/mce-button.js";
         return $plugin_array;
+    }
+
+    /**
+     * TODO: Admin notices
+     */
+    public function admin_notice()
+    {
+        $user_id = get_current_user_id();
+        $message = '<h4>Thanks for installing WP Post Popup!</h4>';
+
+        if (isset($_GET['settings-updated'])) :
+            ?>
+            <div class="notice notice-success is-dismissible">
+                <?php echo $message; ?>
+                <button type="button" class="notice-dismiss">
+                    <span class="screen-reader-text">Dismiss this notice.</span>
+                </button>
+            </div>
+            <?php
+        endif;
     }
 }

@@ -43,13 +43,18 @@
         // Detect windows width function
         var $window = $(window);
 
-        // Close modal
+        /**
+         * Close modal functionality
+         */
+
+        // when clicking on close button
         $(document).on('click', '.close-modal', function () {
             $('.modal-wrapper').removeClass('show').hide();
             $('.modal').removeClass('show');
             $('#modal-content').html('');
         });
 
+        // when clicking outside of modal
         $(window).on('click', function () {
             $('.modal-wrapper').removeClass('show').hide();
             $('.modal').removeClass('show');
@@ -62,36 +67,41 @@
 
         function checkWidth() {
             var windowsize = $window.width();
-            var breakpoint =  $('.modal-wrapper').data('breakpoint');
 
             // if the window is greater than 767px wide then do below. we don't want the modal to show on mobile devices and instead the link will be followed.
-            if (windowsize >= breakpoint) {
+            if (windowsize >= fromPHP.breakpoint) {
                 $('body').on('click', '.modal-link', function (e) {
 
                     // Define variables
                     var modalContent = $('#modal-content');
-                    var $this = ($(this).attr('href') != null) ? $(this) : $(this).children("a").first();
+                    var $this = ($(this).attr('href') != null) ? $(this) : $(this).children('a').first();
                     var postLink = $this.attr('href');
+                    var postUrl = $this[0].pathname.substring(1);
                     var dataDivID = ' #' + $this.attr('data-div');
-                    var $pluginUrl = $('#modal-ready').attr('data-plugin-path');
-                    var styled = ($('.modal-wrapper').hasClass('styled') ? 'yes' : null);
-                    var loader = '<img class="loading" src="' + $pluginUrl + '/wp-post-modal/public/images/loading.gif" />';
+                    var loader = '<img class="loading" src="' + fromPHP.pluginUrl + '/images/loading.gif" />';
 
                     // prevent link from being followed
                     e.preventDefault();
 
                     // display loading animation or in this case static content
-                    if (styled) {
+                    if (fromPHP.styled) {
                         modalContent.html(loader);
                     }
 
                     // Load content from external
                     if ($this.isExternal()) {
-                        modalContent.load($pluginUrl + '/wp-post-modal/public/includes/proxy.php?url=' + encodeURI(postLink) + dataDivID);
+                        modalContent.load(fromPHP.pluginUrl + '/includes/proxy.php?url=' + encodeURI(postLink) + dataDivID);
                     }
                     // Load content from internal
                     else {
-                        modalContent.load(postLink + ' #modal-ready');
+                        $.ajax({
+                            url: '/wp-json/wp-post-modal/v1/any-post-type?slug=' + postUrl,
+                            success: function (data) {
+                                var page = data;
+                                modalContent.html(page.post_content);
+                            },
+                            cache: false
+                        });
                     }
 
                     // show class to display the previously hidden modal

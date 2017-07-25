@@ -101,6 +101,12 @@ class WP_Post_Modal_Public
          */
 
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/wp-post-modal-public.js', array('jquery'), $this->version, false);
+        wp_localize_script($this->plugin_name, 'fromPHP', array(
+            'pluginUrl' => plugin_dir_url(__FILE__),
+            'breakpoint' => (get_option('wp_post_modal_breakpoint') != '' ? get_option('wp_post_modal_breakpoint') : '768'),
+            'styled' => get_option('wp_post_modal_styling'),
+            'ajax_url' => admin_url('admin-ajax.php')
+        ));
 
     }
 
@@ -111,15 +117,12 @@ class WP_Post_Modal_Public
      */
     public function modal_wrapper()
     {
-
-        $styled = (get_option('wp_post_modal_styling') === 'styling' ? 'styled' : '');
+        $styled = (get_option('wp_post_modal_styling') === '1' ? 'styled' : '');
 
         $close = (get_option('wp_post_modal_close') != '' ? get_option('wp_post_modal_close') : '×');
 
-        $breakpoint = (get_option('wp_post_modal_breakpoint') != '' ? get_option('wp_post_modal_breakpoint') : '768');
-
         $HTML = '';
-        $HTML .= '<div class="modal-wrapper ' . $styled . '" data-breakpoint="' . $breakpoint . '">';
+        $HTML .= '<div class="modal-wrapper ' . $styled . '">';
         $HTML .= '<div class="modal">';
         $HTML .= '<div class="close-modal">' . $close . '</div>';
         $HTML .= '<div id="modal-content"></div>';
@@ -130,16 +133,39 @@ class WP_Post_Modal_Public
 
     }
 
-    /**
-     * Wrap content
-     *
-     * @return string
-     *
-     * @since   1.0.0
-     */
-    public function wrap_content($content)
+    public function any_post_api_route()
     {
-        return '<div id="modal-ready" data-plugin-path="' . plugins_url() . '">' . $content . '</div>';
+
+        register_rest_route($this->plugin_name . '/v1', '/any-post-type/', array(
+            'methods' => 'GET',
+            'callback' => array($this, 'get_content_by_slug'),
+            'args' => array(
+                'slug' => array(
+                    'required' => false
+                )
+            )
+        ));
+
     }
 
+    /**
+     *
+     * Get content by slug
+     *
+     * @param WP_REST_Request $request
+     * @return WP_REST_Response
+     */
+    public function get_content_by_slug(WP_REST_Request $request)
+    {
+
+        // get slug from request
+        $slug = $request['slug'];
+
+        // get title by slug
+        $return = get_page_by_path($slug, ARRAY_A, array('page', 'post'));
+
+        $response = new WP_REST_Response($return);
+        return $response;
+
+    }
 }
