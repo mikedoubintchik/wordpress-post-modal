@@ -1,72 +1,259 @@
+/** default styles **/
 .close-modal {
     display: none;
 }
 
-@media only screen and (min-width: 768px) {
-
-    .modal-wrapper {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 1; /* Sit on top */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-    }
-
-    .modal-wrapper.show {
-        display: block;
-    }
-
-    .modal {
-        display: none;
-    }
-
-    .modal.show {
-        display: block;
-    }
-
-    .modal .close-modal {
-        position: absolute;
-        top: 20px;
-        right: 15px;
-        cursor: pointer;
-    }
-
-    .modal.show .close-modal {
-        display: block;
-    }
-
-    /** styled **/
-    .modal-wrapper.styled {
-        background-color: rgb(0, 0, 0); /* Fallback color */
-        background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
-    }
-
-    .modal-wrapper.styled .modal {
-        position: relative;
-        background-color: #fefefe;
-        margin: 10vh auto; /* 10vh from the top and centered */
-        padding: 20px;
-        border: 1px solid #888;
-        width: 70%; /* Could be more or less, depending on screen size */
-        transition: all 2s ease;
-    }
-
-    .modal-wrapper.styled .modal h1 {
-        font-size: 56px;
-        margin: 35px 0;
-    }
-
-    .modal-wrapper.styled .modal .entry-content p {
-        font-size: 16px;
-    }
-
-    .modal-wrapper.styled .modal .loading {
-        display: block;
-        width: 100px;
-        margin: auto;
-        padding: 25vh 0;
-    }
+.modal-wrapper {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
 }
+
+.modal {
+    display: none;
+}
+
+/** activate modal **/
+.modal-wrapper.show,
+.modal.show,
+.modal.show .close-modal {
+    display: block;
+}
+
+/** styled modal **/
+.modal-wrapper.styled {
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+}
+
+.modal-wrapper.styled .modal {
+    position: relative;
+    background-color: #fefefe;
+    margin: 10vh auto; /* 10vh from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%; /* Could be more or less, depending on screen size */
+    transition: all 2s ease;
+}
+
+.modal-wrapper.styled .modal .close-modal {
+    background: transparent;
+    position: absolute;
+    top: -6px;
+    right: 10px;
+    font-size: 2.0em;
+    color: #333;
+    cursor: pointer;
+}
+
+.modal-wrapper.styled .modal h1 {
+    font-size: 56px;
+    margin: 35px 0;
+}
+
+.modal-wrapper.styled .modal .entry-content p {
+    font-size: 16px;
+}
+
+.modal-wrapper.styled .modal .loading {
+    display: block;
+    width: 100px;
+    margin: auto;
+    padding: 25vh 0;
+}
+
+/*** Craig added ***/
+
+.modal-wrapper.styled .modal p {
+    font-size: 16px;
+    font-family: Helvetica, Arial, sans-serif;
+    text-rendering: optimizeLegibility;
+    color: #444;
+    line-height: 1.5em;
+    margin-bottom: 0.8em;
+}
+
+.modal-wrapper.styled .modal h1, h2, h3, h4, h5, h6 {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-wrapper.styled .modal h1 {
+    font-size: 2.5em;
+    margin: 0.3em 0;
+}
+
+.modal-wrapper.styled .modal h2 {
+    font-size: 2.0em;
+    margin: 0.3em 0;
+}
+
+.modal-wrapper.styled .modal h3 {
+    font-size: 1.75em;
+    margin: 0.3em 0;
+}
+
+.modal-wrapper.styled .modal h4 {
+    font-size: 1.50em;
+    margin: 0.3em 0;
+}
+
+.modal-wrapper.styled .modal h5 {
+    font-size: 1.25em;
+    margin: 0.3em 0;
+}
+
+.modal-wrapper.styled .modal h6 {
+    font-size: 1.0em;
+    margin: 0.3em 0;
+    line-height: 1.5em;
+}
+
+.modal-content {
+    padding: 0 0.7em 0em 0.5em;
+}
+
+.modal-wrapper.styled .modal ul li, .modal-wrapper.styled .modal ol li {
+    line-height: 1em;
+    padding-bottom: 0.5em;
+    text-align: justify;
+}
+
+.modal-wrapper.styled .modal ul li {
+    list-style: disc;
+    margin-left: 30px;
+}
+
+.modal-wrapper.styled .modal ol li {
+    list-style: decimal;
+    margin-left: 30px;
+}
+
+.modal-wrapper.styled .modal ol ol {
+    padding: 0.6em;
+}
+
+.modal-wrapper.styled .modal dt {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.modal-wrapper.styled .modal dd {
+    margin: 0;
+    padding: 0.5em 0 0.5em 0;
+}
+
+.modal-wrapper.styled .modal hr {
+    border: 0;
+    height: 30px;
+    border-style: solid;
+    border-color: #8c8c8c;
+    border-width: 1px 0 0 0;
+    border-radius: 20px;
+    background-color: white;
+    margin: 25px;
+}
+
+.modal-wrapper.styled .modal hr:before {
+    display: block;
+    content: "";
+    height: 30px;
+    margin-top: -31px;
+    border-style: solid;
+    border-color: #8c8c8c;
+    border-width: 0 0 1px 0;
+    border-radius: 20px;
+}
+
+.modal-wrapper.styled .modal blockquote {
+    display: block;
+    background: #fff;
+    padding: 15px 20px 15px 45px;
+    margin: 0 0 20px;
+    position: relative;
+
+    /*Font*/
+    font-family: Georgia, serif;
+    font-size: 16px;
+    line-height: 1.2;
+    color: #666;
+    text-align: justify;
+
+    /*Borders - (Optional)*/
+    border-left: 7px solid #009c7b;
+    border-right: 1px solid #009c7b;
+
+    /*Box Shadow - (Optional)*/
+    -moz-box-shadow: 2px 2px 15px #ccc;
+    -webkit-box-shadow: 2px 2px 15px #ccc;
+    box-shadow: 2px 2px 15px #ccc;
+}
+
+.modal-wrapper.styled .modal blockquote::before {
+    content: "\201C"; /*Unicode for Left Double Quote*/
+
+    /*Font*/
+    font-family: Georgia, serif;
+    font-size: 60px;
+    font-weight: bold;
+    color: #999;
+
+    /*Positioning*/
+    position: absolute;
+    left: 10px;
+    top: 5px;
+}
+
+.modal-wrapper.styled .modal blockquote::after {
+    /*Reset to make sure*/
+    content: "";
+}
+
+.modal-wrapper.styled .modal blockquote a {
+    text-decoration: none;
+    background: #eee;
+    cursor: pointer;
+    padding: 0 3px;
+    color: #c76c0c;
+}
+
+.modal-wrapper.styled .modal blockquote a:hover {
+    color: #666;
+}
+
+.modal-wrapper.styled .modal blockquote em {
+    font-style: italic;
+}
+
+.modal-wrapper.styled .modal blockquote cite {
+    color: #999999;
+    font-size: 14px;
+    display: block;
+    margin-top: 5px;
+}
+
+.modal-wrapper.styled .modal blockquote cite:before {
+    content: "\2014 \2009";
+}
+
+.modal-wrapper.styled .modal table {
+
+    color: #757575;
+    font-size: 1em;
+    line-height: 2;
+    margin: 0 0 24px;
+    width: 100%;
+}
+
+.modal-wrapper.styled .modal input[type=password] {
+    margin: 5px 0 10px;
+    width: 25%;
+    padding: 7px 0 7px 4px;
+    border: 1px solid #E3E3E3;
+}
+
+/*** end Craig added ***/
