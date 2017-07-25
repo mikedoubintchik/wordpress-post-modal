@@ -114,10 +114,14 @@ class WP_Post_Modal_Public
 
         $styled = (get_option('wp_post_modal_styling') === 'styling' ? 'styled' : '');
 
+        $close = (get_option('wp_post_modal_close') != '' ? get_option('wp_post_modal_close') : '×');
+
+        $breakpoint = (get_option('wp_post_modal_breakpoint') != '' ? get_option('wp_post_modal_breakpoint') : '768');
+
         $HTML = '';
-        $HTML .= '<div class="modal-wrapper ' . $styled . '">';
+        $HTML .= '<div class="modal-wrapper ' . $styled . '" data-breakpoint="' . $breakpoint . '">';
         $HTML .= '<div class="modal">';
-        $HTML .= '<div class="close-modal">X</div>';
+        $HTML .= '<div class="close-modal">' . $close . '</div>';
         $HTML .= '<div id="modal-content"></div>';
         $HTML .= '</div>';
         $HTML .= '</div>';

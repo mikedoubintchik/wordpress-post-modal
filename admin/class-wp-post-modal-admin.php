@@ -146,6 +146,26 @@ class WP_Post_Modal_Admin
             $this->plugin_name
         );
 
+        // Close button
+        add_settings_field(
+            $this->option_name . '_close',
+            __('Close Button', 'wp-post-modal'),
+            array($this, $this->option_name . '_close_cb'),
+            $this->plugin_name,
+            $this->option_name . '_general',
+            array('label_for' => $this->option_name . '_close')
+        );
+
+        // Breakpoint
+        add_settings_field(
+            $this->option_name . '_breakpoint',
+            __('Breakpoint', 'wp-post-modal'),
+            array($this, $this->option_name . '_breakpoint_cb'),
+            $this->plugin_name,
+            $this->option_name . '_general',
+            array('label_for' => $this->option_name . '_breakpoint')
+        );
+
         // Activate styling
         add_settings_field(
             $this->option_name . '_styling',
@@ -163,9 +183,50 @@ class WP_Post_Modal_Admin
             $this->plugin_name
         );
 
-        register_setting($this->plugin_name, $this->option_name . '_switcher', array($this, $this->option_name . '_sanitize_switcher'));
+        register_setting($this->plugin_name, $this->option_name . '_close', array($this, $this->option_name . '_sanitize_close'));
+        register_setting($this->plugin_name, $this->option_name . '_breakpoint', array($this, $this->option_name . '_sanitize_breakpoint'));
         register_setting($this->plugin_name, $this->option_name . '_styling', array($this, $this->option_name . '_sanitize_styling'));
     }
+
+    /**
+     * Render the input for close button
+     *
+     * @since  1.0.0
+     */
+    public function wp_post_modal_close_cb()
+    {
+        $close = get_option($this->option_name . '_close');
+        ?>
+        <fieldset>
+            <label>
+                <input type="text" size="40" name="<?php echo $this->option_name . '_close' ?>"
+                       id="<?php echo $this->option_name . '_close' ?>"
+                       value="<?php echo $close ?>" placeholder="Default is '×'"/>
+            </label>
+        </fieldset>
+        <?php
+    }
+
+    /**
+     * Render the input for breakpoint
+     *
+     * @since  1.0.0
+     */
+    public function wp_post_modal_breakpoint_cb()
+    {
+        $breakpoint = get_option($this->option_name . '_breakpoint');
+        ?>
+        <fieldset>
+            <label>
+                <input type="text" size="40" name="<?php echo $this->option_name . '_breakpoint' ?>"
+                       id="<?php echo $this->option_name . '_breakpoint' ?>"
+                       value="<?php echo $breakpoint ?>" placeholder="Enter number without 'px'"/>
+            </label>
+            <p>Below this value, the popup link will redirect to the page instead of opening the popup. Enter "0" if you want the popup to work on all screen sizes. If left blank, the default breakpoint is 768px.</p>
+        </fieldset>
+        <?php
+    }
+
 
     /**
      * Render the checkbox for styling
@@ -183,6 +244,7 @@ class WP_Post_Modal_Admin
                        value="styling" <?php checked($styling, 'styling'); ?>
             </label>
         </fieldset>
+        <a href="https://wp-post-modal.allureprojects.com/modal-css/" target="_blank">See CSS used for basic styling</a>
         <?php
     }
 
