@@ -49,6 +49,7 @@
     font-size: 2.0em;
     color: #333;
     cursor: pointer;
+    z-index: 1;
 }
 
 .modal-wrapper.styled .modal h1 {
