@@ -89,3 +89,4 @@ Yes, you can have as many as you like.
 1.4.1: Bug fix
 1.4.2: Add click outside modal functionality
 2.0: Version 2.0 contains new plugin settings, insert popup button in Visual Editor, refactored to using WP Rest API, and more!
+2.0.1: AJAX method for loading external content
