@@ -52,15 +52,6 @@
     z-index: 1;
 }
 
-.modal-wrapper.styled .modal h1 {
-    font-size: 56px;
-    margin: 35px 0;
-}
-
-.modal-wrapper.styled .modal .entry-content p {
-    font-size: 16px;
-}
-
 .modal-wrapper.styled .modal .loading {
     display: block;
     width: 100px;
@@ -68,19 +59,15 @@
     padding: 25vh 0;
 }
 
-/*** Craig added ***/
-
-.modal-wrapper.styled .modal p {
+.modal-wrapper.styled .modal .entry-content p {
     font-size: 16px;
-    font-family: Helvetica, Arial, sans-serif;
     text-rendering: optimizeLegibility;
-    color: #444;
     line-height: 1.5em;
     margin-bottom: 0.8em;
 }
 
-.modal-wrapper.styled .modal h1, h2, h3, h4, h5, h6 {
-    font-family: Helvetica, Arial, sans-serif;
+.modal-wrapper.styled .modal-content {
+    padding: 0 0.7em 0 0.5em;
 }
 
 .modal-wrapper.styled .modal h1 {
@@ -114,10 +101,6 @@
     line-height: 1.5em;
 }
 
-.modal-content {
-    padding: 0 0.7em 0em 0.5em;
-}
-
 .modal-wrapper.styled .modal ul li, .modal-wrapper.styled .modal ol li {
     line-height: 1em;
     padding-bottom: 0.5em;
@@ -146,28 +129,6 @@
 .modal-wrapper.styled .modal dd {
     margin: 0;
     padding: 0.5em 0 0.5em 0;
-}
-
-.modal-wrapper.styled .modal hr {
-    border: 0;
-    height: 30px;
-    border-style: solid;
-    border-color: #8c8c8c;
-    border-width: 1px 0 0 0;
-    border-radius: 20px;
-    background-color: white;
-    margin: 25px;
-}
-
-.modal-wrapper.styled .modal hr:before {
-    display: block;
-    content: "";
-    height: 30px;
-    margin-top: -31px;
-    border-style: solid;
-    border-color: #8c8c8c;
-    border-width: 0 0 1px 0;
-    border-radius: 20px;
 }
 
 .modal-wrapper.styled .modal blockquote {

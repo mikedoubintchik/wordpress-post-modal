@@ -155,6 +155,7 @@ class WP_Post_Modal_Public {
 	 * @return WP_REST_Response
 	 */
 	public function get_content_by_slug( WP_REST_Request $request ) {
+		// Visual Composer shortcodes
 		WPBMap::addAllMappedShortcodes();
 
 		// get slug from request

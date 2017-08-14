@@ -4,7 +4,7 @@ Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.0
 Tested up to: 4.8
-Stable tag: 2.0
+Stable tag: 2.0.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,6 +26,8 @@ Next, edit that link in the text editor by adding class="modal-link" into the li
 Or use our new Visual Editor button to quickly and easily insert the link!
 
 [CLICK FOR DEMO](https://wp-post-modal.allureprojects.com/)
+
+[Contact us for feedback and bug reports](https://allurewebsolutions.com/contact)
 
 ##== Installation ==
 1. Upload `wp-post-modal.zip` to the `/wp-content/plugins/` directory and extract
