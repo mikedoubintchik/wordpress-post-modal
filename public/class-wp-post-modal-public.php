@@ -156,7 +156,10 @@ class WP_Post_Modal_Public {
 	 */
 	public function get_content_by_slug( WP_REST_Request $request ) {
 		// Visual Composer shortcodes
-		WPBMap::addAllMappedShortcodes();
+		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		if ( is_plugin_active( 'js_composer/js_composer.php' ) ) {
+			WPBMap::addAllMappedShortcodes();
+		}
 
 		// get slug from request
 		$slug = $request['slug'];

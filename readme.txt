@@ -4,7 +4,7 @@ Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.0
 Tested up to: 4.8
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,3 +92,5 @@ Yes, you can have as many as you like.
 1.4.2: Add click outside modal functionality
 2.0: Version 2.0 contains new plugin settings, insert popup button in Visual Editor, refactored to using WP Rest API, and more!
 2.0.1: AJAX method for loading external content
+2.0.2: Minor styling fixes
+2.0.3: Bug fix for if visual composer installed active
