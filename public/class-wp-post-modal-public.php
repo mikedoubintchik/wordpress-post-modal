@@ -165,7 +165,7 @@ class WP_Post_Modal_Public {
 		$slug = $request['slug'];
 
 		// get title by slug
-		$return = get_page_by_path( $slug, ARRAY_A, array( 'page', 'post' ) );
+		$return = get_page_by_path( $slug, ARRAY_A, get_post_types() );
 
 		// render shortcodes from Visual Composer
 		$return['post_content'] = apply_filters( 'the_content', $return['post_content'] );
