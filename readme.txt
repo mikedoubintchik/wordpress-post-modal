@@ -25,6 +25,8 @@ Next, edit that link in the text editor by adding class="modal-link" into the li
 
 Or use our new Visual Editor button to quickly and easily insert the link!
 
+IMPORTANT NOTE: The href must be pointing to the SLUG for the post/page, not the full URL.
+
 [CLICK FOR DEMO](https://wp-post-modal.allureprojects.com/)
 
 [Contact us for feedback and bug reports](https://allurewebsolutions.com/contact)
