@@ -33,7 +33,7 @@
     $.fn.isExternal = function () {
 
         var host = new RegExp('/' + window.location.host + '/');
-        var link = 'http://' + window.location.host + this.attr('href');
+        var link = 'http://' + window.location.host + '/' + this.attr('href');
         return !host.test(link);
 
     };

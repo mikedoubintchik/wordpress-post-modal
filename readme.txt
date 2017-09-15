@@ -4,7 +4,7 @@ Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.0
 Tested up to: 4.8.1
-Stable tag: 2.0.4
+Stable tag: 2.0.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,3 +97,4 @@ Yes, you can have as many as you like.
 2.0.2: Minor styling fixes
 2.0.3: Bug fix for if visual composer installed active
 2.0.4: Works with all custom post types
+2.0.5: Fix link when only slug is used
