@@ -109,7 +109,7 @@
                     // Load content from internal
                     else {
                         $.ajax({
-                            url: '/wp-json/wp-post-modal/v1/any-post-type?slug=' + postUrl,
+                            url: fromPHP.siteUrl + '/wp-json/wp-post-modal/v1/any-post-type?slug=' + postUrl,
                             success: function (data) {
                                 var page = data;
                                 modalContent.html(page.post_content);
