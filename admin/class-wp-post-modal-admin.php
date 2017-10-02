@@ -184,10 +184,21 @@ class WP_Post_Modal_Admin
             $this->plugin_name
         );
 
+	    // Use legacy method
+	    add_settings_field(
+		    $this->option_name . '_legacy',
+		    __('Use Legacy Method', 'wp-post-modal'),
+		    array($this, $this->option_name . '_legacy_cb'),
+		    $this->plugin_name,
+		    $this->option_name . '_general',
+		    array('label_for' => $this->option_name . '_legacy')
+	    );
+
         register_setting($this->plugin_name, $this->option_name . '_close', array($this, $this->option_name . '_sanitize_close'));
         register_setting($this->plugin_name, $this->option_name . '_breakpoint', array($this, $this->option_name . '_sanitize_breakpoint'));
         register_setting($this->plugin_name, $this->option_name . '_styling', array($this, $this->option_name . '_sanitize_styling'));
-        register_setting($this->plugin_name, $this->option_name . '_notice');
+	    register_setting($this->plugin_name, $this->option_name . '_legacy', array($this, $this->option_name . '_sanitize_legacy'));
+	    register_setting($this->plugin_name, $this->option_name . '_notice');
 
     }
 
@@ -252,7 +263,6 @@ class WP_Post_Modal_Admin
         <?php
     }
 
-
     /**
      * Render the text for the general section
      *
@@ -272,6 +282,26 @@ class WP_Post_Modal_Admin
     {
         echo '<img src="' . plugins_url() . '/wp-post-modal/admin/images/modal-styling-example.jpg" width="300px" />';
     }
+
+	/**
+	 * Render the checkbox for legacy method
+	 *
+	 * @since  1.0.0
+	 */
+	public function wp_post_modal_legacy_cb()
+	{
+		$legacy = get_option($this->option_name . '_legacy', true);
+		?>
+        <fieldset>
+            <label>
+                <input type="checkbox" name="<?php echo $this->option_name . '_legacy' ?>"
+                       id="<?php echo $this->option_name . '_legacy' ?>"
+                       value="1" <?php echo checked($legacy, '1'); ?> />
+            </label>
+        </fieldset>
+        <p>Use this if the default method is not working.</p>
+		<?php
+	}
 
     /**
      * Render the options page for plugin

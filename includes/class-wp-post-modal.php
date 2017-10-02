@@ -189,6 +189,8 @@ class WP_Post_Modal
 
         $this->loader->add_action('wp_footer', $plugin_public, 'modal_wrapper');
 
+	    $this->loader->add_action('the_content', $plugin_public, 'wrap_content');
+
         $this->loader->add_action('rest_api_init', $plugin_public, 'any_post_api_route');
 
     }

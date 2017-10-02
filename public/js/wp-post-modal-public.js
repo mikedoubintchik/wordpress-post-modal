@@ -88,34 +88,51 @@
                         modalContent.html(loader);
                     }
 
-                    // Load content from external
-                    if ($this.isExternal()) {
-
-                        $.ajaxPrefilter(function (options) {
-                            if (options.crossDomain && jQuery.support.cors) {
-                                var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
-                                options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
-                                //options.url = "http://cors.corsproxy.io/url=" + options.url;
-                            }
-                        });
-
-                        $.get(
-                            postLink,
-                            function (response) {
-                                var html = $(response);
-                                modalContent.html($(html).find(dataDivID).html());
-                            });
+                    // Use legacy method
+                    if (fromPHP.legacy) {
+                        // Load content from external
+                        if ($this.isExternal()) {
+                            modalContent.load(fromPHP.pluginUrl + '/wp-post-modal/public/partials/wp-post-modal-public-proxy.php?url=' + encodeURI(postLink) + dataDivID);
+                        }
+                        // Load content from internal
+                        else {
+                            modalContent.load(postLink + ' #modal-ready');
+                        }
                     }
-                    // Load content from internal
+                    // Use new REST API method
                     else {
-                        $.ajax({
-                            url: fromPHP.siteUrl + '/wp-json/wp-post-modal/v1/any-post-type?slug=' + postUrl,
-                            success: function (data) {
-                                var page = data;
-                                modalContent.html(page.post_content);
-                            },
-                            cache: false
-                        });
+                        // Load content from external
+                        if ($this.isExternal()) {
+
+                            $.ajaxPrefilter(function (options) {
+                                if (options.crossDomain && jQuery.support.cors) {
+                                    var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
+                                    options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
+                                    //options.url = "http://cors.corsproxy.io/url=" + options.url;
+                                }
+                            });
+
+                            $.get(
+                                postLink,
+                                function (response) {
+                                    var html = $(response);
+                                    modalContent.html($(html).find(dataDivID).html());
+                                });
+                        }
+                        // Load content from internal
+                        else {
+                            $.ajax({
+                                url: fromPHP.siteUrl + '/wp-json/wp-post-modal/v1/any-post-type?slug=' + postUrl,
+                                success: function (data) {
+                                    var page = data;
+                                    modalContent.html(page.post_content);
+                                },
+                                error: function () {
+                                    modalContent.load(postLink + ' #modal-ready');
+                                },
+                                cache: false
+                            });
+                        }
                     }
 
                     // show class to display the previously hidden modal

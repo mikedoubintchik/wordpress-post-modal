@@ -103,7 +103,8 @@ class WP_Post_Modal_Public {
 			'breakpoint' => ( get_option( 'wp_post_modal_breakpoint' ) != '' ? get_option( 'wp_post_modal_breakpoint' ) : '768' ),
 			'styled'     => get_option( 'wp_post_modal_styling' ),
 			'ajax_url'   => admin_url( 'admin-ajax.php' ),
-			'siteUrl'    => get_bloginfo( 'url' )
+			'siteUrl'    => get_bloginfo( 'url' ),
+			'legacy'    => get_option( 'wp_post_modal_legacy' )
 	) );
 
 	}
@@ -175,5 +176,17 @@ class WP_Post_Modal_Public {
 
 		return $response;
 
+	}
+
+	/**
+	 * Wrap content in modal-ready ID
+	 *
+	 * @return string
+	 *
+	 * @since   1.0.0
+	 */
+	public function wrap_content($content)
+	{
+		return '<div id="modal-ready">' . $content . '</div>';
 	}
 }
