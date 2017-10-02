@@ -25,8 +25,6 @@ Next, edit that link in the text editor by adding class="modal-link" into the li
 
 Or use our new Visual Editor button to quickly and easily insert the link!
 
-IMPORTANT NOTE: The href must be pointing to the SLUG for the post/page, not the full URL.
-
 [CLICK FOR DEMO](https://wp-post-modal.allureprojects.com/)
 
 [Contact us for feedback and bug reports](https://allurewebsolutions.com/contact)
@@ -55,6 +53,15 @@ They will not because these aren't "popups" in the sense of an add. The way this
 The content can come from any web page. If it is from a post or page (or any post-type) from your site, it will be the content that is in the editor in the back-end. In other words, the popup will not show your header, footer, nor sidebars. Just the primary content. If it is from another website, it will typically be the core or main content on that page.
 
 You simply make a page or post with the content you want, as you always do.
+
+= What is the legacy method? =
+The plugin by default uses the WordPress REST API to pull content for pages. There are two scenarios where you might want to use the legacy method:
+
+1. If the REST API method is not working
+2. If you want to include custom fields or other custom content inside the popup
+
+= How do I include custom fields or content outside `the_content()` function? =
+In your custom template file you would wrap all of the content / custom fields/ etc. you would like with a div that has the `#modal-ready` ID.
 
 = How is the popup triggered? =
 With a slightly modified link to the page or post. The user must actively click on the link for the popup to show.
@@ -98,3 +105,4 @@ Yes, you can have as many as you like.
 2.0.3: Bug fix for if visual composer installed active
 2.0.4: Works with all custom post types
 2.0.5: Fix link when only slug is used
+2.1: Add legacy method with fallback
