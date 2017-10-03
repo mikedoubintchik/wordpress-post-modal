@@ -30,6 +30,11 @@
      */
 
 
+    /**
+     * Check if URL is external function
+     *
+     * @returns {boolean}
+     */
     $.fn.isExternal = function () {
 
         var host = new RegExp('/' + window.location.host + '/');
@@ -37,6 +42,26 @@
         return !host.test(link);
 
     };
+
+    /**
+     * Basename function for JS
+     *
+     * @param path
+     * @param suffix
+     * @returns {*}
+     */
+    function basename(path, suffix) {
+        var b = path;
+        var lastChar = b.charAt(b.length - 1);
+        if (lastChar === '/' || lastChar === '\\') {
+            b = b.slice(0, -1);
+        }
+        b = b.replace(/^.*[/\\]/g, '');
+        if (typeof suffix === 'string' && b.substr(b.length - suffix.length) === suffix) {
+            b = b.substr(0, b.length - suffix.length);
+        }
+        return b;
+    }
 
     $(function () {
 
@@ -77,7 +102,9 @@
                     var $this = ($(this).attr('href') != null) ? $(this) : $(this).children('a').first();
                     var postLink = $this.attr('href');
                     var postUrl = $this[0].pathname.substring(1);
+                    var postSlug = basename(postLink);
                     var dataDivID = ' #' + $this.attr('data-div');
+                    var dataBuddypress = $this.attr('data-buddypress');
                     var loader = '<img class="loading" src="' + fromPHP.pluginUrl + '/images/loading.gif" />';
 
                     // prevent link from being followed
@@ -96,14 +123,16 @@
                         }
                         // Load content from internal
                         else {
-                            modalContent.load(postLink + ' #modal-ready');
+                            if (dataBuddypress)
+                                modalContent.load(postLink + ' #buddypress');
+                            else
+                                modalContent.load(postLink + ' #modal-ready');
                         }
                     }
                     // Use new REST API method
                     else {
                         // Load content from external
                         if ($this.isExternal()) {
-
                             $.ajaxPrefilter(function (options) {
                                 if (options.crossDomain && jQuery.support.cors) {
                                     var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
@@ -122,13 +151,15 @@
                         // Load content from internal
                         else {
                             $.ajax({
-                                url: fromPHP.siteUrl + '/wp-json/wp-post-modal/v1/any-post-type?slug=' + postUrl,
+                                url: fromPHP.siteUrl + '/wp-json/wp-post-modal/v1/any-post-type?slug=' + postSlug,
                                 success: function (data) {
-                                    var page = data;
-                                    modalContent.html(page.post_content);
+                                    modalContent.html(data.post_content);
                                 },
                                 error: function () {
-                                    modalContent.load(postLink + ' #modal-ready');
+                                    if (dataBuddypress)
+                                        modalContent.load(postLink + ' #buddypress');
+                                    else
+                                        modalContent.load(postLink + ' #modal-ready');
                                 },
                                 cache: false
                             });
