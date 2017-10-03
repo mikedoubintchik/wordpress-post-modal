@@ -171,16 +171,14 @@ class WP_Post_Modal_Public {
 
 
 		if ( $return['post_content'] ) {
+			// render shortcodes from Visual Composer
 			$return['post_content'] = apply_filters( 'the_content', $return['post_content'] );
 			$response               = new WP_REST_Response( $return );
-		} else // render shortcodes from Visual Composer
-		{
+		} else {
 			$response = new WP_Error( 'post_empty', 'Post is empty', array( 'status' => 404 ) );
 		}
 
-
 		return $response;
-
 	}
 
 	/**
