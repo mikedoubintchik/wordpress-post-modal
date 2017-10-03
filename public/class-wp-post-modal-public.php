@@ -104,8 +104,8 @@ class WP_Post_Modal_Public {
 			'styled'     => get_option( 'wp_post_modal_styling' ),
 			'ajax_url'   => admin_url( 'admin-ajax.php' ),
 			'siteUrl'    => get_bloginfo( 'url' ),
-			'legacy'    => get_option( 'wp_post_modal_legacy' )
-	) );
+			'legacy'     => get_option( 'wp_post_modal_legacy' )
+		) );
 
 	}
 
@@ -169,10 +169,15 @@ class WP_Post_Modal_Public {
 		// get title by slug
 		$return = get_page_by_path( $slug, ARRAY_A, get_post_types() );
 
-		// render shortcodes from Visual Composer
-		$return['post_content'] = apply_filters( 'the_content', $return['post_content'] );
 
-		$response = new WP_REST_Response( $return );
+		if ( $return['post_content'] ) {
+			$return['post_content'] = apply_filters( 'the_content', $return['post_content'] );
+			$response               = new WP_REST_Response( $return );
+		} else // render shortcodes from Visual Composer
+		{
+			$response = new WP_Error( 'post_empty', 'Post is empty', array( 'status' => 404 ) );
+		}
+
 
 		return $response;
 
@@ -185,8 +190,9 @@ class WP_Post_Modal_Public {
 	 *
 	 * @since   1.0.0
 	 */
-	public function wrap_content($content)
-	{
-		return '<div id="modal-ready">' . $content . '</div>';
+	public function wrap_content( $content ) {
+		if ( ! empty( $content ) ) {
+			return '<div id="modal-ready">' . $content . '</div>';
+		}
 	}
 }

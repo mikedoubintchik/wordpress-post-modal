@@ -14,11 +14,15 @@
                 var anchorText = ed.selection.getContent();
                 var node = ed.selection.getNode();
                 var currentUrl,
-                    currentContainer;
+                    currentContainer,
+                    buddypress;
                 if (node.href) {
                     currentUrl = node.href;
                     currentContainer = node.getAttribute('data-div');
+                    buddypress = node.getAttribute('data-buddypress');
                 }
+
+                console.log(buddypress);
 
                 ed.windowManager.open({
                     title: 'Insert/Edit Popup Link',
@@ -45,12 +49,19 @@
                             name: 'container',
                             value: currentContainer,
                             label: 'Container ID'
+                        },
+                        {
+                            type: 'checkbox',
+                            name: 'buddypress',
+                            checked: (!!buddypress),
+                            text: 'Is this a BuddyPress profile page?'
                         }
                     ],
                     onsubmit: function (e) {
                         // Insert content when the window form is submitted
                         var container = (e.data.container ? ' data-div="' + e.data.container + '"' : '');
-                        var link = '<a href="' + e.data.url + '" class="modal-link"' + container + '>' + e.data.text + '</a>';
+                        var buddypress = (e.data.buddypress ? ' data-buddypress="yes"' : '');
+                        var link = '<a href="' + e.data.url + '" class="modal-link"' + container + buddypress + '>' + e.data.text + '</a>';
                         ed.insertContent(link);
                     }
                 });

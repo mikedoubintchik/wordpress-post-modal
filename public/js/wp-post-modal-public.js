@@ -104,6 +104,7 @@
                     var postUrl = $this[0].pathname.substring(1);
                     var postSlug = basename(postLink);
                     var dataDivID = ' #' + $this.attr('data-div');
+                    var dataBuddypress = $this.attr('data-buddypress');
                     var loader = '<img class="loading" src="' + fromPHP.pluginUrl + '/images/loading.gif" />';
 
                     // prevent link from being followed
@@ -122,7 +123,10 @@
                         }
                         // Load content from internal
                         else {
-                            modalContent.load(postLink + ' #modal-ready');
+                            if (dataBuddypress)
+                                modalContent.load(postLink + ' #buddypress');
+                            else
+                                modalContent.load(postLink + ' #modal-ready');
                         }
                     }
                     // Use new REST API method
@@ -149,12 +153,13 @@
                             $.ajax({
                                 url: fromPHP.siteUrl + '/wp-json/wp-post-modal/v1/any-post-type?slug=' + postSlug,
                                 success: function (data) {
-                                    var page = data;
-                                    modalContent.html(page.post_content);
+                                    modalContent.html(data.post_content);
                                 },
                                 error: function () {
-                                    console.log('error');
-                                    modalContent.load(postLink + ' #modal-ready');
+                                    if (dataBuddypress)
+                                        modalContent.load(postLink + ' #buddypress');
+                                    else
+                                        modalContent.load(postLink + ' #modal-ready');
                                 },
                                 cache: false
                             });
