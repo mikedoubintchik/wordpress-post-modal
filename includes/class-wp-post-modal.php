@@ -162,12 +162,11 @@ class WP_Post_Modal {
 		$this->loader->add_filter( 'admin_notices', $plugin_admin, 'admin_notice_updated' );
 		$this->loader->add_filter( 'network_admin_notices', $plugin_admin, 'admin_notice_updated' );
 
-		$this->loader->add_action( 'wp_ajax_admin_notice_installed_dismiss', $plugin_admin, 'admin_notice_installed_dismiss' );
+		$this->loader->add_filter( 'admin_notices', $plugin_admin, 'admin_notice_installed' );
+		$this->loader->add_filter( 'network_admin_notices', $plugin_admin, 'admin_notice_installed' );
 
-		if ( empty( get_blog_option( get_current_blog_id(), 'admin-notice-installed-notice-dismissed' ) ) ) {
-			$this->loader->add_filter( 'admin_notices', $plugin_admin, 'admin_notice_installed' );
-			$this->loader->add_filter( 'network_admin_notices', $plugin_admin, 'admin_notice_installed' );
-		}
+		$this->loader->add_filter( 'admin_notices', $plugin_admin, 'admin_notice_remote' );
+		$this->loader->add_filter( 'network_admin_notices', $plugin_admin, 'admin_notice_remote' );
 
 		$this->loader->add_filter( 'mce_buttons', $plugin_admin, 'register_custom_mce_buttons' );
 		$this->loader->add_filter( "mce_external_plugins", $plugin_admin, "enqueue_custom_mce_scripts" );

@@ -370,11 +370,38 @@ class WP_Post_Modal_Admin {
 	 * Admin notice for plugin installed
 	 */
 	public function admin_notice_installed() {
-		$user_id = get_current_user_id();
 		$message = '<h4>Thanks for installing WP Post Popup!</h4><p>Please <a href="https://wordpress.org/support/plugin/wp-post-modal/reviews/" target="_blank">click here</a> to give us a review :)</p>';
 		?>
         <div class="notice notice-success is-dismissible admin-notice-installed">
 			<?php echo $message; ?>
+            <button type="button" class="notice-dismiss">
+                <span class="screen-reader-text">Dismiss this notice.</span>
+            </button>
+        </div>
+		<?php
+	}
+
+	/**
+	 * Remote admin notice
+	 */
+	public function admin_notice_remote() {
+		$notice_url = 'https://wp-post-modal.allureprojects.com/wp-json/wp/v2/pages/35';
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_URL, $notice_url);
+		$result = curl_exec($ch);
+		curl_close($ch);
+		$obj = json_decode($result);
+
+		$message = $obj->content->rendered;
+		?>
+        <div class="notice notice-success is-dismissible admin-notice-remote">
+            <div class="notice-content">
+	            <?php echo $message; ?>
+            </div>
+
             <button type="button" class="notice-dismiss">
                 <span class="screen-reader-text">Dismiss this notice.</span>
             </button>
