@@ -381,13 +381,4 @@ class WP_Post_Modal_Admin {
         </div>
 		<?php
 	}
-
-	public function admin_notice_installed_dismiss() {
-		if ( empty( get_blog_option( get_current_blog_id(), 'admin-notice-installed-notice-dismissed' ) ) ) {
-			add_blog_option( get_current_blog_id(), 'admin-notice-installed-notice-dismissed', 1 );
-		} else {
-			update_blog_option( get_current_blog_id(), 'admin-notice-installed-notice-dismissed', 1 );
-		}
-
-	}
 }

@@ -29,21 +29,25 @@
      * practising this, we should strive to set a better example in our own work.
      */
 
-    // admin notice dismissal
-    $(function () {
-        $(document).on('click', '.admin-notice-installed .notice-dismiss', function () {
-            $.ajax({
-                url: ajaxurl,
-                type: 'post',
-                data: {
-                    action: 'admin_notice_installed_dismiss'
-                },
-                success: function (response) {
-                },
-                error: function (error) {
-                }
-            })
+    function addDays(date, days) {
+        var result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+    }
 
+    $(function () {
+
+        // if admin notice installed is dismissed
+        if (localStorage.admin_notice_intalled_dismissed)
+            $('.admin-notice-installed').addClass('hidden');
+
+        // clear hidden admin installed dismissal
+        if (new Date() > addDays(localStorage.admin_notice_intalled_dismissed, 7))
+            localStorage.removeItem('admin_notice_intalled_dismissed');
+
+        // hide admin notice installed when dismissing notification
+        $(document).on('click', '.admin-notice-installed .notice-dismiss', function () {
+            localStorage.admin_notice_intalled_dismissed = new Date();
         });
     })
 
