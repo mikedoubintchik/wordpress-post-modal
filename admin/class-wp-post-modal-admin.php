@@ -387,19 +387,16 @@ class WP_Post_Modal_Admin {
 	public function admin_notice_remote() {
 		$notice_url = 'https://wp-post-modal.allureprojects.com/wp-json/wp/v2/pages/35';
 
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_URL, $notice_url);
-		$result = curl_exec($ch);
-		curl_close($ch);
-		$obj = json_decode($result);
+		$message = json_decode(wp_remote_retrieve_body(wp_remote_get( $notice_url)), true)['content']['rendered'];
 
-		$message = $obj->content->rendered;
+		if( is_wp_error( $message ) ) {
+			return false; // Bail early
+		}
+
 		?>
         <div class="notice notice-success is-dismissible admin-notice-remote">
             <div class="notice-content">
-	            <?php echo $message; ?>
+				<?php echo $message; ?>
             </div>
 
             <button type="button" class="notice-dismiss">
