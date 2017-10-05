@@ -74,19 +74,23 @@
          * Close modal functionality
          */
 
-        // when clicking on close button
-        $(document).on('click', '.close-modal', function () {
+        function hideModal() {
             $('.modal-wrapper').removeClass('show').hide();
             $('.modal').removeClass('show');
             $('#modal-content').html('');
+        }
+
+        // when pressing esc
+        $(document).keyup(function (e) {
+            if (e.keyCode === 27 && $('.modal-wrapper').hasClass('show'))
+                hideModal();
         });
 
+        // when clicking on close button
+        $(document).on('click', '.close-modal', hideModal);
+
         // when clicking outside of modal
-        $(window).on('click', function () {
-            $('.modal-wrapper').removeClass('show').hide();
-            $('.modal').removeClass('show');
-            $('#modal-content').html('');
-        });
+        $(window).on('click', hideModal);
 
         $(document).on('click', '.modal', function (e) {
             e.stopPropagation();
