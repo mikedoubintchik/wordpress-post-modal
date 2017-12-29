@@ -4,7 +4,7 @@ Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.0
 Tested up to: 4.9.1
-Stable tag: 2.1.2
+Stable tag: 2.1.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -108,3 +108,4 @@ Yes, you can have as many as you like.
 2.1: Add legacy method with fallback, admin notices, remote notice, added support for buddypress profiles
 2.1.1: Update remote admin notice functionality
 2.1.2: Close popup with esc key
+2.1.3: Minor styling fixes
