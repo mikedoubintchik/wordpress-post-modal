@@ -168,8 +168,10 @@ class WP_Post_Modal {
 		$this->loader->add_filter( 'admin_notices', $plugin_admin, 'admin_notice_remote' );
 		$this->loader->add_filter( 'network_admin_notices', $plugin_admin, 'admin_notice_remote' );
 
-		$this->loader->add_filter( 'mce_buttons', $plugin_admin, 'register_custom_mce_buttons' );
-		$this->loader->add_filter( "mce_external_plugins", $plugin_admin, "enqueue_custom_mce_scripts" );
+		if ( get_option( 'wp_post_modal_button', true ) !== '1' ) {
+			$this->loader->add_filter( 'mce_buttons', $plugin_admin, 'register_custom_mce_buttons' );
+			$this->loader->add_filter( "mce_external_plugins", $plugin_admin, "enqueue_custom_mce_scripts" );
+		}
 	}
 
 	/**

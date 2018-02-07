@@ -170,17 +170,21 @@
                         // Load content from internal
                         else {
                             $.ajax({
+                                type: 'GET',
+                                dataType: 'json',
                                 url: fromPHP.siteUrl + '/wp-json/wp-post-modal/v1/any-post-type?slug=' + postSlug,
                                 success: function (data) {
                                     modalContent.html(data.post_content);
                                 },
-                                error: function () {
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    console.log(xhr.status);
+                                    console.log(thrownError);
+
                                     if (dataBuddypress)
                                         modalContent.load(postLink + ' #buddypress');
                                     else
                                         modalContent.load(postLink + ' #modal-ready');
-                                },
-                                cache: false
+                                }
                             });
                         }
                     }

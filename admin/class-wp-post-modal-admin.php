@@ -171,6 +171,16 @@ class WP_Post_Modal_Admin {
 			array( 'label_for' => $this->option_name . '_styling' )
 		);
 
+		// Disable Visual Editor Button
+		add_settings_field(
+			$this->option_name . '_button',
+			__( 'Disable Visual Editor Button', 'wp-post-modal' ),
+			array( $this, $this->option_name . '_button_cb' ),
+			$this->plugin_name,
+			$this->option_name . '_general',
+			array( 'label_for' => $this->option_name . '_button' )
+		);
+
 		// styling example
 		add_settings_section(
 			$this->option_name . '_styling_example',
@@ -200,6 +210,10 @@ class WP_Post_Modal_Admin {
 		register_setting( $this->plugin_name, $this->option_name . '_styling', array(
 			$this,
 			$this->option_name . '_sanitize_styling'
+		) );
+		register_setting( $this->plugin_name, $this->option_name . '_button', array(
+			$this,
+			$this->option_name . '_sanitize_button'
 		) );
 		register_setting( $this->plugin_name, $this->option_name . '_legacy', array(
 			$this,
@@ -245,7 +259,6 @@ class WP_Post_Modal_Admin {
 		<?php
 	}
 
-
 	/**
 	 * Render the checkbox for styling
 	 *
@@ -262,6 +275,24 @@ class WP_Post_Modal_Admin {
             </label>
         </fieldset>
         <a href="https://wp-post-modal.allureprojects.com/modal-css/" target="_blank">See CSS used for basic styling</a>
+		<?php
+	}
+
+	/**
+	 * Render the checkbox for disabling TinyMCE button
+	 *
+	 * @since  1.0.0
+	 */
+	public function wp_post_modal_button_cb() {
+		$button = get_option( $this->option_name . '_button', true );
+		?>
+        <fieldset>
+            <label>
+                <input type="checkbox" name="<?php echo $this->option_name . '_button' ?>"
+                       id="<?php echo $this->option_name . '_button' ?>"
+                       value="1" <?php echo checked( $button, '1' ); ?> />
+            </label>
+        </fieldset>
 		<?php
 	}
 
@@ -387,9 +418,9 @@ class WP_Post_Modal_Admin {
 	public function admin_notice_remote() {
 		$notice_url = 'https://wp-post-modal.allureprojects.com/wp-json/wp/v2/pages/35';
 
-		$message = json_decode(wp_remote_retrieve_body(wp_remote_get( $notice_url)), true)['content']['rendered'];
+		$message = json_decode( wp_remote_retrieve_body( wp_remote_get( $notice_url ) ), true )['content']['rendered'];
 
-		if( is_wp_error( $message ) ) {
+		if ( is_wp_error( $message ) ) {
 			return false; // Bail early
 		}
 
