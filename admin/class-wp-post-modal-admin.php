@@ -231,9 +231,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="text" size="40" name="<?php echo $this->option_name . '_close' ?>"
-                       id="<?php echo $this->option_name . '_close' ?>"
-                       value="<?php echo $close ?>" placeholder="Default is '×'"/>
+                <input type="text" name="<?php echo esc_attr( $this->option_name . '_close' ); ?>"
+                       id="<?php echo esc_attr( $this->option_name . '_close' ); ?>"
+                       value="<?php echo esc_attr( $close ); ?>" placeholder="Default is '×'"/>
             </label>
         </fieldset>
 		<?php
@@ -249,9 +249,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="text" size="40" name="<?php echo $this->option_name . '_breakpoint' ?>"
-                       id="<?php echo $this->option_name . '_breakpoint' ?>"
-                       value="<?php echo $breakpoint ?>" placeholder="Enter number without 'px'"/>
+                <input type="text" name="<?php echo esc_attr( $this->option_name . '_breakpoint' ); ?>"
+                       id="<?php echo esc_attr( $this->option_name . '_breakpoint' ); ?>"
+                       value="<?php echo esc_attr( $breakpoint ); ?>" placeholder="Enter number without 'px'"/>
             </label>
             <p>Below this value, the popup link will redirect to the page instead of opening the popup. Enter "0" if you
                 want the popup to work on all screen sizes. If left blank, the default breakpoint is 768px.</p>
@@ -269,8 +269,8 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="checkbox" name="<?php echo $this->option_name . '_styling' ?>"
-                       id="<?php echo $this->option_name . '_styling' ?>"
+                <input type="checkbox" name="<?php echo esc_attr( $this->option_name . '_styling' ); ?>"
+                       id="<?php echo esc_attr( $this->option_name . '_styling' ); ?>"
                        value="1" <?php echo checked( $styling, '1' ); ?> />
             </label>
         </fieldset>
@@ -324,8 +324,8 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="checkbox" name="<?php echo $this->option_name . '_legacy' ?>"
-                       id="<?php echo $this->option_name . '_legacy' ?>"
+                <input type="checkbox" name="<?php echo esc_attr( $this->option_name . '_legacy' ) ?>"
+                       id="<?php echo esc_attr( $this->option_name . '_legacy' ); ?>"
                        value="1" <?php echo checked( $legacy, '1' ); ?> />
             </label>
         </fieldset>
