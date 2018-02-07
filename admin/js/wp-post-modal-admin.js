@@ -29,41 +29,45 @@
      * practising this, we should strive to set a better example in our own work.
      */
 
-    function addDays(date, days) {
-        var result = new Date(date);
-        result.setDate(result.getDate() + days);
-        return result;
-    }
-
     $(function () {
-
-        // if admin notice installed is dismissed
-        if (localStorage.admin_notice_intalled_dismissed && new Date() < addDays(localStorage.admin_notice_intalled_dismissed, 7))
-            $('.admin-notice-installed').addClass('hidden');
-
-
-        // hide admin notice installed when dismissing notification
-        $(document).on('click', '.admin-notice-installed .notice-dismiss', function () {
-            localStorage.admin_notice_intalled_dismissed = new Date();
-        });
-
-        var currentNoticeContent = $('.admin-notice-remote .notice-content').html();
-
-        // hide remote notice if current remote notice content equals saved notice content
-        if (localStorage.admin_notice_remote_dismissed) {
-            if (JSON.parse(localStorage.admin_notice_remote_dismissed).content === currentNoticeContent)
-                $('.admin-notice-remote').addClass('hidden');
+        function addDays(date, days) {
+            var result = new Date(date);
+            result.setDate(result.getDate() + days);
+            return result;
         }
 
-        // hide admin notice installed when dismissing notification
-        $(document).on('click', '.admin-notice-remote .notice-dismiss', function () {
-            var noticeData = {
-                date: new Date(),
-                content: currentNoticeContent
-            };
+        // show notices when page loads
+        $.when($('.notice-success').removeClass('hidden')).done(function () {
+            // if admin notice installed is dismissed
+            if (localStorage.admin_notice_installed_dismissed && new Date() < addDays(localStorage.admin_notice_installed_dismissed, 14))
+                $('.admin-notice-installed').addClass('hidden');
 
-            localStorage.admin_notice_remote_dismissed = JSON.stringify(noticeData);
+            // hide admin notice installed when dismissing notification
+            $(document).on('click', '.admin-notice-installed .notice-dismiss', function () {
+                localStorage.admin_notice_installed_dismissed = new Date();
+            });
+
+            var currentNoticeContent = $('.admin-notice-remote .notice-content').html();
+
+            // hide remote notice if current remote notice content equals saved notice content
+            if (localStorage.admin_notice_remote_dismissed) {
+                if (JSON.parse(localStorage.admin_notice_remote_dismissed).content === currentNoticeContent)
+                    $('.admin-notice-remote').addClass('hidden');
+            }
+
+            // hide admin notice installed when dismissing notification
+            $(document).on('click', '.admin-notice-remote .notice-dismiss', function () {
+                var noticeData = {
+                    date: new Date(),
+                    content: currentNoticeContent
+                };
+
+                localStorage.admin_notice_remote_dismissed = JSON.stringify(noticeData);
+            });
+
         });
-    })
+
+
+    });
 
 })(jQuery);
