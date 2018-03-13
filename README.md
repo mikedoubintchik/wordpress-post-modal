@@ -3,8 +3,8 @@ Contributors: allurewebsolutions
 Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.0
-Tested up to: 4.9.4
-Stable tag: 2.1.4
+Tested up to: 4.9.5
+Stable tag: 2.1.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,8 +24,6 @@ Next, edit that link in the text editor by adding class="modal-link" into the li
 `<a class="modal-link" href="http://my-site.com/privacy-policy/>Our Privacy Policy</a>`
 
 Or use our new Visual Editor button to quickly and easily insert the link!
-
-IMPORTANT NOTE: The href must be pointing to the SLUG for the post/page, not the full URL.
 
 [CLICK FOR DEMO](https://wp-post-modal.allureprojects.com/)
 
@@ -49,7 +47,7 @@ If your user needs additional information you will now be able to popup a window
 Most importantly, your user will not be taken to another page, on or off your site. The information will load quicker into the popup than going to the page itself.
 
 = Will these Popups be blocked by an Ad Blocker =
-They will not because these aren't "popups" in the sense of an add. The way this works is by creating a modal window which is a just a website block that is hidden until a click or some other action makes it visible.
+They will not because these aren't "popups" in the sense of an Ad. The way this works is by creating a modal window which is a just a website block that is hidden until a click or some other action makes it visible.
 
 = Where does the content of the popup come from? =
 The content can come from any web page. If it is from a post or page (or any post-type) from your site, it will be the content that is in the editor in the back-end. In other words, the popup will not show your header, footer, nor sidebars. Just the primary content. If it is from another website, it will typically be the core or main content on that page.
@@ -65,6 +63,12 @@ Then edit that link in the text editor by adding class="modal-link" into the lin
 `<a class="modal-link" href="http://my-site.com/privacy-policy/>Our Privacy Policy</a>`
 
 If the link goes to a page on an external site, you need to find a container that has the content you want and a suitable ID. Once you know that, you need to add data-div="xx" to the link, where xx is the ID of content container. It also needs the class="modal-link" as well.  `<a class="modal-link" href="https://en.wikipedia.org/wiki/Apple" data-div="bodyContent">What is an apple?</a>`
+
+= What if my External Page isn't loading =
+If your external page isn't working with the normal or legacy method, then you can try using the "iFrame method." There are two ways to use the iframe method.
+
+1. Add the class `iframe` to your modal-link to selectively use the iframe method
+1. Turn on the iframe method in the plugin settings to make all external links use the iframe method
 
 = Can I change the look of trigger link? =
 Absolutely, any way you want. You can turn it into a button like this: `<a class="modal-link" href="http://my-site/privacy-policy/"><button type="button">Our Privacy Policy</button></a>` or make it an image.
@@ -103,3 +107,4 @@ Yes, you can have as many as you like.
 2.1.2: Close popup with esc key
 2.1.3: Minor styling fixes
 2.1.4: Made Visual Editor button optional in plugin settings, improved error handling in ajax requests, refactor admin notice dismissal
+2.1.5: Add iframe method for loading more complicated external pages

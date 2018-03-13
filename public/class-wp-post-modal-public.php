@@ -104,7 +104,8 @@ class WP_Post_Modal_Public {
 			'styled'     => get_option( 'wp_post_modal_styling' ),
 			'ajax_url'   => admin_url( 'admin-ajax.php' ),
 			'siteUrl'    => get_bloginfo( 'url' ),
-			'legacy'     => get_option( 'wp_post_modal_legacy' )
+			'legacy'     => get_option( 'wp_post_modal_legacy' ),
+			'iframe'     => get_option( 'wp_post_modal_iframe' )
 		) );
 
 	}

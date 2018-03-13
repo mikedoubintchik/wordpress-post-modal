@@ -199,6 +199,16 @@ class WP_Post_Modal_Admin {
 			array( 'label_for' => $this->option_name . '_legacy' )
 		);
 
+		// Use iframe method for external links
+		add_settings_field(
+			$this->option_name . '_iframe',
+			__( 'Use iFrame Method for external links', 'wp-post-modal' ),
+			array( $this, $this->option_name . '_iframe_cb' ),
+			$this->plugin_name,
+			$this->option_name . '_general',
+			array( 'label_for' => $this->option_name . '_iframe' )
+		);
+
 		register_setting( $this->plugin_name, $this->option_name . '_close', array(
 			$this,
 			$this->option_name . '_sanitize_close'
@@ -218,6 +228,10 @@ class WP_Post_Modal_Admin {
 		register_setting( $this->plugin_name, $this->option_name . '_legacy', array(
 			$this,
 			$this->option_name . '_sanitize_legacy'
+		) );
+		register_setting( $this->plugin_name, $this->option_name . '_iframe', array(
+			$this,
+			$this->option_name . '_sanitize_iframe'
 		) );
 	}
 
@@ -330,6 +344,26 @@ class WP_Post_Modal_Admin {
             </label>
         </fieldset>
         <p>Use this if the default method is not working OR if you are using custom templating</p>
+		<?php
+	}
+
+	/**
+	 * Render the checkbox for iframe method
+	 *
+	 * @since  1.0.0
+	 */
+	public function wp_post_modal_iframe_cb() {
+		$iframe = get_option( $this->option_name . '_iframe', true );
+		?>
+        <fieldset>
+            <label>
+                <input type="checkbox" name="<?php echo $this->option_name . '_iframe' ?>"
+                       id="<?php echo $this->option_name . '_iframe' ?>"
+                       value="1" <?php echo checked( $iframe, '1' ); ?> />
+            </label>
+        </fieldset>
+        <p>Use this if you want to load non-basic content pages into the iframe. For example, if you want to load a
+            google spreadsheet into the popup. Alternatively, add the class <code>iframe</code> to your modal-link.</p>
 		<?php
 	}
 

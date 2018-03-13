@@ -125,20 +125,27 @@
                     if (fromPHP.legacy) {
                         // Load content from external
                         if ($this.isExternal()) {
-                            $.ajaxPrefilter(function (options) {
-                                if (options.crossDomain && jQuery.support.cors) {
-                                    var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
-                                    options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
-                                    //options.url = "http://cors.corsproxy.io/url=" + options.url;
-                                }
-                            });
+                            if ($(this).hasClass('iframe') || fromPHP.iframe) {
+                                var iframeCode = '<iframe src="' + $(this).attr('href') + '" width="100%"' +
+                                    ' height="600px" frameborder="0"></iframe>';
+                                modalContent.html(iframeCode);
 
-                            $.get(
-                                postLink,
-                                function (response) {
-                                    var html = $(response);
-                                    modalContent.html($(html).find(dataDivID).html());
+                            } else {
+                                $.ajaxPrefilter(function (options) {
+                                    if (options.crossDomain && jQuery.support.cors) {
+                                        var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
+                                        options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
+                                        //options.url = "http://cors.corsproxy.io/url=" + options.url;
+                                    }
                                 });
+
+                                $.get(
+                                    postLink,
+                                    function (response) {
+                                        var html = $(response);
+                                        modalContent.html($(html).find(dataDivID).html());
+                                    });
+                            }
                         }
                         // Load content from internal
                         else {
@@ -152,20 +159,28 @@
                     else {
                         // Load content from external
                         if ($this.isExternal()) {
-                            $.ajaxPrefilter(function (options) {
-                                if (options.crossDomain && jQuery.support.cors) {
-                                    var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
-                                    options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
-                                    //options.url = "http://cors.corsproxy.io/url=" + options.url;
-                                }
-                            });
 
-                            $.get(
-                                postLink,
-                                function (response) {
-                                    var html = $(response);
-                                    modalContent.html($(html).find(dataDivID).html());
+                            if ($(this).hasClass('iframe') || fromPHP.iframe) {
+                                var iframeCode = '<iframe src="' + $(this).attr('href') + '" width="100%"' +
+                                    ' height="600px" frameborder="0"></iframe>';
+                                modalContent.html(iframeCode);
+
+                            } else {
+                                $.ajaxPrefilter(function (options) {
+                                    if (options.crossDomain && jQuery.support.cors) {
+                                        var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
+                                        options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
+                                        //options.url = "http://cors.corsproxy.io/url=" + options.url;
+                                    }
                                 });
+
+                                $.get(
+                                    postLink,
+                                    function (response) {
+                                        var html = $(response);
+                                        modalContent.html($(html).find(dataDivID).html());
+                                    });
+                            }
                         }
                         // Load content from internal
                         else {
