@@ -1,16 +1,16 @@
-#=== WP Post Popup ===
+=== WP Post Popup ===
 Contributors: allurewebsolutions
 Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.0
 Tested up to: 4.9.5
-Stable tag: 2.1.5
+Stable tag: 2.1.6
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Turn any page or post into a popup instantly!
 
-##== Description ==
+== Description ==
 Turn any page or post into a popup instantly! Add a link anywhere, with a simple change, and the page or post (or any other post type) becomes a popup window. You can also have external web pages show in the popup as well.
 
 Just the content of the page or post will show, the part you put into the editor when creating the page or post. No headers, footers, nor sidebars. Perfect for showing the Website Policy, or making an FAQ, etc., anywhere you need a user triggered popup window.
@@ -29,14 +29,14 @@ Or use our new Visual Editor button to quickly and easily insert the link!
 
 [Contact us for feedback and bug reports](https://allurewebsolutions.com/contact)
 
-##== Installation ==
+== Installation ==
 1. Upload `wp-post-modal.zip` to the `/wp-content/plugins/` directory and extract
 2. Activate the plugin through the "Plugins" menu in WordPress
 3. Add the class `modal-link` to open the href of that link into a modal window.
 4. If you want to show an external page in the modal, add the attribute `data-div="#id"` to your .modal-link where the <strong>id</strong> is the container on the target external page that you would like to display inside the modal
 5. A page can have multiple modal links
 
-##== Frequently Asked Questions ==
+== Frequently Asked Questions ==
 
 = What does this NOT do? =
 These popups are not for getting the user's attention nor having them sign up for access, etc. These are to give the user additional information without leaving the page or site.
@@ -64,6 +64,14 @@ Then edit that link in the text editor by adding class="modal-link" into the lin
 
 If the link goes to a page on an external site, you need to find a container that has the content you want and a suitable ID. Once you know that, you need to add data-div="xx" to the link, where xx is the ID of content container. It also needs the class="modal-link" as well.  `<a class="modal-link" href="https://en.wikipedia.org/wiki/Apple" data-div="bodyContent">What is an apple?</a>`
 
+The popup can be initiated in one more way through using a the `modal-link` URL parameter. Structure:
+https://wp-post-modal.allureprojects.com?modal-link=[SLUG/URL] -- replace the SLUG/URL with the URL or slug of the page
+you are trying to open in your popup. This will only work for internal pages.
+
+= Can I use anchor links? =
+Yes, you can add an anchor to the end of your URL (for internally linked pages) and the popup will scroll to the
+position of the anchor.
+
 = What if my External Page isn't loading =
 If your external page isn't working with the normal or legacy method, then you can try using the "iFrame method." There are two ways to use the iframe method.
 
@@ -85,13 +93,13 @@ Next you have the option to have the popup ignore the basic CSS that comes with 
 = Can I have multiple popups on one page? =
 Yes, you can have as many as you like.
 
-##== Screenshots ==
+== Screenshots ==
 1. How the modal looks with simple text page content
 2. Style the popup within the WP Customizer
 3. Available plugin settings
 4. Easily insert popup link with custom button in Visual Editor
 
-##== Changelog ==
+== Changelog ==
 1.0: Initial release
 1.4: Add color overlay
 1.4.1: Bug fix
@@ -108,3 +116,4 @@ Yes, you can have as many as you like.
 2.1.3: Minor styling fixes
 2.1.4: Made Visual Editor button optional in plugin settings, improved error handling in ajax requests, refactor admin notice dismissal
 2.1.5: Add iframe method for loading more complicated external pages
+2.1.6: Added support for anchor links and open with modal through URL

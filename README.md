@@ -4,7 +4,7 @@ Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.0
 Tested up to: 4.9.5
-Stable tag: 2.1.5
+Stable tag: 2.1.6
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,14 @@ Then edit that link in the text editor by adding class="modal-link" into the lin
 
 If the link goes to a page on an external site, you need to find a container that has the content you want and a suitable ID. Once you know that, you need to add data-div="xx" to the link, where xx is the ID of content container. It also needs the class="modal-link" as well.  `<a class="modal-link" href="https://en.wikipedia.org/wiki/Apple" data-div="bodyContent">What is an apple?</a>`
 
+The popup can be initiated in one more way through using a the `modal-link` URL parameter. Structure:
+https://wp-post-modal.allureprojects.com?modal-link=[SLUG/URL] -- replace the SLUG/URL with the URL or slug of the page
+you are trying to open in your popup. This will only work for internal pages.
+
+= Can I use anchor links? =
+Yes, you can add an anchor to the end of your URL (for internally linked pages) and the popup will scroll to the
+position of the anchor.
+
 = What if my External Page isn't loading =
 If your external page isn't working with the normal or legacy method, then you can try using the "iFrame method." There are two ways to use the iframe method.
 
@@ -108,3 +116,4 @@ Yes, you can have as many as you like.
 2.1.3: Minor styling fixes
 2.1.4: Made Visual Editor button optional in plugin settings, improved error handling in ajax requests, refactor admin notice dismissal
 2.1.5: Add iframe method for loading more complicated external pages
+2.1.6: Added support for anchor links and open with modal through URL
