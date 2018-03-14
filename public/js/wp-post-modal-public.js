@@ -65,6 +65,27 @@
         return b;
     }
 
+    /**
+     * Get URL Paramenters
+     *
+     * @param sParam
+     * @returns {*}
+     */
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+    };
+
     $(function () {
 
         // Detect windows width function
@@ -101,6 +122,40 @@
 
             // if the window is greater than 767px wide then do below. we don't want the modal to show on mobile devices and instead the link will be followed.
             if (windowsize >= fromPHP.breakpoint) {
+
+                // if using URL parameter to open modal
+                if (getUrlParameter('modal-link')) {
+                    if (fromPHP.styled) {
+                        $('#modal-content').html('<img class="loading" src="' + fromPHP.pluginUrl + '/images/loading.gif" />');
+                    }
+
+                    if (fromPHP.legacy) {
+                        $('#modal-content').load(getUrlParameter('modal-link') + ' #modal-ready');
+                    } else {
+                        $.ajax({
+                            type: 'GET',
+                            dataType: 'json',
+                            url: fromPHP.siteUrl + '/wp-json/wp-post-modal/v1/any-post-type?slug=' + basename(getUrlParameter('modal-link')),
+                            success: function (data) {
+                                $.when($('#modal-content').html(data.post_content));
+
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                console.log(xhr.status);
+                                console.log(thrownError);
+                            }
+                        });
+                    }
+
+
+                    // show class to display the previously hidden modal
+                    $('.modal-wrapper').slideDown('slow', function () {
+                        $(this).addClass('show');
+                        $('.modal').addClass('show');
+                    });
+                }
+
+
                 $('body').on('click', '.modal-link', function (e) {
 
                     // Define variables
@@ -109,6 +164,7 @@
                     var postLink = $this.attr('href');
                     var postUrl = $this[0].pathname.substring(1);
                     var postSlug = basename(postLink);
+                    var postAnchor = postSlug.indexOf('#') !== -1 ? postSlug.substring(postSlug.indexOf('#')) : false;
                     var dataDivID = ' #' + $this.attr('data-div');
                     var dataBuddypress = $this.attr('data-buddypress');
                     var loader = '<img class="loading" src="' + fromPHP.pluginUrl + '/images/loading.gif" />';
@@ -149,10 +205,20 @@
                         }
                         // Load content from internal
                         else {
-                            if (dataBuddypress)
+                            if (dataBuddypress) {
                                 modalContent.load(postLink + ' #buddypress');
-                            else
+                            }
+                            else {
                                 modalContent.load(postLink + ' #modal-ready');
+
+                                setTimeout(function () {
+                                    if (postAnchor) {
+                                        $('.modal-wrapper').animate({
+                                            scrollTop: ($('#modal-content ' + postAnchor).offset().top)
+                                        }, 500);
+                                    }
+                                }, 500);
+                            }
                         }
                     }
                     // Use new REST API method
@@ -189,7 +255,15 @@
                                 dataType: 'json',
                                 url: fromPHP.siteUrl + '/wp-json/wp-post-modal/v1/any-post-type?slug=' + postSlug,
                                 success: function (data) {
-                                    modalContent.html(data.post_content);
+                                    $.when(modalContent.html(data.post_content));
+
+                                    setTimeout(function () {
+                                        if (postAnchor) {
+                                            $('.modal-wrapper').animate({
+                                                scrollTop: ($('#modal-content ' + postAnchor).offset().top)
+                                            }, 500);
+                                        }
+                                    }, 500);
                                 },
                                 error: function (xhr, ajaxOptions, thrownError) {
                                     console.log(xhr.status);
