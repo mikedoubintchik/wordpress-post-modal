@@ -1,4 +1,9 @@
 /** default styles **/
+body.no-scroll {
+    position: fixed;
+    width: 100%;
+}
+
 .close-modal {
     display: none;
 }

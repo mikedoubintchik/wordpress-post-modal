@@ -37,7 +37,7 @@
      */
     $.fn.isExternal = function () {
 
-        var host = window.location.host;
+        var host = window.location.hostname;
         var link = $('<a>', {
             href: this.attr('href')
         })[0].hostname;
@@ -92,10 +92,20 @@
         var $window = $(window);
 
         /**
+         * Show modal functionality
+         */
+        function showModal() {
+            $('body').addClass('no-scroll');
+            $('.modal-wrapper').addClass('show');
+            $('.modal').addClass('show');
+        }
+
+
+        /**
          * Close modal functionality
          */
-
         function hideModal() {
+            $('body').removeClass('no-scroll');
             $('.modal-wrapper').removeClass('show').hide();
             $('.modal').removeClass('show');
             $('#modal-content').html('');
@@ -148,11 +158,8 @@
                     }
 
 
-                    // show class to display the previously hidden modal
-                    $('.modal-wrapper').slideDown('slow', function () {
-                        $(this).addClass('show');
-                        $('.modal').addClass('show');
-                    });
+                    // show modal
+                    $('.modal-wrapper').fadeIn('fast', showModal);
                 }
 
 
@@ -278,11 +285,8 @@
                         }
                     }
 
-                    // show class to display the previously hidden modal
-                    $('.modal-wrapper').slideDown('slow', function () {
-                        $(this).addClass('show');
-                        $('.modal').addClass('show');
-                    });
+                    // show modal
+                    $('.modal-wrapper').fadeIn('fast', showModal);
 
                     return false;
                 });

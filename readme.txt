@@ -3,8 +3,8 @@ Contributors: allurewebsolutions
 Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.0
-Tested up to: 4.9.5
-Stable tag: 2.1.6
+Tested up to: 4.9.6
+Stable tag: 2.1.7
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -117,3 +117,4 @@ Yes, you can have as many as you like.
 2.1.4: Made Visual Editor button optional in plugin settings, improved error handling in ajax requests, refactor admin notice dismissal
 2.1.5: Add iframe method for loading more complicated external pages
 2.1.6: Added support for anchor links and open with modal through URL
+2.1.7: Changed slide down effect to fade in, prevented body scrolling when popup is open, recognize dev URLs with port
