@@ -90,11 +90,13 @@
 
         // Detect windows width function
         var $window = $(window);
+        var scrollPos;
 
         /**
          * Show modal functionality
          */
         function showModal() {
+            scrollPos = window.pageYOffset;
             $('body').addClass('no-scroll');
             $('.modal-wrapper').addClass('show');
             $('.modal').addClass('show');
@@ -108,7 +110,8 @@
             $('body').removeClass('no-scroll');
             $('.modal-wrapper').removeClass('show').hide();
             $('.modal').removeClass('show');
-            $('#modal-content').html('');
+            $('#modal-content').empty();
+            window.scroll(0, scrollPos);
         }
 
         // when pressing esc
