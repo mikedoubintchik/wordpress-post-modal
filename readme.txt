@@ -4,7 +4,7 @@ Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.0
 Tested up to: 4.9.6
-Stable tag: 2.1.9
+Stable tag: 2.1.10
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -121,3 +121,4 @@ Yes, you can have as many as you like.
 with port number
 2.1.8: Minor fix to move body to previously scrolled position after popup is closed
 2.1.9: Refactor post with anchor functionality
+2.1.10: Allow preceding forward slash on anchor links, check if modal is open before running close modal function on window click

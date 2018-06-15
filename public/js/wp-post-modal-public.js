@@ -89,8 +89,9 @@
     $(function () {
 
         // Detect windows width function
-        var $window = $(window);
-        var scrollPos;
+        var $window = $(window),
+            $document = $(document),
+            scrollPos;
 
         /**
          * Show modal functionality
@@ -107,26 +108,29 @@
          * Close modal functionality
          */
         function hideModal() {
-            $('body').removeClass('no-scroll');
-            $('.modal-wrapper').removeClass('show').hide();
-            $('.modal').removeClass('show');
-            $('#modal-content').empty();
-            window.scroll(0, scrollPos);
+            var body = $('body');
+            if (body.hasClass('no-scroll')) {
+                body.removeClass('no-scroll');
+                $('.modal-wrapper').removeClass('show').hide();
+                $('.modal').removeClass('show');
+                $('#modal-content').empty();
+                window.scroll(0, scrollPos);
+            }
         }
 
         // when pressing esc
-        $(document).keyup(function (e) {
+        $document.keyup(function (e) {
             if (e.keyCode === 27 && $('.modal-wrapper').hasClass('show'))
                 hideModal();
         });
 
         // when clicking on close button
-        $(document).on('click', '.close-modal', hideModal);
+        $document.on('click', '.close-modal', hideModal);
 
         // when clicking outside of modal
         $(window).on('click', hideModal);
 
-        $(document).on('click', '.modal', function (e) {
+        $document.on('click', '.modal', function (e) {
             e.stopPropagation();
         });
 
@@ -173,8 +177,8 @@
                     var $this = ($(this).attr('href') != null) ? $(this) : $(this).children('a').first();
                     var postLink = $this.attr('href');
                     var postUrl = $this[0].pathname.substring(1);
-                    var postSlug = basename(postLink);
-                    var postAnchor = postSlug.indexOf('#') !== -1 ? postSlug.substring(postSlug.indexOf('#')) : false;
+                    var postSlug = postLink.lastIndexOf('/#') > -1 ? basename(postLink.substring(0, postLink.lastIndexOf('/#'))) + basename(postLink) : basename(postLink);
+                    var postAnchor = postSlug.lastIndexOf('#') !== -1 ? postSlug.substring(postSlug.lastIndexOf('#')) : false;
                     var dataDivID = ' #' + $this.attr('data-div');
                     var dataBuddypress = $this.attr('data-buddypress');
                     var loader = '<img class="loading" src="' + fromPHP.pluginUrl + '/images/loading.gif" />';
