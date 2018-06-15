@@ -219,15 +219,13 @@
                                 modalContent.load(postLink + ' #buddypress');
                             }
                             else {
-                                modalContent.load(postLink + ' #modal-ready');
-
-                                setTimeout(function () {
+                                modalContent.load(postLink + ' #modal-ready', function () {
                                     if (postAnchor) {
                                         $('.modal-wrapper').animate({
                                             scrollTop: ($('#modal-content ' + postAnchor).offset().top)
                                         }, 500);
                                     }
-                                }, 500);
+                                });
                             }
                         }
                     }
@@ -265,15 +263,13 @@
                                 dataType: 'json',
                                 url: fromPHP.siteUrl + '/wp-json/wp-post-modal/v1/any-post-type?slug=' + postSlug,
                                 success: function (data) {
-                                    $.when(modalContent.html(data.post_content));
-
-                                    setTimeout(function () {
+                                    $.when(modalContent.html(data.post_content)).done(function () {
                                         if (postAnchor) {
                                             $('.modal-wrapper').animate({
                                                 scrollTop: ($('#modal-content ' + postAnchor).offset().top)
                                             }, 500);
                                         }
-                                    }, 500);
+                                    });
                                 },
                                 error: function (xhr, ajaxOptions, thrownError) {
                                     console.log(xhr.status);
