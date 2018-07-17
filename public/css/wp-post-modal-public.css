@@ -1,6 +1,5 @@
 /** default styles **/
 body.no-scroll {
-    position: fixed;
     overflow: hidden;
     width: 100%;
 }
