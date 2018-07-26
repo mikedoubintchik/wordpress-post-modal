@@ -171,6 +171,16 @@ class WP_Post_Modal_Admin {
 			array( 'label_for' => $this->option_name . '_styling' )
 		);
 
+		// Update URL state in address bar
+		add_settings_field(
+			$this->option_name . '_urlstate',
+			__( 'Dynamically update URL in address bar when modal is open', 'wp-post-modal' ),
+			array( $this, $this->option_name . '_urlstate_cb' ),
+			$this->plugin_name,
+			$this->option_name . '_general',
+			array( 'label_for' => $this->option_name . '_urlstate' )
+		);
+
 		// Disable Visual Editor Button
 		add_settings_field(
 			$this->option_name . '_button',
@@ -220,6 +230,10 @@ class WP_Post_Modal_Admin {
 		register_setting( $this->plugin_name, $this->option_name . '_styling', array(
 			$this,
 			$this->option_name . '_sanitize_styling'
+		) );
+		register_setting( $this->plugin_name, $this->option_name . '_urlstate', array(
+			$this,
+			$this->option_name . '_sanitize_urlstate'
 		) );
 		register_setting( $this->plugin_name, $this->option_name . '_button', array(
 			$this,
@@ -289,6 +303,24 @@ class WP_Post_Modal_Admin {
             </label>
         </fieldset>
         <a href="https://wp-post-modal.allureprojects.com/modal-css/" target="_blank">See CSS used for basic styling</a>
+		<?php
+	}
+
+	/**
+	 * Render the checkbox for styling
+	 *
+	 * @since  1.0.0
+	 */
+	public function wp_post_modal_urlstate_cb() {
+		$urlstate = get_option( $this->option_name . '_urlstate', true );
+		?>
+        <fieldset>
+            <label>
+                <input type="checkbox" name="<?php echo $this->option_name . '_urlstate' ?>"
+                       id="<?php echo $this->option_name . '_urlstate' ?>"
+                       value="1" <?php echo checked( $urlstate, '1' ); ?> />
+            </label>
+        </fieldset>
 		<?php
 	}
 

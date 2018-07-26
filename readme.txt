@@ -4,7 +4,7 @@ Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.0
 Tested up to: 4.9.7
-Stable tag: 2.1.11
+Stable tag: 2.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,13 +56,13 @@ You simply make a page or post with the content you want, as you always do.
 
 = How is the popup triggered? =
 With a slightly modified link to the page or post. The user must actively click on the link for the popup to show.
-If you link to your privacy policy with a link like this:
-`<a href="http://my-site.com/privacy-policy/>Our Privacy Policy</a>`
+If you link to your privacy policy with a link like this: `<a href="http://my-site.com/privacy-policy/>Our Privacy
+Policy</a>`
 
-Then edit that link in the text editor by adding class="modal-link" into the link to make this:
-`<a class="modal-link" href="http://my-site.com/privacy-policy/>Our Privacy Policy</a>`
+Then edit that link in the text editor by adding class="modal-link" into the link to make this: `<a class="modal-link"
+href="http://my-site.com/privacy-policy/>Our Privacy Policy</a>`
 
-If the link goes to a page on an external site, you need to find a container that has the content you want and a suitable ID. Once you know that, you need to add data-div="xx" to the link, where xx is the ID of content container. It also needs the class="modal-link" as well.  `<a class="modal-link" href="https://en.wikipedia.org/wiki/Apple" data-div="bodyContent">What is an apple?</a>`
+If the link goes to a page on an external site, you need to find a container that has the content you want and a suitable ID. Once you know that, you need to add data-div="xx" to the link, where xx is the ID of content container. It also needs the class="modal-link" as well. `<a class="modal-link" href="https://en.wikipedia.org/wiki/Apple" data-div="bodyContent">What is an apple?</a>`
 
 The popup can be initiated in one more way through using a the `modal-link` URL parameter. Structure:
 https://wp-post-modal.allureprojects.com?modal-link=[SLUG/URL] -- replace the SLUG/URL with the URL or slug of the page
@@ -122,3 +122,4 @@ with port number
 2.1.8: Minor fix to move body to previously scrolled position after popup is closed
 2.1.9: Refactor post with anchor functionality
 2.1.10: Allow preceding forward slash on anchor links, check if modal is open before running close modal function on window click
+2.2: Add functionality to update URL in address bar

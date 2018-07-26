@@ -91,23 +91,27 @@
         // Detect windows width function
         var $window = $(window),
             $document = $(document),
-            scrollPos;
+            scrollPos,
+            currentURL = window.location.pathname;
 
         /**
          * Show modal functionality
          */
-        function showModal() {
+        function showModal(postLink) {
             scrollPos = window.pageYOffset;
             $('body').addClass('no-scroll');
             $('.modal-wrapper').addClass('show');
             $('.modal').addClass('show');
+            if (postLink.length > 0) {
+                history.replaceState('', '', postLink);
+            }
         }
 
 
         /**
          * Close modal functionality
          */
-        function hideModal() {
+        function hideModal(currentURL) {
             var body = $('body');
             if (body.hasClass('no-scroll')) {
                 body.removeClass('no-scroll');
@@ -115,20 +119,28 @@
                 $('.modal').removeClass('show');
                 $('#modal-content').empty();
                 window.scroll(0, scrollPos);
+
+                if (window.location.pathname !== currentURL) {
+                    history.replaceState('', '', currentURL);
+                }
             }
         }
 
         // when pressing esc
         $document.keyup(function (e) {
             if (e.keyCode === 27 && $('.modal-wrapper').hasClass('show'))
-                hideModal();
+                hideModal(currentURL);
         });
 
         // when clicking on close button
-        $document.on('click', '.close-modal', hideModal);
+        $document.on('click', '.close-modal', function () {
+            hideModal(currentURL)
+        });
 
         // when clicking outside of modal
-        $(window).on('click', hideModal);
+        $(window).on('click', function () {
+            hideModal(currentURL)
+        });
 
         $document.on('click', '.modal', function (e) {
             e.stopPropagation();
@@ -289,7 +301,10 @@
                     }
 
                     // show modal
-                    $('.modal-wrapper').fadeIn('fast', showModal);
+                    $('.modal-wrapper').fadeIn('fast', function () {
+                        // if url state plugin setting is active
+                        showModal(fromPHP.urlState ? postLink : '');
+                    });
 
                     return false;
                 });
