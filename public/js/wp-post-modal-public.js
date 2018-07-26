@@ -236,11 +236,13 @@
                             }
                             else {
                                 modalContent.load(postLink + ' #modal-ready', function () {
-                                    if (postAnchor) {
-                                        $('.modal-wrapper').animate({
-                                            scrollTop: ($('#modal-content ' + postAnchor).offset().top)
-                                        }, 500);
-                                    }
+                                    setTimeout(function () {
+                                        if (postAnchor) {
+                                            $('.modal-wrapper').animate({
+                                                scrollTop: ($('#modal-content ' + postAnchor).offset().top)
+                                            }, 300);
+                                        }
+                                    }, 200);
                                 });
                             }
                         }
@@ -280,11 +282,13 @@
                                 url: fromPHP.siteUrl + '/wp-json/wp-post-modal/v1/any-post-type?slug=' + postSlug,
                                 success: function (data) {
                                     $.when(modalContent.html(data.post_content)).done(function () {
-                                        if (postAnchor) {
-                                            $('.modal-wrapper').animate({
-                                                scrollTop: ($('#modal-content ' + postAnchor).offset().top)
-                                            }, 500);
-                                        }
+                                        setTimeout(function () {
+                                            if (postAnchor) {
+                                                $('.modal-wrapper').animate({
+                                                    scrollTop: ($('#modal-content ' + postAnchor).offset().top)
+                                                }, 300);
+                                            }
+                                        }, 200);
                                     });
                                 },
                                 error: function (xhr, ajaxOptions, thrownError) {
@@ -305,8 +309,6 @@
                         // if url state plugin setting is active
                         showModal(fromPHP.urlState ? postLink : '');
                     });
-
-                    return false;
                 });
             }
         }
