@@ -199,14 +199,14 @@ class WP_Post_Modal_Admin {
 			$this->plugin_name
 		);
 
-		// Use legacy method
+		// Use rest method
 		add_settings_field(
-			$this->option_name . '_legacy',
-			__( 'Use Legacy Method', 'wp-post-modal' ),
-			array( $this, $this->option_name . '_legacy_cb' ),
+			$this->option_name . '_rest',
+			__( 'Use Rest API Method', 'wp-post-modal' ),
+			array( $this, $this->option_name . '_rest_cb' ),
 			$this->plugin_name,
 			$this->option_name . '_general',
-			array( 'label_for' => $this->option_name . '_legacy' )
+			array( 'label_for' => $this->option_name . '_rest' )
 		);
 
 		// Use iframe method for external links
@@ -239,9 +239,9 @@ class WP_Post_Modal_Admin {
 			$this,
 			$this->option_name . '_sanitize_button'
 		) );
-		register_setting( $this->plugin_name, $this->option_name . '_legacy', array(
+		register_setting( $this->plugin_name, $this->option_name . '_rest', array(
 			$this,
-			$this->option_name . '_sanitize_legacy'
+			$this->option_name . '_sanitize_rest'
 		) );
 		register_setting( $this->plugin_name, $this->option_name . '_iframe', array(
 			$this,
@@ -361,21 +361,21 @@ class WP_Post_Modal_Admin {
 	}
 
 	/**
-	 * Render the checkbox for legacy method
+	 * Render the checkbox for rest method
 	 *
 	 * @since  1.0.0
 	 */
-	public function wp_post_modal_legacy_cb() {
-		$legacy = get_option( $this->option_name . '_legacy', true );
+	public function wp_post_modal_rest_cb() {
+		$rest = get_option( $this->option_name . '_rest', true );
 		?>
         <fieldset>
             <label>
-                <input type="checkbox" name="<?php echo $this->option_name . '_legacy' ?>"
-                       id="<?php echo $this->option_name . '_legacy' ?>"
-                       value="1" <?php echo checked( $legacy, '1' ); ?> />
+                <input type="checkbox" name="<?php echo $this->option_name . '_rest' ?>"
+                       id="<?php echo $this->option_name . '_rest' ?>"
+                       value="1" <?php echo checked( $rest, '1' ); ?> />
             </label>
         </fieldset>
-        <p>Use this if the default method is not working OR if you are using custom templating</p>
+        <p>Use this if your content is loading slow and you aren't using custom templates</p>
 		<?php
 	}
 

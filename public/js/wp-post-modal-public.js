@@ -2,35 +2,6 @@
     'use strict';
 
     /**
-     * All of the code for your public-facing JavaScript source
-     * should reside in this file.
-     *
-     * Note: It has been assumed you will write jQuery code here, so the
-     * $ function reference has been prepared for usage within the scope
-     * of this function.
-     *
-     * This enables you to define handlers, for when the DOM is ready:
-     *
-     * $(function() {
-     *
-     * });
-     *
-     * When the window is loaded:
-     *
-     * $( window ).load(function() {
-     *
-     * });
-     *
-     * ...and/or other possibilities.
-     *
-     * Ideally, it is not considered best practise to attach more than a
-     * single DOM-ready or window-load handler for a particular page.
-     * Although scripts in the WordPress core, Plugins and Themes may be
-     * practising this, we should strive to set a better example in our own work.
-     */
-
-
-    /**
      * Check if URL is external function
      *
      * @returns {boolean}
@@ -86,6 +57,24 @@
         }
     };
 
+    /**
+     * Suppress modal link redirect in WP Customizer
+     */
+    function modalCustomizer() {
+        if (wp.customize) {
+            var body = $('body');
+            body.off('click.preview');
+
+            body.on('click.preview', 'a[href]:not(.modal-link)', function (e) {
+                var link = $(this);
+                e.preventDefault();
+                wp.customize.preview.send('scroll', 0);
+                wp.customize.preview.send('url', link.prop('href'));
+            });
+        }
+    }
+
+    // Document Ready
     $(function () {
 
         // Detect windows width function
@@ -97,16 +86,18 @@
         /**
          * Show modal functionality
          */
-        function showModal(postLink) {
+        function showModal(postLink, external) {
             scrollPos = window.pageYOffset;
-            $('body').addClass('no-scroll');
+            $('body, html').addClass('no-scroll');
             $('.modal-wrapper').addClass('show');
             $('.modal').addClass('show');
-            if (postLink.length > 0) {
-                history.replaceState('', '', postLink);
+
+            if (postLink) {
+                if (postLink.length > 0 && !external) {
+                    history.replaceState('', '', postLink);
+                }
             }
         }
-
 
         /**
          * Close modal functionality
@@ -115,6 +106,7 @@
             var body = $('body');
             if (body.hasClass('no-scroll')) {
                 body.removeClass('no-scroll');
+                $('html').removeClass('no-scroll');
                 $('.modal-wrapper').removeClass('show').hide();
                 $('.modal').removeClass('show');
                 $('#modal-content').empty();
@@ -126,62 +118,58 @@
             }
         }
 
-        // when pressing esc
-        $document.keyup(function (e) {
-            if (e.keyCode === 27 && $('.modal-wrapper').hasClass('show'))
-                hideModal(currentURL);
-        });
 
-        // when clicking on close button
-        $document.on('click', '.close-modal', function () {
-            hideModal(currentURL)
-        });
+        $document
+        // Close modal when pressing esc
+            .keyup(function (e) {
+                if (e.keyCode === 27 && $('.modal-wrapper').hasClass('show'))
+                    hideModal(currentURL);
+            })
+            // Close modal when clicking on close button
+            .on('click', '.close-modal', function () {
+                hideModal(currentURL);
+            })
+            // when clicking outside of modal
+            .on('click', '.modal', function (e) {
+                e.stopPropagation();
+            });
+
 
         // when clicking outside of modal
         $(window).on('click', function () {
-            hideModal(currentURL)
+            hideModal(currentURL);
         });
 
-        $document.on('click', '.modal', function (e) {
-            e.stopPropagation();
-        });
+        /**
+         * Check width
+         */
+        function initModal() {
 
-        function checkWidth() {
-            var windowsize = $window.width();
-
-            // if the window is greater than 767px wide then do below. we don't want the modal to show on mobile devices and instead the link will be followed.
-            if (windowsize >= fromPHP.breakpoint) {
+            // if the window is greater than breakpoint then show modal, otherwise go to linked page as normal
+            if ($window.width() >= fromPHP.breakpoint) {
+                var modalUrl = getUrlParameter('modal-link');
 
                 // if using URL parameter to open modal
-                if (getUrlParameter('modal-link')) {
+                if (modalUrl) {
+                    // show loading animation if styling is turned on
                     if (fromPHP.styled) {
                         $('#modal-content').html('<img class="loading" src="' + fromPHP.pluginUrl + '/images/loading.gif" />');
                     }
 
-                    if (fromPHP.legacy) {
-                        $('#modal-content').load(getUrlParameter('modal-link') + ' #modal-ready');
-                    } else {
-                        $.ajax({
-                            type: 'GET',
-                            dataType: 'json',
-                            url: fromPHP.siteUrl + '/wp-json/wp-post-modal/v1/any-post-type?slug=' + basename(getUrlParameter('modal-link')),
-                            success: function (data) {
-                                $.when($('#modal-content').html(data.post_content));
-
-                            },
-                            error: function (xhr, ajaxOptions, thrownError) {
-                                console.log(xhr.status);
-                                console.log(thrownError);
-                            }
+                    $.get(
+                        modalUrl,
+                        function (html) {
+                            $('#modal-content').html($(html).find('#modal-ready').html());
                         });
-                    }
-
 
                     // show modal
                     $('.modal-wrapper').fadeIn('fast', showModal);
                 }
 
 
+                /**
+                 * When clicking a modal-link
+                 */
                 $('body').on('click', '.modal-link', function (e) {
 
                     // Define variables
@@ -203,135 +191,99 @@
                         modalContent.html(loader);
                     }
 
-                    // Use legacy method
-                    if (fromPHP.legacy) {
-                        // Load content from external
-                        if ($this.isExternal()) {
-                            if ($(this).hasClass('iframe') || fromPHP.iframe) {
-                                var iframeCode = '<iframe src="' + $(this).attr('href') + '" width="100%"' +
-                                    ' height="600px" frameborder="0"></iframe>';
-                                modalContent.html(iframeCode);
-
-                            } else {
-                                $.ajaxPrefilter(function (options) {
-                                    if (options.crossDomain && jQuery.support.cors) {
-                                        var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
-                                        options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
-                                        //options.url = "http://cors.corsproxy.io/url=" + options.url;
-                                    }
-                                });
-
-                                $.get(
-                                    postLink,
-                                    function (response) {
-                                        var html = $(response);
-                                        modalContent.html($(html).find(dataDivID).html());
-                                    });
-                            }
+                    // Load content from external
+                    if ($this.isExternal()) {
+                        // load external content using iframe method
+                        if ($(this).hasClass('iframe') || fromPHP.iframe) {
+                            var iframeCode = '<iframe src="' + $(this).attr('href') + '" width="100%"' +
+                                ' height="600px" frameborder="0"></iframe>';
+                            modalContent.html(iframeCode);
                         }
-                        // Load content from internal
+                        // load external content normally
                         else {
-                            if (dataBuddypress) {
-                                modalContent.load(postLink + ' #buddypress');
-                            }
-                            else {
-                                modalContent.load(postLink + ' #modal-ready', function () {
-                                    setTimeout(function () {
-                                        if (postAnchor) {
-                                            $('.modal-wrapper').animate({
-                                                scrollTop: ($('#modal-content ' + postAnchor).offset().top)
-                                            }, 300);
-                                        }
-                                    }, 200);
-                                });
-                            }
-                        }
-                    }
-                    // Use new REST API method
-                    else {
-                        // Load content from external
-                        if ($this.isExternal()) {
-
-                            if ($(this).hasClass('iframe') || fromPHP.iframe) {
-                                var iframeCode = '<iframe src="' + $(this).attr('href') + '" width="100%"' +
-                                    ' height="600px" frameborder="0"></iframe>';
-                                modalContent.html(iframeCode);
-
-                            } else {
-                                $.ajaxPrefilter(function (options) {
-                                    if (options.crossDomain && jQuery.support.cors) {
-                                        var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
-                                        options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
-                                        //options.url = "http://cors.corsproxy.io/url=" + options.url;
-                                    }
-                                });
-
-                                $.get(
-                                    postLink,
-                                    function (response) {
-                                        var html = $(response);
-                                        modalContent.html($(html).find(dataDivID).html());
-                                    });
-                            }
-                        }
-                        // Load content from internal
-                        else {
-                            $.ajax({
-                                type: 'GET',
-                                dataType: 'json',
-                                url: fromPHP.siteUrl + '/wp-json/wp-post-modal/v1/any-post-type?slug=' + postSlug,
-                                success: function (data) {
-                                    $.when(modalContent.html(data.post_content)).done(function () {
-                                        setTimeout(function () {
-                                            if (postAnchor) {
-                                                $('.modal-wrapper').animate({
-                                                    scrollTop: ($('#modal-content ' + postAnchor).offset().top)
-                                                }, 300);
-                                            }
-                                        }, 200);
-                                    });
-                                },
-                                error: function (xhr, ajaxOptions, thrownError) {
-                                    console.log(xhr.status);
-                                    console.log(thrownError);
-
-                                    if (dataBuddypress)
-                                        modalContent.load(postLink + ' #buddypress');
-                                    else
-                                        modalContent.load(postLink + ' #modal-ready');
+                            $.ajaxPrefilter(function (options) {
+                                if (options.crossDomain && jQuery.support.cors) {
+                                    var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
+                                    options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
+                                    //options.url = "http://cors.corsproxy.io/url=" + options.url;
                                 }
                             });
+
+                            $.get(
+                                postLink,
+                                function (html) {
+                                    modalContent.html($(html).find(dataDivID).html());
+                                });
+                        }
+                    }
+                    // Load content from internal page
+                    else {
+                        // when loading buddy press profile
+                        if (dataBuddypress) {
+                            modalContent.load(postLink + ' #buddypress');
+                        }
+                        // load internal content using iframe method
+                        else if ($(this).hasClass('iframe')) {
+                            var iframeCode = '<iframe src="' + $(this).attr('href') + '" width="100%"' +
+                                ' height="600px" frameborder="0"></iframe>';
+                            modalContent.html(iframeCode);
+                        }
+                        // when loading any other type of content
+                        else {
+                            // use the rest method
+                            if (fromPHP.restMethod || $(this).hasClass('rest')) {
+                                $.get(
+                                    fromPHP.siteUrl + '/wp-json/wp-post-modal/v1/any-post-type?slug=' + postSlug,
+                                    function (response) {
+                                        $.when(modalContent.html(response.post_content)).done(function () {
+                                            // scroll to anchor
+                                            setTimeout(function () {
+                                                if (postAnchor) {
+                                                    $('.modal-wrapper').animate({
+                                                        scrollTop: ($('#modal-content ' + postAnchor).offset().top)
+                                                    }, 300);
+                                                }
+                                            }, 200);
+                                        });
+                                    });
+                            }
+                            // use the default method
+                            else {
+                                $.get(
+                                    postLink,
+                                    function (html) {
+                                        $.when(modalContent.html($(html).find('#modal-ready').html())).done(function () {
+                                            // scroll to anchor
+                                            setTimeout(function () {
+                                                if (postAnchor) {
+                                                    $('.modal-wrapper').animate({
+                                                        scrollTop: ($('#modal-content ' + postAnchor).offset().top)
+                                                    }, 300);
+                                                }
+                                            }, 200);
+                                        });
+                                    });
+                            }
                         }
                     }
 
                     // show modal
                     $('.modal-wrapper').fadeIn('fast', function () {
                         // if url state plugin setting is active
-                        showModal(fromPHP.urlState ? postLink : '');
+                        showModal(fromPHP.urlState ? postLink : '', $this.isExternal());
                     });
                 });
             }
         }
 
-        checkWidth();
-        $(window).resize(checkWidth);
+        // Initiate modal
+        initModal();
+
+        // Re-initiate modal on window resize
+        $(window).resize(initModal);
     });
 
-    // Suppress modal link redirect in WP Customizer
-    function modalCustomizer() {
-        if (wp.customize) {
-            var body = $('body');
-            body.off('click.preview');
-
-            body.on('click.preview', 'a[href]:not(.modal-link)', function (e) {
-                var link = $(this);
-                e.preventDefault();
-                wp.customize.preview.send('scroll', 0);
-                wp.customize.preview.send('url', link.prop('href'));
-            });
-        }
-    }
-
+    // Window load
     $(window).on('load', function () {
         modalCustomizer();
     });

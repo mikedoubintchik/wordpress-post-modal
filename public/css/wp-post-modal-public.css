@@ -1,8 +1,11 @@
 /** default styles **/
+html.no-scroll,
 body.no-scroll {
     position: fixed;
     overflow: hidden;
     width: 100%;
+    -webkit-transform: translate3d(0, 0, 0);
+    cursor: pointer;
 }
 
 .close-modal {
@@ -223,5 +226,3 @@ body.no-scroll {
     padding: 7px 0 7px 4px;
     border: 1px solid #E3E3E3;
 }
-
-/*** end Craig added ***/

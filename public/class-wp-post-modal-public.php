@@ -104,7 +104,7 @@ class WP_Post_Modal_Public {
 			'styled'     => get_option( 'wp_post_modal_styling' ),
 			'ajax_url'   => admin_url( 'admin-ajax.php' ),
 			'siteUrl'    => get_bloginfo( 'url' ),
-			'legacy'     => get_option( 'wp_post_modal_legacy' ),
+			'restMethod' => get_option( 'wp_post_modal_rest' ),
 			'iframe'     => get_option( 'wp_post_modal_iframe' ),
 			'urlState'   => get_option( 'wp_post_modal_urlstate' ),
 		) );
@@ -194,5 +194,7 @@ class WP_Post_Modal_Public {
 		if ( ! empty( $content ) ) {
 			return '<div id="modal-ready">' . $content . '</div>';
 		}
+
+		return false;
 	}
 }
