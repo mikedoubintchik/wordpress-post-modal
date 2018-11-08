@@ -3,8 +3,8 @@ Contributors: allurewebsolutions
 Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.0
-Tested up to: 4.9.8
-Stable tag: 3.0
+Tested up to: 5.0
+Stable tag: 3.0.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,3 +109,4 @@ with port number
 2.1.10: Allow preceding forward slash on anchor links, check if modal is open before running close modal function on window click
 2.2: Add functionality to update URL in address bar
 3.0: Many improvements in plugin code
+3.0.1: Fix scrolling bug
