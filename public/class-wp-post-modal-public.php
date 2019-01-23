@@ -102,6 +102,7 @@ class WP_Post_Modal_Public {
 			'pluginUrl'  => plugin_dir_url( __FILE__ ),
 			'breakpoint' => ( get_option( 'wp_post_modal_breakpoint' ) != '' ? get_option( 'wp_post_modal_breakpoint' ) : '768' ),
 			'styled'     => get_option( 'wp_post_modal_styling' ),
+			'loader'     => get_option( 'wp_post_modal_loader' ),
 			'ajax_url'   => admin_url( 'admin-ajax.php' ),
 			'siteUrl'    => get_bloginfo( 'url' ),
 			'restMethod' => get_option( 'wp_post_modal_rest' ),

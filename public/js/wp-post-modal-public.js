@@ -7,7 +7,6 @@
      * @returns {boolean}
      */
     $.fn.isExternal = function () {
-
         var host = window.location.hostname;
         var link = $('<a>', {
             href: this.attr('href')
@@ -15,6 +14,13 @@
         return (link !== host);
 
     };
+
+    /**
+     * Check if modal is open
+     */
+    function popupOpen() {
+        return $('#modal-content').html().length;
+    }
 
     /**
      * Basename function for JS
@@ -137,7 +143,7 @@
 
         // when clicking outside of modal
         $(window).on('click', function () {
-            hideModal(currentURL);
+            if (popupOpen()) hideModal(currentURL);
         });
 
         /**
@@ -152,7 +158,7 @@
                 // if using URL parameter to open modal
                 if (modalUrl) {
                     // show loading animation if styling is turned on
-                    if (fromPHP.styled) {
+                    if (fromPHP.loader) {
                         $('#modal-content').html('<img class="loading" src="' + fromPHP.pluginUrl + '/images/loading.gif" />');
                     }
 
@@ -187,7 +193,7 @@
                     e.preventDefault();
 
                     // display loading animation or in this case static content
-                    if (fromPHP.styled) {
+                    if (fromPHP.loader) {
                         modalContent.html(loader);
                     }
 
@@ -252,16 +258,34 @@
                                 $.get(
                                     postLink,
                                     function (html) {
-                                        $.when(modalContent.html($(html).find('#modal-ready').html())).done(function () {
-                                            // scroll to anchor
-                                            setTimeout(function () {
-                                                if (postAnchor) {
-                                                    $('.modal-wrapper').animate({
-                                                        scrollTop: ($('#modal-content ' + postAnchor).offset().top)
-                                                    }, 300);
-                                                }
-                                            }, 200);
-                                        });
+                                        var content = $(html).find('#modal-ready');
+
+                                        if (content[0]) {
+                                            $.when(modalContent.html($(html).find('#modal-ready').html())).done(function () {
+                                                // scroll to anchor
+                                                setTimeout(function () {
+                                                    if (postAnchor) {
+                                                        $('.modal-wrapper').animate({
+                                                            scrollTop: ($('#modal-content ' + postAnchor).offset().top)
+                                                        }, 300);
+                                                    }
+                                                }, 200);
+                                            });
+                                        }
+                                        // fallback to load method
+                                        else {
+                                            modalContent.load(postLink, function () {
+                                                modalContent.html($(modalContent.html()).find('#modal-ready').html());
+
+                                                setTimeout(function () {
+                                                    if (postAnchor) {
+                                                        $('.modal-wrapper').animate({
+                                                            scrollTop: ($('#modal-content ' + postAnchor).offset().top)
+                                                        }, 300);
+                                                    }
+                                                }, 200);
+                                            });
+                                        }
                                     });
                             }
                         }

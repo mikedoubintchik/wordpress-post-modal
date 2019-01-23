@@ -3,8 +3,7 @@ Contributors: allurewebsolutions
 Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.0
-Tested up to: 5.0
-Stable tag: 3.0.1
+Tested up to: 5.0.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -110,3 +109,4 @@ with port number
 2.2: Add functionality to update URL in address bar
 3.0: Many improvements in plugin code
 3.0.1: Fix scrolling bug
+3.1.0: Added setting to toggle loading animation

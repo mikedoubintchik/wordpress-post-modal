@@ -171,6 +171,16 @@ class WP_Post_Modal_Admin {
 			array( 'label_for' => $this->option_name . '_styling' )
 		);
 
+		// Show loader
+		add_settings_field(
+			$this->option_name . '_loader',
+			__( 'Show animated loader', 'wp-post-modal' ),
+			array( $this, $this->option_name . '_loader_cb' ),
+			$this->plugin_name,
+			$this->option_name . '_general',
+			array( 'label_for' => $this->option_name . '_loader' )
+		);
+
 		// Update URL state in address bar
 		add_settings_field(
 			$this->option_name . '_urlstate',
@@ -230,6 +240,10 @@ class WP_Post_Modal_Admin {
 		register_setting( $this->plugin_name, $this->option_name . '_styling', array(
 			$this,
 			$this->option_name . '_sanitize_styling'
+		) );
+		register_setting( $this->plugin_name, $this->option_name . '_loader', array(
+			$this,
+			$this->option_name . '_sanitize_loader'
 		) );
 		register_setting( $this->plugin_name, $this->option_name . '_urlstate', array(
 			$this,
@@ -303,6 +317,24 @@ class WP_Post_Modal_Admin {
             </label>
         </fieldset>
         <a href="https://wp-post-modal.allureprojects.com/modal-css/" target="_blank">See CSS used for basic styling</a>
+		<?php
+	}
+
+	/**
+	 * Render the checkbox for loader
+	 *
+	 * @since  1.0.0
+	 */
+	public function wp_post_modal_loader_cb() {
+		$loader = get_option( $this->option_name . '_loader', true );
+		?>
+        <fieldset>
+            <label>
+                <input type="checkbox" name="<?php echo $this->option_name . '_loader' ?>"
+                       id="<?php echo $this->option_name . '_loader' ?>"
+                       value="1" <?php echo checked( $loader, '1' ); ?> />
+            </label>
+        </fieldset>
 		<?php
 	}
 
