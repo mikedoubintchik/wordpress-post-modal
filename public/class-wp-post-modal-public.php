@@ -99,15 +99,17 @@ class WP_Post_Modal_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-post-modal-public.js', array( 'jquery' ), $this->version, false );
 		wp_localize_script( $this->plugin_name, 'fromPHP', array(
-			'pluginUrl'  => plugin_dir_url( __FILE__ ),
-			'breakpoint' => ( get_option( 'wp_post_modal_breakpoint' ) != '' ? get_option( 'wp_post_modal_breakpoint' ) : '768' ),
-			'styled'     => get_option( 'wp_post_modal_styling' ),
-			'loader'     => get_option( 'wp_post_modal_loader' ),
-			'ajax_url'   => admin_url( 'admin-ajax.php' ),
-			'siteUrl'    => get_bloginfo( 'url' ),
-			'restMethod' => get_option( 'wp_post_modal_rest' ),
-			'iframe'     => get_option( 'wp_post_modal_iframe' ),
-			'urlState'   => get_option( 'wp_post_modal_urlstate' ),
+			'pluginUrl'   => plugin_dir_url( __FILE__ ),
+			'breakpoint'  => ( get_option( 'wp_post_modal_breakpoint' ) != '' ? get_option( 'wp_post_modal_breakpoint' ) : '768' ),
+			'styled'      => get_option( 'wp_post_modal_styling' ),
+			'loader'      => get_option( 'wp_post_modal_loader' ),
+			'ajax_url'    => admin_url( 'admin-ajax.php' ),
+			'siteUrl'     => get_bloginfo( 'url' ),
+			'restMethod'  => get_option( 'wp_post_modal_rest' ),
+			'iframe'      => get_option( 'wp_post_modal_iframe' ),
+			'urlState'    => get_option( 'wp_post_modal_urlstate' ),
+			'containerID' => '#' . ( get_option( 'wp_post_modal_container' ) ? get_option( 'wp_post_modal_container' ) : 'modal-ready' ),
+			'isAdmin'     => is_admin()
 		) );
 
 	}

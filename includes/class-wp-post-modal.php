@@ -159,9 +159,6 @@ class WP_Post_Modal {
 
 		$this->loader->add_filter( 'plugin_action_links_' . plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_name . '.php' ), $plugin_admin, 'add_settings_link' );
 
-		$this->loader->add_filter( 'admin_notices', $plugin_admin, 'admin_notice_updated' );
-		$this->loader->add_filter( 'network_admin_notices', $plugin_admin, 'admin_notice_updated' );
-
 		$this->loader->add_filter( 'admin_notices', $plugin_admin, 'admin_notice_installed' );
 		$this->loader->add_filter( 'network_admin_notices', $plugin_admin, 'admin_notice_installed' );
 

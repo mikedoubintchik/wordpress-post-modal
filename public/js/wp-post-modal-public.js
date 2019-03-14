@@ -67,7 +67,7 @@
      * Suppress modal link redirect in WP Customizer
      */
     function modalCustomizer() {
-        if (wp.customize) {
+        if (typeof wp.customize !== 'undefined') {
             var body = $('body');
             body.off('click.preview');
 
@@ -98,6 +98,7 @@
             $('.modal-wrapper').addClass('show');
             $('.modal').addClass('show');
 
+            // update address bar to show url of popup content page
             if (postLink) {
                 if (postLink.length > 0 && !external) {
                     history.replaceState('', '', postLink);
@@ -110,6 +111,7 @@
          */
         function hideModal(currentURL) {
             var body = $('body');
+
             if (body.hasClass('no-scroll')) {
                 body.removeClass('no-scroll');
                 $('html').removeClass('no-scroll');
@@ -118,6 +120,7 @@
                 $('#modal-content').empty();
                 window.scroll(0, scrollPos);
 
+                // return original page url in address bar
                 if (window.location.pathname !== currentURL) {
                     history.replaceState('', '', currentURL);
                 }
@@ -150,7 +153,6 @@
          * Check width
          */
         function initModal() {
-
             // if the window is greater than breakpoint then show modal, otherwise go to linked page as normal
             if ($window.width() >= fromPHP.breakpoint) {
                 var modalUrl = getUrlParameter('modal-link');
@@ -165,7 +167,7 @@
                     $.get(
                         modalUrl,
                         function (html) {
-                            $('#modal-content').html($(html).find('#modal-ready').html());
+                            $('#modal-content').html($(html).find(fromPHP.containerID).html());
                         });
 
                     // show modal
@@ -177,12 +179,10 @@
                  * When clicking a modal-link
                  */
                 $('body').on('click', '.modal-link', function (e) {
-
                     // Define variables
                     var modalContent = $('#modal-content');
                     var $this = ($(this).attr('href') != null) ? $(this) : $(this).children('a').first();
                     var postLink = $this.attr('href');
-                    var postUrl = $this[0].pathname.substring(1);
                     var postSlug = postLink.lastIndexOf('/#') > -1 ? basename(postLink.substring(0, postLink.lastIndexOf('/#'))) + basename(postLink) : basename(postLink);
                     var postAnchor = postSlug.lastIndexOf('#') !== -1 ? postSlug.substring(postSlug.lastIndexOf('#')) : false;
                     var dataDivID = ' #' + $this.attr('data-div');
@@ -258,10 +258,10 @@
                                 $.get(
                                     postLink,
                                     function (html) {
-                                        var content = $(html).find('#modal-ready');
-
+                                        var content = $(html).find(fromPHP.containerID);
+                                        
                                         if (content[0]) {
-                                            $.when(modalContent.html($(html).find('#modal-ready').html())).done(function () {
+                                            $.when(modalContent.html($(html).find(fromPHP.containerID).html())).done(function () {
                                                 // scroll to anchor
                                                 setTimeout(function () {
                                                     if (postAnchor) {
@@ -275,7 +275,7 @@
                                         // fallback to load method
                                         else {
                                             modalContent.load(postLink, function () {
-                                                modalContent.html($(modalContent.html()).find('#modal-ready').html());
+                                                modalContent.html($(modalContent.html()).find(fromPHP.containerID).html());
 
                                                 setTimeout(function () {
                                                     if (postAnchor) {

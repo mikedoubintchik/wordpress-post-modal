@@ -141,6 +141,16 @@ class WP_Post_Modal_Admin {
 			$this->plugin_name
 		);
 
+		// Container ID
+		add_settings_field(
+			$this->option_name . '_container',
+			__( 'Container ID', 'wp-post-modal' ),
+			array( $this, $this->option_name . '_container_cb' ),
+			$this->plugin_name,
+			$this->option_name . '_general',
+			array( 'label_for' => $this->option_name . '_container' )
+		);
+
 		// Close button
 		add_settings_field(
 			$this->option_name . '_close',
@@ -229,6 +239,13 @@ class WP_Post_Modal_Admin {
 			array( 'label_for' => $this->option_name . '_iframe' )
 		);
 
+		/**
+		 * Register Settings
+		 */
+		register_setting( $this->plugin_name, $this->option_name . '_container', array(
+			$this,
+			$this->option_name . '_sanitize_container'
+		) );
 		register_setting( $this->plugin_name, $this->option_name . '_close', array(
 			$this,
 			$this->option_name . '_sanitize_close'
@@ -261,6 +278,25 @@ class WP_Post_Modal_Admin {
 			$this,
 			$this->option_name . '_sanitize_iframe'
 		) );
+	}
+
+	/**
+	 * Render the input for container ID
+	 *
+	 * @since  1.0.0
+	 */
+	public function wp_post_modal_container_cb() {
+		$container = get_option( $this->option_name . '_container' );
+		?>
+        <fieldset>
+            <label>
+                <input type="text" size="40" name="<?php echo $this->option_name . '_container' ?>"
+                       id="<?php echo $this->option_name . '_container' ?>"
+                       value="<?php echo $container ?>" placeholder="Default is 'modal-ready'"/>
+            </label>
+            <p>Optional: Set the ID of the container that you popped up. By default, this plugin wraps the_content() of any Post/Page with a div that has the ID of "modal-ready." If you change this value, your content will still be wrapped in modal-ready, but the popup will use your custom ID defined here. Be careful as not all IDs will work.</p>
+        </fieldset>
+		<?php
 	}
 
 	/**
@@ -477,6 +513,8 @@ class WP_Post_Modal_Admin {
 
 	/**
 	 * Admin notice for plugin updated
+     *
+     * TODO: possibly remove if not needed. not currently being used.
 	 */
 	public function admin_notice_updated() {
 		$user_id = get_current_user_id();

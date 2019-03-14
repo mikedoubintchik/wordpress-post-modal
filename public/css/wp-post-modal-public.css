@@ -30,7 +30,7 @@ body.no-scroll {
 .modal-wrapper.show,
 .modal.show,
 .modal.show .close-modal {
-    display: block;
+    display: block !important;
 }
 
 /** styled modal **/
