@@ -302,9 +302,6 @@
 
         // Initiate modal
         initModal();
-
-        // Re-initiate modal on window resize
-        $(window).resize(initModal);
     });
 
     // Window load

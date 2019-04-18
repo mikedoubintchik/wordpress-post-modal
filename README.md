@@ -76,6 +76,7 @@ Yes, you can have as many as you like.
 
 ##Changelog
 
+* 3.2.1: Minor bug fix 
 * 3.2.0: Added setting for container ID, fixed minor JS bug, fixed bug with notifications
 * 3.1.0: Added setting to toggle loading animation
 * 3.0.1: Fix scrolling bug
