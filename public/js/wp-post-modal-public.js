@@ -167,7 +167,9 @@
                     $.get(
                         modalUrl,
                         function (html) {
-                            $('#modal-content').html($(html).find(fromPHP.containerID).html());
+                            var htmlContent = (html.indexOf('<html') > -1) ? $(html).find(fromPHP.containerID).html() : html;
+
+                            $('#modal-content').html(htmlContent);
                         });
 
                     // show modal
@@ -258,19 +260,21 @@
                                 $.get(
                                     postLink,
                                     function (html) {
-                                        var content = $(html).find(fromPHP.containerID);
-                                        
+                                        var content = $(html).find(fromPHP.containerID),
+                                            htmlContent = (html.indexOf('<html') > -1) ? $(html).find(fromPHP.containerID).html() : html;
+
                                         if (content[0]) {
-                                            $.when(modalContent.html($(html).find(fromPHP.containerID).html())).done(function () {
-                                                // scroll to anchor
-                                                setTimeout(function () {
-                                                    if (postAnchor) {
-                                                        $('.modal-wrapper').animate({
-                                                            scrollTop: ($('#modal-content ' + postAnchor).offset().top)
-                                                        }, 300);
-                                                    }
-                                                }, 200);
-                                            });
+                                            $.when(modalContent.html(htmlContent))
+                                                .done(function () {
+                                                    // scroll to anchor
+                                                    setTimeout(function () {
+                                                        if (postAnchor) {
+                                                            $('.modal-wrapper').animate({
+                                                                scrollTop: ($('#modal-content ' + postAnchor).offset().top)
+                                                            }, 300);
+                                                        }
+                                                    }, 200);
+                                                });
                                         }
                                         // fallback to load method
                                         else {

@@ -16,7 +16,7 @@
  * Plugin Name:       WP Post Popup
  * Plugin URI:        https://allurewebsolutions.com
  * Description:       This plugin allows any content to be pulled into a modal window dynamically. To use, just create a link with class "modal-link".
- * Version:           3.2.1
+ * Version:           3.2.2
  * Author:            Allure Web Solutions
  * Author URI:        https://allurewebsolutions.com
  * License:           GPL-2.0+
@@ -72,4 +72,5 @@ function run_wp_post_modal() {
 	$plugin->run();
 
 }
+
 run_wp_post_modal();
