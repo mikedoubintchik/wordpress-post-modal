@@ -87,7 +87,8 @@
         var $window = $(window),
             $document = $(document),
             scrollPos,
-            currentURL = window.location.pathname;
+            currentURL = window.location.pathname,
+            disablePopup = !!window.MSInputMethodContext && !!document.documentMode;
 
         /**
          * Show modal functionality
@@ -304,8 +305,8 @@
             }
         }
 
-        // Initiate modal
-        initModal();
+        // Initiate modal if not IE11
+        if (!disablePopup) initModal();
     });
 
     // Window load

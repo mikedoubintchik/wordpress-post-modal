@@ -76,6 +76,7 @@ Yes, you can have as many as you like.
 
 ##Changelog
 
+* 3.2.3: Disabled popup for IE11
 * 3.2.2: Fixed custom templates to work with URL parameter
 * 3.2.1: Minor bug fix 
 * 3.2.0: Added setting for container ID, fixed minor JS bug, fixed bug with notifications
