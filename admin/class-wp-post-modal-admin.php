@@ -25,7 +25,7 @@ class WP_Post_Modal_Admin {
 	/**
 	 * The options name to be used in this plugin
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
 	 * @access    private
 	 * @var    string $option_name Option name of this plugin
 	 */
@@ -55,7 +55,7 @@ class WP_Post_Modal_Admin {
 	 * @since    1.0.0
 	 *
 	 * @param      string $plugin_name The name of this plugin.
-	 * @param      string $version The version of this plugin.
+	 * @param      string $version     The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -181,6 +181,16 @@ class WP_Post_Modal_Admin {
 			array( 'label_for' => $this->option_name . '_styling' )
 		);
 
+		// Disable body scrolling
+		add_settings_field(
+			$this->option_name . '_scrolling',
+			__( 'Disable body scrolling', 'wp-post-modal' ),
+			array( $this, $this->option_name . '_scrolling_cb' ),
+			$this->plugin_name,
+			$this->option_name . '_general',
+			array( 'label_for' => $this->option_name . '_scrolling' )
+		);
+
 		// Show loader
 		add_settings_field(
 			$this->option_name . '_loader',
@@ -258,6 +268,10 @@ class WP_Post_Modal_Admin {
 			$this,
 			$this->option_name . '_sanitize_styling'
 		) );
+		register_setting( $this->plugin_name, $this->option_name . '_scrolling', array(
+			$this,
+			$this->option_name . '_sanitize_scrolling'
+		) );
 		register_setting( $this->plugin_name, $this->option_name . '_loader', array(
 			$this,
 			$this->option_name . '_sanitize_loader'
@@ -294,7 +308,8 @@ class WP_Post_Modal_Admin {
                        id="<?php echo $this->option_name . '_container' ?>"
                        value="<?php echo $container ?>" placeholder="Default is 'modal-ready'"/>
             </label>
-            <p>Optional: Set the ID of the container that you popped up. By default, this plugin wraps the_content() of any Post/Page with a div that has the ID of "modal-ready." If you change this value, your content will still be wrapped in modal-ready, but the popup will use your custom ID defined here. Be careful as not all IDs will work.</p>
+            <p>Optional: Set the ID of the container that you popped up. By default, this plugin wraps the_content() of any Post/Page with a div that has the ID of "modal-ready." If you change this value, your content
+                will still be wrapped in modal-ready, but the popup will use your custom ID defined here. Be careful as not all IDs will work.</p>
         </fieldset>
 		<?php
 	}
@@ -353,6 +368,25 @@ class WP_Post_Modal_Admin {
             </label>
         </fieldset>
         <a href="https://wp-post-modal.allureprojects.com/modal-css/" target="_blank">See CSS used for basic styling</a>
+		<?php
+	}
+
+	/**
+	 * Render the checkbox for disabling body scrolling
+	 *
+	 * @since  1.0.0
+	 */
+	public function wp_post_modal_scrolling_cb() {
+		$scrolling = get_option( $this->option_name . '_scrolling', true );
+		?>
+        <fieldset>
+            <label>
+                <input type="checkbox" name="<?php echo $this->option_name . '_scrolling' ?>"
+                       id="<?php echo $this->option_name . '_scrolling' ?>"
+                       value="1" <?php echo checked( $scrolling, '1' ); ?> />
+            </label>
+        </fieldset>
+        <p>Disable body scrolling when when popup is open. Note: This will cause the body position to jump when the popup is open and to scroll back to the previous position when the popup is closed.</p>
 		<?php
 	}
 
@@ -513,8 +547,8 @@ class WP_Post_Modal_Admin {
 
 	/**
 	 * Admin notice for plugin updated
-     *
-     * TODO: possibly remove if not needed. not currently being used.
+	 *
+	 * TODO: possibly remove if not needed. not currently being used.
 	 */
 	public function admin_notice_updated() {
 		$user_id = get_current_user_id();

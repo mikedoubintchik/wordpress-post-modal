@@ -95,7 +95,7 @@
          */
         function showModal(postLink, external) {
             scrollPos = window.pageYOffset;
-            $('body, html').addClass('no-scroll');
+            if (fromPHP.disableScrolling) $('body, html').addClass('no-scroll');
             $('.modal-wrapper').addClass('show');
             $('.modal').addClass('show');
 
@@ -113,18 +113,21 @@
         function hideModal(currentURL) {
             var body = $('body');
 
+            // handle scrolling
             if (body.hasClass('no-scroll')) {
                 body.removeClass('no-scroll');
                 $('html').removeClass('no-scroll');
-                $('.modal-wrapper').removeClass('show').hide();
-                $('.modal').removeClass('show');
-                $('#modal-content').empty();
                 window.scroll(0, scrollPos);
+            }
 
-                // return original page url in address bar
-                if (window.location.pathname !== currentURL) {
-                    history.replaceState('', '', currentURL);
-                }
+            // hide popup
+            $('.modal-wrapper').removeClass('show').hide();
+            $('.modal').removeClass('show');
+            $('#modal-content').empty();
+
+            // return original page url in address bar
+            if (window.location.pathname !== currentURL) {
+                history.replaceState('', '', currentURL);
             }
         }
 
@@ -306,6 +309,7 @@
         }
 
         // Initiate modal if not IE11
+
         if (!disablePopup) initModal();
     });
 
