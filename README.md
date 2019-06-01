@@ -76,6 +76,7 @@ Yes, you can have as many as you like.
 
 ##Changelog
 
+* 3.2.5: Fix bug with popup being empty
 * 3.2.4: Added setting for disabling body scrolling
 * 3.2.3: Disabled popup for IE11
 * 3.2.2: Fixed custom templates to work with URL parameter

@@ -3,7 +3,7 @@ Contributors: allurewebsolutions
 Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.0
-Tested up to: 5.2
+Tested up to: 5.2.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,7 @@ Yes, you can have as many as you like.
 4. Easily insert popup link with custom button in Visual Editor
 
 == Changelog ==
+3.2.5: Fix bug with popup being empty
 3.2.4: Added setting for disabling body scrolling
 3.2.3: Disabled popup for IE11
 3.2.2: Fixed custom templates to work with URL parameter

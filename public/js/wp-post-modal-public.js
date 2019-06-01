@@ -19,7 +19,7 @@
      * Check if modal is open
      */
     function popupOpen() {
-        return $('#modal-content').html().length;
+        return $('.modal-wrapper').hasClass('show');
     }
 
     /**
@@ -309,7 +309,6 @@
         }
 
         // Initiate modal if not IE11
-
         if (!disablePopup) initModal();
     });
 
