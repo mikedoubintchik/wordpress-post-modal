@@ -61,6 +61,9 @@ You simply make a page or post with the content you want, as you always do.
 Yes, you can add an anchor to the end of your URL (for internally linked pages) and the popup will scroll to the
 position of the anchor.
 
+= Using a custom div ID =
+You can change the name of the default site-wide div ID to use in the plugin settings. Alternatively, you can change the div ID case-by-case by adding this attribute `data-div="DIVID"` to your modal links.
+
 = What if my External Page isn't loading =
 If your external page isn't working, then you can try using the [iFrame method](http://wp-post-modal.allureprojects.com/documentation). With the iFrame method the entire external page will load. You will not be able to specify a specific div to load.
 
@@ -85,6 +88,7 @@ Yes, you can have as many as you like.
 4. Easily insert popup link with custom button in Visual Editor
 
 == Changelog ==
+3.2.6: Added data-div functionality for internal popups
 3.2.5: Fix bug with popup being empty
 3.2.4: Added setting for disabling body scrolling
 3.2.3: Disabled popup for IE11

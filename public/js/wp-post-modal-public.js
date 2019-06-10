@@ -191,7 +191,7 @@
                     var postLink = $this.attr('href');
                     var postSlug = postLink.lastIndexOf('/#') > -1 ? basename(postLink.substring(0, postLink.lastIndexOf('/#'))) + basename(postLink) : basename(postLink);
                     var postAnchor = postSlug.lastIndexOf('#') !== -1 ? postSlug.substring(postSlug.lastIndexOf('#')) : false;
-                    var dataDivID = ' #' + $this.attr('data-div');
+                    var dataDivID = $this.attr('data-div') ? ('#' + $this.attr('data-div')) : fromPHP.containerID;
                     var dataBuddypress = $this.attr('data-buddypress');
                     var loader = '<img class="loading" src="' + fromPHP.pluginUrl + '/images/loading.gif" />';
 
@@ -264,8 +264,8 @@
                                 $.get(
                                     postLink,
                                     function (html) {
-                                        var content = $(html).find(fromPHP.containerID),
-                                            htmlContent = (html.indexOf('<html') > -1) ? $(html).find(fromPHP.containerID).html() : html;
+                                        var content = $(html).find(dataDivID),
+                                            htmlContent = (html.indexOf('<html') > -1) ? $(html).find(dataDivID).html() : html;
 
                                         if (content[0]) {
                                             $.when(modalContent.html(htmlContent))
@@ -283,7 +283,7 @@
                                         // fallback to load method
                                         else {
                                             modalContent.load(postLink, function () {
-                                                modalContent.html($(modalContent.html()).find(fromPHP.containerID).html());
+                                                modalContent.html($(modalContent.html()).find(dataDivID).html());
 
                                                 setTimeout(function () {
                                                     if (postAnchor) {
