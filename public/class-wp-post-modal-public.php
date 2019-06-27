@@ -43,10 +43,11 @@ class WP_Post_Modal_Public {
 	/**
 	 * Initialize the class and set its properties.
 	 *
+	 * @param string $plugin_name The name of the plugin.
+	 * @param string $version     The version of this plugin.
+	 *
 	 * @since    1.0.0
 	 *
-	 * @param      string $plugin_name The name of the plugin.
-	 * @param      string $version     The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -190,13 +191,17 @@ class WP_Post_Modal_Public {
 	/**
 	 * Wrap content in modal-ready ID
 	 *
+	 * @param $content
+	 *
 	 * @return string
 	 *
 	 * @since   1.0.0
 	 */
 	public function wrap_content( $content ) {
 		if ( ! empty( $content ) ) {
-			return '<div id="modal-ready">' . $content . '</div>';
+			$div_id = apply_filters( 'define_wrapping_div_id', null ) ? apply_filters( 'define_wrapping_div_id', null ) : 'modal-ready';
+
+			return '<div id="' . $div_id . '">' . $content . '</div>';
 		}
 
 		return false;

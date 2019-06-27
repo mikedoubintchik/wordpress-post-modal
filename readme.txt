@@ -3,7 +3,7 @@ Contributors: allurewebsolutions
 Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.0
-Tested up to: 5.2.1
+Tested up to: 5.2.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,7 @@ Yes, you can have as many as you like.
 4. Easily insert popup link with custom button in Visual Editor
 
 == Changelog ==
+3.3.0: Added filter for changing default wrapping div id
 3.2.6: Added data-div functionality for internal popups
 3.2.5: Fix bug with popup being empty
 3.2.4: Added setting for disabling body scrolling

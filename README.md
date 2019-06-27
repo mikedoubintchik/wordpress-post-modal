@@ -1,12 +1,12 @@
-#WP Post Popup WordPress Plugin
+# WP Post Popup WordPress Plugin
 
-##Description
+## Description
 
 Turn any page / post / external page into a popup instantly!
 
 Perfect for showing basic content pages without redirecting a user to the page.
 
-##Features
+## Features
 
  * Loads only the_content() field -- excludes header/footer/sidebars/etc.
  * Optionally load custom fields using a custom page template [See Documentation](https://allurewebsolutions.com/open-wordpress-post-modal-without-plugin#customize)
@@ -21,28 +21,28 @@ Perfect for showing basic content pages without redirecting a user to the page.
  * Visual Editor button for easy popup link creation
  * Set a breakpoint below which the page will load normally instead of a popup
 
-##Useful Links
+## Useful Links
 
 * [Demo Site](https://wp-post-modal.allureprojects.com/)
 * [Contact us for feedback and bug reports](https://allurewebsolutions.com/contact) 
 * [Guidelines for submitting a support request](https://allurewebsolutions.com/open-wordpress-post-modal-without-plugin#support)
 
 
-##Installation
+## Installation
 
 1. Upload `wp-post-modal.zip` to the `/wp-content/plugins/` directory and extract
 2. Activate the plugin through the "Plugins" menu in WordPress
 3. Add the class `modal-link` to open the href of that link into a modal window.
 
-##Frequently Asked Questions
+## Frequently Asked Questions
 
-####Where is the documentation?
+#### Where is the documentation?
 [See Documentation](http://wp-post-modal.allureprojects.com/documentation)
 
-####Will these Popups be blocked by an Ad Blocker
+#### Will these Popups be blocked by an Ad Blocker
 They will not because these aren't "popups" in the sense of an Ad. The way this works is by creating a modal window which is a just a section of your page that is hidden until a click or some other action makes it visible.
 
-####Where does the content of the popup come from?
+#### Where does the content of the popup come from?
 The content can come from any web page. If it is from a post or page (or any custom post type) from your site, it will
 be the content that is in the WordPress editor (or from a custom template) . In other words, the popup will not show
 your header, footer, nor sidebars. Just the primary content. If it is from another website, it will typically be the
@@ -50,17 +50,17 @@ core or main content on that page, but you define that.
 
 You simply make a page or post with the content you want, as you always do.
 
-####How is the popup triggered?
+#### How is the popup triggered?
 [See Documentation](http://wp-post-modal.allureprojects.com/documentation)
 
-####Can I use anchor links?
+#### Can I use anchor links?
 Yes, you can add an anchor to the end of your URL (for internally linked pages) and the popup will scroll to the
 position of the anchor.
 
-####Using a custom div ID
+#### Using a custom div ID
 You can change the name of the default site-wide div ID to use in the plugin settings. Alternatively, you can change the div ID case-by-case by adding this attribute `data-div="DIVID"` to your `modal-link`.
 
-####What if my External Page isn't loading
+#### What if my External Page isn't loading
 If your external page isn't working, then you can try using the [iFrame method](http://wp-post-modal.allureprojects.com/documentation). With the iFrame method the entire external page will load. You will not be able to specify a specific div to load.
 
 There are two ways to use the iframe method:
@@ -68,17 +68,18 @@ There are two ways to use the iframe method:
 1. Add the class `iframe` to your modal-link to selectively use the iframe method
 1. Turn on the iframe method in the plugin settings to make all external links use the iframe method
 
-####Can I change the look of trigger link?
+#### Can I change the look of trigger link?
 Absolutely, any way you want. You can turn it into a button like this: `<a class="modal-link" href="http://my-site/privacy-policy/"><button type="button">Our Privacy Policy</button></a>` or make it an image.
 
-####How do I change the look of the popup it self? What settings are available?
+#### How do I change the look of the popup it self? What settings are available?
 [See Documentation](http://wp-post-modal.allureprojects.com/documentation)
 
-####Can I have multiple popups on one page?
+#### Can I have multiple popups on one page?
 Yes, you can have as many as you like.
 
-##Changelog
+## Changelog
 
+* 3.3.0: Added filter for changing default wrapping div id
 * 3.2.6: Added data-div functionality for internal popups
 * 3.2.5: Fix bug with popup being empty
 * 3.2.4: Added setting for disabling body scrolling
