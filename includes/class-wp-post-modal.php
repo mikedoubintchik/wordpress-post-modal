@@ -186,8 +186,10 @@ class WP_Post_Modal {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'wp_footer', $plugin_public, 'modal_wrapper' );
-
-		$this->loader->add_action( 'the_content', $plugin_public, 'wrap_content' );
+		
+		if ( ! get_option( 'wp_post_modal_wrapping', true ) ) {
+			$this->loader->add_action( 'the_content', $plugin_public, 'wrap_content' );
+		}
 
 		$this->loader->add_action( 'rest_api_init', $plugin_public, 'any_post_api_route' );
 
@@ -206,8 +208,8 @@ class WP_Post_Modal {
 	 * The name of the plugin used to uniquely identify it within the context of
 	 * WordPress and to define internationalization functionality.
 	 *
-	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
+	 * @since     1.0.0
 	 */
 	public function get_plugin_name() {
 		return $this->plugin_name;
@@ -216,8 +218,8 @@ class WP_Post_Modal {
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
-	 * @since     1.0.0
 	 * @return    WP_Post_Modal_Loader    Orchestrates the hooks of the plugin.
+	 * @since     1.0.0
 	 */
 	public function get_loader() {
 		return $this->loader;
@@ -226,8 +228,8 @@ class WP_Post_Modal {
 	/**
 	 * Retrieve the version number of the plugin.
 	 *
-	 * @since     1.0.0
 	 * @return    string    The version number of the plugin.
+	 * @since     1.0.0
 	 */
 	public function get_version() {
 		return $this->version;

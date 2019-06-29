@@ -79,6 +79,7 @@ Yes, you can have as many as you like.
 
 ## Changelog
 
+* 3.3.1: Added plugin setting to disable native content wrapping
 * 3.3.0: Added filter for changing default wrapping div id
 * 3.2.6: Added data-div functionality for internal popups
 * 3.2.5: Fix bug with popup being empty

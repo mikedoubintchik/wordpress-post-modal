@@ -52,10 +52,11 @@ class WP_Post_Modal_Admin {
 	/**
 	 * Initialize the class and set its properties.
 	 *
+	 * @param string $plugin_name The name of this plugin.
+	 * @param string $version     The version of this plugin.
+	 *
 	 * @since    1.0.0
 	 *
-	 * @param      string $plugin_name The name of this plugin.
-	 * @param      string $version     The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -249,6 +250,16 @@ class WP_Post_Modal_Admin {
 			array( 'label_for' => $this->option_name . '_iframe' )
 		);
 
+		// Disable native content wrapping
+		add_settings_field(
+			$this->option_name . '_wrapping',
+			__( 'Disable native content wrapping', 'wp-post-modal' ),
+			array( $this, $this->option_name . '_wrapping_cb' ),
+			$this->plugin_name,
+			$this->option_name . '_general',
+			array( 'label_for' => $this->option_name . '_wrapping' )
+		);
+
 		/**
 		 * Register Settings
 		 */
@@ -292,6 +303,10 @@ class WP_Post_Modal_Admin {
 			$this,
 			$this->option_name . '_sanitize_iframe'
 		) );
+		register_setting( $this->plugin_name, $this->option_name . '_wrapping', array(
+			$this,
+			$this->option_name . '_sanitize_wrapping'
+		) );
 	}
 
 	/**
@@ -304,9 +319,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="text" size="40" name="<?php echo $this->option_name . '_container' ?>"
-                       id="<?php echo $this->option_name . '_container' ?>"
-                       value="<?php echo $container ?>" placeholder="Default is 'modal-ready'"/>
+                <input type="text" size="40" name="<?= $this->option_name . '_container' ?>"
+                       id="<?= $this->option_name . '_container' ?>"
+                       value="<?= $container ?>" placeholder="Default is 'modal-ready'"/>
             </label>
             <p>Optional: Set the ID of the container that you popped up. By default, this plugin wraps the_content() of any Post/Page with a div that has the ID of "modal-ready." If you change this value, your content
                 will still be wrapped in modal-ready, but the popup will use your custom ID defined here. Be careful as not all IDs will work.</p>
@@ -324,9 +339,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="text" size="40" name="<?php echo $this->option_name . '_close' ?>"
-                       id="<?php echo $this->option_name . '_close' ?>"
-                       value="<?php echo $close ?>" placeholder="Default is '×'"/>
+                <input type="text" size="40" name="<?= $this->option_name . '_close' ?>"
+                       id="<?= $this->option_name . '_close' ?>"
+                       value="<?= $close ?>" placeholder="Default is '×'"/>
             </label>
         </fieldset>
 		<?php
@@ -342,9 +357,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="text" size="40" name="<?php echo $this->option_name . '_breakpoint' ?>"
-                       id="<?php echo $this->option_name . '_breakpoint' ?>"
-                       value="<?php echo $breakpoint ?>" placeholder="Enter number without 'px'"/>
+                <input type="text" size="40" name="<?= $this->option_name . '_breakpoint' ?>"
+                       id="<?= $this->option_name . '_breakpoint' ?>"
+                       value="<?= $breakpoint ?>" placeholder="Enter number without 'px'"/>
             </label>
             <p>Below this value, the popup link will redirect to the page instead of opening the popup. Enter "0" if you
                 want the popup to work on all screen sizes. If left blank, the default breakpoint is 768px.</p>
@@ -362,9 +377,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="checkbox" name="<?php echo $this->option_name . '_styling' ?>"
-                       id="<?php echo $this->option_name . '_styling' ?>"
-                       value="1" <?php echo checked( $styling, '1' ); ?> />
+                <input type="checkbox" name="<?= $this->option_name . '_styling' ?>"
+                       id="<?= $this->option_name . '_styling' ?>"
+                       value="1" <?= checked( $styling, '1' ); ?> />
             </label>
         </fieldset>
         <a href="https://wp-post-modal.allureprojects.com/modal-css/" target="_blank">See CSS used for basic styling</a>
@@ -381,9 +396,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="checkbox" name="<?php echo $this->option_name . '_scrolling' ?>"
-                       id="<?php echo $this->option_name . '_scrolling' ?>"
-                       value="1" <?php echo checked( $scrolling, '1' ); ?> />
+                <input type="checkbox" name="<?= $this->option_name . '_scrolling' ?>"
+                       id="<?= $this->option_name . '_scrolling' ?>"
+                       value="1" <?= checked( $scrolling, '1' ); ?> />
             </label>
         </fieldset>
         <p>Disable body scrolling when when popup is open. Note: This will cause the body position to jump when the popup is open and to scroll back to the previous position when the popup is closed.</p>
@@ -400,9 +415,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="checkbox" name="<?php echo $this->option_name . '_loader' ?>"
-                       id="<?php echo $this->option_name . '_loader' ?>"
-                       value="1" <?php echo checked( $loader, '1' ); ?> />
+                <input type="checkbox" name="<?= $this->option_name . '_loader' ?>"
+                       id="<?= $this->option_name . '_loader' ?>"
+                       value="1" <?= checked( $loader, '1' ); ?> />
             </label>
         </fieldset>
 		<?php
@@ -418,9 +433,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="checkbox" name="<?php echo $this->option_name . '_urlstate' ?>"
-                       id="<?php echo $this->option_name . '_urlstate' ?>"
-                       value="1" <?php echo checked( $urlstate, '1' ); ?> />
+                <input type="checkbox" name="<?= $this->option_name . '_urlstate' ?>"
+                       id="<?= $this->option_name . '_urlstate' ?>"
+                       value="1" <?= checked( $urlstate, '1' ); ?> />
             </label>
         </fieldset>
 		<?php
@@ -436,9 +451,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="checkbox" name="<?php echo $this->option_name . '_button' ?>"
-                       id="<?php echo $this->option_name . '_button' ?>"
-                       value="1" <?php echo checked( $button, '1' ); ?> />
+                <input type="checkbox" name="<?= $this->option_name . '_button' ?>"
+                       id="<?= $this->option_name . '_button' ?>"
+                       value="1" <?= checked( $button, '1' ); ?> />
             </label>
         </fieldset>
 		<?php
@@ -472,9 +487,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="checkbox" name="<?php echo $this->option_name . '_rest' ?>"
-                       id="<?php echo $this->option_name . '_rest' ?>"
-                       value="1" <?php echo checked( $rest, '1' ); ?> />
+                <input type="checkbox" name="<?= $this->option_name . '_rest' ?>"
+                       id="<?= $this->option_name . '_rest' ?>"
+                       value="1" <?= checked( $rest, '1' ); ?> />
             </label>
         </fieldset>
         <p>Use this if your content is loading slow and you aren't using custom templates</p>
@@ -491,13 +506,32 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="checkbox" name="<?php echo $this->option_name . '_iframe' ?>"
-                       id="<?php echo $this->option_name . '_iframe' ?>"
-                       value="1" <?php echo checked( $iframe, '1' ); ?> />
+                <input type="checkbox" name="<?= $this->option_name . '_iframe' ?>"
+                       id="<?= $this->option_name . '_iframe' ?>"
+                       value="1" <?= checked( $iframe, '1' ); ?> />
             </label>
         </fieldset>
         <p>Use this if you want to load non-basic content pages into the iframe. For example, if you want to load a
             google spreadsheet into the popup. Alternatively, add the class <code>iframe</code> to your modal-link.</p>
+		<?php
+	}
+
+	/**
+	 * Render the checkbox for iframe method
+	 *
+	 * @since  1.0.0
+	 */
+	public function wp_post_modal_wrapping_cb() {
+		$wrapping = get_option( $this->option_name . '_wrapping', true );
+		?>
+        <fieldset>
+            <label>
+                <input type="checkbox" name="<?= $this->option_name . '_wrapping' ?>"
+                       id="<?= $this->option_name . '_wrapping' ?>"
+                       value="1" <?= checked( $wrapping, '1' ); ?> />
+            </label>
+        </fieldset>
+        <p>Use this if you want to disable the native wrapping of <code>the_content()</code> field with the 'modal-ready' div. If this doesn't make sense, you can leave this unchecked.</p>
 		<?php
 	}
 
@@ -558,7 +592,7 @@ class WP_Post_Modal_Admin {
 		if ( isset( $_GET['settings-updated'] ) ) {
 			?>
             <div class="notice notice-success is-dismissible">
-				<?php echo $message; ?>
+				<?= $message; ?>
                 <button type="button" class="notice-dismiss">
                     <span class="screen-reader-text">Dismiss this notice.</span>
                 </button>
@@ -574,7 +608,7 @@ class WP_Post_Modal_Admin {
 		$message = '<h4>Thanks for installing WP Post Popup!</h4><p>Please <a href="https://wordpress.org/support/plugin/wp-post-modal/reviews/" target="_blank">click here</a> to give us a review :)</p>';
 		?>
         <div class="notice notice-success is-dismissible admin-notice-installed hidden">
-			<?php echo $message; ?>
+			<?= $message; ?>
             <button type="button" class="notice-dismiss">
                 <span class="screen-reader-text">Dismiss this notice.</span>
             </button>
@@ -597,7 +631,7 @@ class WP_Post_Modal_Admin {
 		?>
         <div class="notice notice-success is-dismissible admin-notice-remote hidden">
             <div class="notice-content">
-				<?php echo $message; ?>
+				<?= $message; ?>
             </div>
 
             <button type="button" class="notice-dismiss">
