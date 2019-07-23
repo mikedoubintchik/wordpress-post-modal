@@ -319,9 +319,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="text" size="40" name="<?= $this->option_name . '_container' ?>"
-                       id="<?= $this->option_name . '_container' ?>"
-                       value="<?= $container ?>" placeholder="Default is 'modal-ready'"/>
+                <input type="text" size="40" name="<?= esc_attr( $this->option_name ) . '_container' ?>"
+                       id="<?= esc_attr( $this->option_name ) . '_container' ?>"
+                       value="<?= esc_attr( $container ) ?>" placeholder="Default is 'modal-ready'"/>
             </label>
             <p>Optional: Set the ID of the container that you popped up. By default, this plugin wraps the_content() of any Post/Page with a div that has the ID of "modal-ready." If you change this value, your content
                 will still be wrapped in modal-ready, but the popup will use your custom ID defined here. Be careful as not all IDs will work.</p>
@@ -339,9 +339,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="text" size="40" name="<?= $this->option_name . '_close' ?>"
-                       id="<?= $this->option_name . '_close' ?>"
-                       value="<?= $close ?>" placeholder="Default is '×'"/>
+                <input type="text" size="40" name="<?= esc_attr( $this->option_name ) . '_close' ?>"
+                       id="<?= esc_attr( $this->option_name ) . '_close' ?>"
+                       value="<?= esc_attr( $close ) ?>" placeholder="Default is '×'"/>
             </label>
         </fieldset>
 		<?php
@@ -357,9 +357,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="text" size="40" name="<?= $this->option_name . '_breakpoint' ?>"
-                       id="<?= $this->option_name . '_breakpoint' ?>"
-                       value="<?= $breakpoint ?>" placeholder="Enter number without 'px'"/>
+                <input type="text" size="40" name="<?= esc_attr( $this->option_name ) . '_breakpoint' ?>"
+                       id="<?= esc_attr( $this->option_name ) . '_breakpoint' ?>"
+                       value="<?= esc_attr( $breakpoint ) ?>" placeholder="Enter number without 'px'"/>
             </label>
             <p>Below this value, the popup link will redirect to the page instead of opening the popup. Enter "0" if you
                 want the popup to work on all screen sizes. If left blank, the default breakpoint is 768px.</p>
@@ -377,9 +377,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="checkbox" name="<?= $this->option_name . '_styling' ?>"
-                       id="<?= $this->option_name . '_styling' ?>"
-                       value="1" <?= checked( $styling, '1' ); ?> />
+                <input type="checkbox" name="<?= esc_attr( $this->option_name ) . '_styling' ?>"
+                       id="<?= esc_attr( $this->option_name ) . '_styling' ?>"
+                       value="1" <?php checked( $styling, '1' ); ?> />
             </label>
         </fieldset>
         <a href="https://wp-post-modal.allureprojects.com/modal-css/" target="_blank">See CSS used for basic styling</a>
@@ -396,9 +396,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="checkbox" name="<?= $this->option_name . '_scrolling' ?>"
-                       id="<?= $this->option_name . '_scrolling' ?>"
-                       value="1" <?= checked( $scrolling, '1' ); ?> />
+                <input type="checkbox" name="<?= esc_attr( $this->option_name ) . '_scrolling' ?>"
+                       id="<?= esc_attr( $this->option_name ) . '_scrolling' ?>"
+                       value="1" <?php checked( $scrolling, '1' ); ?> />
             </label>
         </fieldset>
         <p>Disable body scrolling when when popup is open. Note: This will cause the body position to jump when the popup is open and to scroll back to the previous position when the popup is closed.</p>
@@ -415,9 +415,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="checkbox" name="<?= $this->option_name . '_loader' ?>"
-                       id="<?= $this->option_name . '_loader' ?>"
-                       value="1" <?= checked( $loader, '1' ); ?> />
+                <input type="checkbox" name="<?= esc_attr( $this->option_name ) . '_loader' ?>"
+                       id="<?= esc_attr( $this->option_name ) . '_loader' ?>"
+                       value="1" <?php checked( $loader, '1' ); ?> />
             </label>
         </fieldset>
 		<?php
@@ -433,9 +433,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="checkbox" name="<?= $this->option_name . '_urlstate' ?>"
-                       id="<?= $this->option_name . '_urlstate' ?>"
-                       value="1" <?= checked( $urlstate, '1' ); ?> />
+                <input type="checkbox" name="<?= esc_attr( $this->option_name ) . '_urlstate' ?>"
+                       id="<?= esc_attr( $this->option_name ) . '_urlstate'; ?>"
+                       value="1" <?php checked( $urlstate, '1' ); ?> />
             </label>
         </fieldset>
 		<?php
@@ -451,9 +451,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="checkbox" name="<?= $this->option_name . '_button' ?>"
-                       id="<?= $this->option_name . '_button' ?>"
-                       value="1" <?= checked( $button, '1' ); ?> />
+                <input type="checkbox" name="<?= esc_attr( $this->option_name ) . '_button' ?>"
+                       id="<?= esc_attr( $this->option_name ) . '_button' ?>"
+                       value="1" <?php checked( $button, '1' ); ?> />
             </label>
         </fieldset>
 		<?php
@@ -487,9 +487,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="checkbox" name="<?= $this->option_name . '_rest' ?>"
-                       id="<?= $this->option_name . '_rest' ?>"
-                       value="1" <?= checked( $rest, '1' ); ?> />
+                <input type="checkbox" name="<?= esc_attr( $this->option_name ) . '_rest' ?>"
+                       id="<?= esc_attr( $this->option_name ) . '_rest' ?>"
+                       value="1" <?php checked( $rest, '1' ); ?> />
             </label>
         </fieldset>
         <p>Use this if your content is loading slow and you aren't using custom templates</p>
@@ -506,9 +506,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="checkbox" name="<?= $this->option_name . '_iframe' ?>"
-                       id="<?= $this->option_name . '_iframe' ?>"
-                       value="1" <?= checked( $iframe, '1' ); ?> />
+                <input type="checkbox" name="<?= esc_attr( $this->option_name ) . '_iframe' ?>"
+                       id="<?= esc_attr( $this->option_name ) . '_iframe' ?>"
+                       value="1" <?php checked( $iframe, '1' ); ?> />
             </label>
         </fieldset>
         <p>Use this if you want to load non-basic content pages into the iframe. For example, if you want to load a
@@ -526,9 +526,9 @@ class WP_Post_Modal_Admin {
 		?>
         <fieldset>
             <label>
-                <input type="checkbox" name="<?= $this->option_name . '_wrapping' ?>"
-                       id="<?= $this->option_name . '_wrapping' ?>"
-                       value="1" <?= checked( $wrapping, '1' ); ?> />
+                <input type="checkbox" name="<?= esc_attr( $this->option_name ) . '_wrapping' ?>"
+                       id="<?= esc_attr( $this->option_name ) . '_wrapping' ?>"
+                       value="1" <?php checked( $wrapping, '1' ); ?> />
             </label>
         </fieldset>
         <p>Use this if you want to disable the native wrapping of <code>the_content()</code> field with the 'modal-ready' div. If this doesn't make sense, you can leave this unchecked.</p>
