@@ -1,6 +1,9 @@
 (function ($) {
     'use strict';
 
+    // added to support accessibility for screen reader users
+    var clickedURL;
+
     /**
      * Check if URL is external function
      *
@@ -14,6 +17,35 @@
         return (link !== host);
 
     };
+
+    /**
+     * Trapping user in modal for web accessibility
+     */
+    function trapFocus() {
+        $('.close-modal').focus();
+
+        var focusableEls = document.querySelectorAll('.modal a[href]:not([disabled]), .modal button:not([disabled]), .modal textarea:not([disabled]), .modal input[type="text"]:not([disabled]), .modal input[type="radio"]:not([disabled]), .modal input[type="checkbox"]:not([disabled]), .modal select:not([disabled])'),
+            firstFocusableEl = focusableEls[0],
+            lastFocusableEl = focusableEls[focusableEls.length - 1];
+        
+        document.addEventListener('keydown', function (e) {
+            var isTabPressed = (e.key === 'Tab' || e.keyCode === 9);
+
+            if (!isTabPressed) return;
+
+            if (e.shiftKey && isTabPressed) /* shift + tab */ {
+                if (document.activeElement === firstFocusableEl) {
+                    lastFocusableEl.focus();
+                    e.preventDefault();
+                }
+            } else if (isTabPressed) /* tab */ {
+                if (document.activeElement === lastFocusableEl) {
+                    firstFocusableEl.focus();
+                    e.preventDefault();
+                }
+            }
+        });
+    }
 
     /**
      * Check if modal is open
@@ -99,6 +131,11 @@
             $('.modal-wrapper').addClass('show');
             $('.modal').addClass('show');
 
+            // trap focus inside modal
+            setTimeout(function () {
+                trapFocus();
+            }, 1000);
+
             // update address bar to show url of popup content page
             if (postLink) {
                 if (postLink.length > 0 && !external) {
@@ -125,18 +162,19 @@
             $('.modal').removeClass('show');
             $('#modal-content').empty();
 
+            // return to previous tab location for screen reader users
+            clickedURL.focus();
+
             // return original page url in address bar
             if (window.location.pathname !== currentURL) {
                 history.replaceState('', '', currentURL);
             }
         }
 
-
         $document
-        // Close modal when pressing esc
             .keyup(function (e) {
-                if (e.keyCode === 27 && $('.modal-wrapper').hasClass('show'))
-                    hideModal(currentURL);
+                // close modal when pressing esc
+                if (e.keyCode === 27 && $('.modal-wrapper').hasClass('show')) hideModal(currentURL);
             })
             // Close modal when clicking on close button
             .on('click', '.close-modal', function () {
@@ -194,6 +232,7 @@
                     var dataDivID = $this.attr('data-div') ? ('#' + $this.attr('data-div')) : fromPHP.containerID;
                     var dataBuddypress = $this.attr('data-buddypress');
                     var loader = '<img class="loading" src="' + fromPHP.pluginUrl + '/images/loading.gif" />';
+                    clickedURL = document.activeElement;
 
                     // prevent link from being followed
                     e.preventDefault();

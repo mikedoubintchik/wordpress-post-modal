@@ -9,6 +9,13 @@ body.no-scroll {
 
 .close-modal {
     display: none;
+    border: 0;
+    margin-top: 10px;
+}
+
+.close-modal:focus {
+    outline: 1px dashed skyblue;
+    border-radius: 5px;
 }
 
 .modal-wrapper {

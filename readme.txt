@@ -88,6 +88,7 @@ Yes, you can have as many as you like.
 4. Easily insert popup link with custom button in Visual Editor
 
 == Changelog ==
+3.4.0: Added accessibility support for modal
 3.3.1: Added plugin setting to disable native content wrapping
 3.3.0: Added filter for changing default wrapping div id
 3.2.6: Added data-div functionality for internal popups
