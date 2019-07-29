@@ -126,7 +126,7 @@ class WP_Post_Modal_Public {
 
 		$close = ( get_option( 'wp_post_modal_close' ) != '' ? get_option( 'wp_post_modal_close' ) : '×' );
 
-		$HTML = '<div class="modal-wrapper ' . $styled . '" role="dialog" aria-label="' . __( 'Popup Dialog', 'wp-post-modal' ) . '">';
+		$HTML = '<div class="modal-wrapper ' . $styled . '" role="dialog" aria-modal="true"  aria-label="' . __( 'Popup Dialog', 'wp-post-modal' ) . '">';
 		$HTML .= '<div class="modal">';
 		$HTML .= '<button type="button" aria-label="' . __( 'Close', 'wp-post-modal' ) . '" class="close-modal"> ' . $close . ' </button>';
 		$HTML .= '<div id="modal-content"></div>';

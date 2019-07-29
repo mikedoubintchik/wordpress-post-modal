@@ -79,6 +79,7 @@ Yes, you can have as many as you like.
 
 ## Changelog
 
+* 3.4.1: Added aria label on modal wrapper
 * 3.4.0: Added accessibility support for modal
 * 3.3.1: Added plugin setting to disable native content wrapping
 * 3.3.0: Added filter for changing default wrapping div id
