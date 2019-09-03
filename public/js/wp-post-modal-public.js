@@ -225,7 +225,7 @@
                 $('body').on('click', '.modal-link', function (e) {
                     // Define variables
                     var modalContent = $('#modal-content');
-                    var $this = ($(this).attr('href') != null) ? $(this) : $(this).children('a').first();
+                    var $this = ($(this).attr('href') != null) ? $(this) : $('a', this).first();
                     var postLink = $this.attr('href');
                     var postSlug = postLink.lastIndexOf('/#') > -1 ? basename(postLink.substring(0, postLink.lastIndexOf('/#'))) + basename(postLink) : basename(postLink);
                     var postAnchor = postSlug.lastIndexOf('#') !== -1 ? postSlug.substring(postSlug.lastIndexOf('#')) : false;
