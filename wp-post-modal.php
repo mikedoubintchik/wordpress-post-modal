@@ -16,7 +16,7 @@
  * Plugin Name:       WP Post Popup
  * Plugin URI:        https://allurewebsolutions.com
  * Description:       This plugin allows any content to be pulled into a modal window dynamically. To use, just create a link with class "modal-link".
- * Version:           3.4.1
+ * Version:           3.4.2
  * Author:            Allure Web Solutions
  * Author URI:        https://allurewebsolutions.com
  * License:           GPL-2.0+
@@ -26,7 +26,7 @@
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
+if (!defined('WPINC')) {
 	die;
 }
 
@@ -34,8 +34,9 @@ if ( ! defined( 'WPINC' ) ) {
  * The code that runs during plugin activation.
  * This action is documented in includes/class-wp-post-modal-activator.php
  */
-function activate_wp_post_modal() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-post-modal-activator.php';
+function activate_wp_post_modal()
+{
+	require_once plugin_dir_path(__FILE__) . 'includes/class-wp-post-modal-activator.php';
 	WP_Post_Modal_Activator::activate();
 }
 
@@ -43,19 +44,20 @@ function activate_wp_post_modal() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-wp-post-modal-deactivator.php
  */
-function deactivate_wp_post_modal() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-post-modal-deactivator.php';
+function deactivate_wp_post_modal()
+{
+	require_once plugin_dir_path(__FILE__) . 'includes/class-wp-post-modal-deactivator.php';
 	WP_Post_Modal_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_wp_post_modal' );
-register_deactivation_hook( __FILE__, 'deactivate_wp_post_modal' );
+register_activation_hook(__FILE__, 'activate_wp_post_modal');
+register_deactivation_hook(__FILE__, 'deactivate_wp_post_modal');
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-wp-post-modal.php';
+require plugin_dir_path(__FILE__) . 'includes/class-wp-post-modal.php';
 
 /**
  * Begins execution of the plugin.
@@ -66,11 +68,11 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-wp-post-modal.php';
  *
  * @since    1.0.0
  */
-function run_wp_post_modal() {
+function run_wp_post_modal()
+{
 
 	$plugin = new WP_Post_Modal();
 	$plugin->run();
-
 }
 
 run_wp_post_modal();

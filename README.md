@@ -24,9 +24,8 @@ Perfect for showing basic content pages without redirecting a user to the page.
 ## Useful Links
 
 * [Demo Site](https://wp-post-modal.allureprojects.com/)
-* [Contact us for feedback and bug reports](https://allurewebsolutions.com/contact) 
+* [Contact us for feedback and bug reports](https://allurewebsolutions.com/contact)
 * [Guidelines for submitting a support request](https://allurewebsolutions.com/open-wordpress-post-modal-without-plugin#support)
-
 
 ## Installation
 
@@ -40,9 +39,11 @@ Perfect for showing basic content pages without redirecting a user to the page.
 [See Documentation](http://wp-post-modal.allureprojects.com/documentation)
 
 #### Will these Popups be blocked by an Ad Blocker
+
 They will not because these aren't "popups" in the sense of an Ad. The way this works is by creating a modal window which is a just a section of your page that is hidden until a click or some other action makes it visible.
 
 #### Where does the content of the popup come from?
+
 The content can come from any web page. If it is from a post or page (or any custom post type) from your site, it will
 be the content that is in the WordPress editor (or from a custom template) . In other words, the popup will not show
 your header, footer, nor sidebars. Just the primary content. If it is from another website, it will typically be the
@@ -51,16 +52,20 @@ core or main content on that page, but you define that.
 You simply make a page or post with the content you want, as you always do.
 
 #### How is the popup triggered?
+
 [See Documentation](http://wp-post-modal.allureprojects.com/documentation)
 
 #### Can I use anchor links?
+
 Yes, you can add an anchor to the end of your URL (for internally linked pages) and the popup will scroll to the
 position of the anchor.
 
 #### Using a custom div ID
-You can change the name of the default site-wide div ID to use in the plugin settings. Alternatively, you can change the div ID case-by-case by adding this attribute `data-div="DIVID"` to your `modal-link`.
+
+You can change the name of the default site-wide div ID to use in the plugin settings. Alternatively, you can change the div ID case-by-case by adding this attribute `data-div="DIVID"` to your `modal-link` .
 
 #### What if my External Page isn't loading
+
 If your external page isn't working, then you can try using the [iFrame method](http://wp-post-modal.allureprojects.com/documentation). With the iFrame method the entire external page will load. You will not be able to specify a specific div to load.
 
 There are two ways to use the iframe method:
@@ -69,16 +74,20 @@ There are two ways to use the iframe method:
 1. Turn on the iframe method in the plugin settings to make all external links use the iframe method
 
 #### Can I change the look of trigger link?
+
 Absolutely, any way you want. You can turn it into a button like this: `<a class="modal-link" href="http://my-site/privacy-policy/"><button type="button">Our Privacy Policy</button></a>` or make it an image.
 
 #### How do I change the look of the popup it self? What settings are available?
+
 [See Documentation](http://wp-post-modal.allureprojects.com/documentation)
 
 #### Can I have multiple popups on one page?
+
 Yes, you can have as many as you like.
 
 ## Changelog
 
+* 3.4.2: Minor update to allow targeting of nested modal-links
 * 3.4.1: Added aria label on modal wrapper
 * 3.4.0: Added accessibility support for modal
 * 3.3.1: Added plugin setting to disable native content wrapping
@@ -88,7 +97,7 @@ Yes, you can have as many as you like.
 * 3.2.4: Added setting for disabling body scrolling
 * 3.2.3: Disabled popup for IE11
 * 3.2.2: Fixed custom templates to work with URL parameter
-* 3.2.1: Minor bug fix 
+* 3.2.1: Minor bug fix
 * 3.2.0: Added setting for container ID, fixed minor JS bug, fixed bug with notifications
 * 3.1.0: Added setting to toggle loading animation
 * 3.0.1: Fix scrolling bug
@@ -97,7 +106,9 @@ Yes, you can have as many as you like.
 * 2.1.10: Allow preceding forward slash on anchor links, check if modal is open before running close modal function on window click
 * 2.1.9: Refactor post with anchor functionality
 * 2.1.8: Minor fix to move body to previously scrolled position after popup is closed
+
 with port number
+
 * 2.1.7: Changed slide down effect to fade in, prevented body scrolling when popup is open, recognize development URLs
 * 2.1.6: Added support for anchor links and open with modal through URL
 * 2.1.5: Add iframe method for loading more complicated external pages

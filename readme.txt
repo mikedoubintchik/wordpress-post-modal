@@ -88,6 +88,7 @@ Yes, you can have as many as you like.
 4. Easily insert popup link with custom button in Visual Editor
 
 == Changelog ==
+3.4.2: Minor update to allow targeting of nested modal-links
 3.4.1: Added aria label on modal wrapper
 3.4.0: Added accessibility support for modal
 3.3.1: Added plugin setting to disable native content wrapping
