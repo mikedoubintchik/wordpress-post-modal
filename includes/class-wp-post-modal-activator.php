@@ -44,8 +44,7 @@ class WP_Post_Modal_Activator
         if (get_option('wp_post_modal_button') === false || get_option('wp_post_modal_button') === '')
             update_option('wp_post_modal_button', '0');
 
-        // TODO: redirect to settings page after plugin activation
-        wp_redirect(admin_url('options-general.php?page=wp-post-modal'));
-        exit;
+        // redirect to settings page on activation
+        add_option('wp-post-modal_do_activation_redirect', true);
     }
 }

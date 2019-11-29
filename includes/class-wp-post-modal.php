@@ -27,7 +27,8 @@
  * @subpackage WP_Post_Modal/includes
  * @author     Allure Web Solutions <info@allurewebsolutions.com>
  */
-class WP_Post_Modal {
+class WP_Post_Modal
+{
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -66,7 +67,8 @@ class WP_Post_Modal {
 	 *
 	 * @since    1.0.0
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 
 		$this->plugin_name = 'wp-post-modal';
 		$this->version     = '1.0.0';
@@ -75,7 +77,6 @@ class WP_Post_Modal {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -94,33 +95,33 @@ class WP_Post_Modal {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function load_dependencies() {
+	private function load_dependencies()
+	{
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-post-modal-loader.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-wp-post-modal-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-post-modal-i18n.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-wp-post-modal-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-post-modal-admin.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-wp-post-modal-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wp-post-modal-public.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-wp-post-modal-public.php';
 
 		$this->loader = new WP_Post_Modal_Loader();
-
 	}
 
 	/**
@@ -132,12 +133,12 @@ class WP_Post_Modal {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function set_locale() {
+	private function set_locale()
+	{
 
 		$plugin_i18n = new WP_Post_Modal_i18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
+		$this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
 	}
 
 	/**
@@ -147,27 +148,36 @@ class WP_Post_Modal {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_admin_hooks() {
+	private function define_admin_hooks()
+	{
 
-		$plugin_admin = new WP_Post_Modal_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new WP_Post_Modal_Admin($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
 
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_options_page' );
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_setting' );
+		$this->loader->add_action('admin_menu', $plugin_admin, 'add_options_page');
+		$this->loader->add_action('admin_init', $plugin_admin, 'register_setting');
 
-		$this->loader->add_filter( 'plugin_action_links_' . plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_name . '.php' ), $plugin_admin, 'add_settings_link' );
+		$this->loader->add_filter('plugin_action_links_' . plugin_basename(plugin_dir_path(__DIR__) . $this->plugin_name . '.php'), $plugin_admin, 'add_settings_link');
 
-		$this->loader->add_filter( 'admin_notices', $plugin_admin, 'admin_notice_installed' );
-		$this->loader->add_filter( 'network_admin_notices', $plugin_admin, 'admin_notice_installed' );
+		$this->loader->add_filter('admin_notices', $plugin_admin, 'admin_notice_installed');
+		$this->loader->add_filter('network_admin_notices', $plugin_admin, 'admin_notice_installed');
 
-		$this->loader->add_filter( 'admin_notices', $plugin_admin, 'admin_notice_remote' );
-		$this->loader->add_filter( 'network_admin_notices', $plugin_admin, 'admin_notice_remote' );
+		$this->loader->add_filter('admin_notices', $plugin_admin, 'admin_notice_remote');
+		$this->loader->add_filter('network_admin_notices', $plugin_admin, 'admin_notice_remote');
 
-		if ( get_option( 'wp_post_modal_button', true ) !== '1' ) {
-			$this->loader->add_filter( 'mce_buttons', $plugin_admin, 'register_custom_mce_buttons' );
-			$this->loader->add_filter( "mce_external_plugins", $plugin_admin, "enqueue_custom_mce_scripts" );
+		if (get_option('wp_post_modal_button', true) !== '1') {
+			$this->loader->add_filter('mce_buttons', $plugin_admin, 'register_custom_mce_buttons');
+			$this->loader->add_filter("mce_external_plugins", $plugin_admin, "enqueue_custom_mce_scripts");
+		}
+
+		// redirect to settings pages on activation
+		if (get_option('wp-post-modal_do_activation_redirect', false)) {
+			add_filter('admin_init', function () {
+				delete_option('wp-post-modal_do_activation_redirect');
+				wp_redirect(admin_url('options-general.php?page=wp-post-modal'));
+			});
 		}
 	}
 
@@ -178,21 +188,21 @@ class WP_Post_Modal {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_public_hooks() {
+	private function define_public_hooks()
+	{
 
-		$plugin_public = new WP_Post_Modal_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new WP_Post_Modal_Public($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
+		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
-		$this->loader->add_action( 'wp_footer', $plugin_public, 'modal_wrapper' );
-		
-		if ( ! get_option( 'wp_post_modal_wrapping', true ) ) {
-			$this->loader->add_action( 'the_content', $plugin_public, 'wrap_content' );
+		$this->loader->add_action('wp_footer', $plugin_public, 'modal_wrapper');
+
+		if (!get_option('wp_post_modal_wrapping', true)) {
+			$this->loader->add_action('the_content', $plugin_public, 'wrap_content');
 		}
 
-		$this->loader->add_action( 'rest_api_init', $plugin_public, 'any_post_api_route' );
-
+		$this->loader->add_action('rest_api_init', $plugin_public, 'any_post_api_route');
 	}
 
 	/**
@@ -200,7 +210,8 @@ class WP_Post_Modal {
 	 *
 	 * @since    1.0.0
 	 */
-	public function run() {
+	public function run()
+	{
 		$this->loader->run();
 	}
 
@@ -211,7 +222,8 @@ class WP_Post_Modal {
 	 * @return    string    The name of the plugin.
 	 * @since     1.0.0
 	 */
-	public function get_plugin_name() {
+	public function get_plugin_name()
+	{
 		return $this->plugin_name;
 	}
 
@@ -221,7 +233,8 @@ class WP_Post_Modal {
 	 * @return    WP_Post_Modal_Loader    Orchestrates the hooks of the plugin.
 	 * @since     1.0.0
 	 */
-	public function get_loader() {
+	public function get_loader()
+	{
 		return $this->loader;
 	}
 
@@ -231,8 +244,8 @@ class WP_Post_Modal {
 	 * @return    string    The version number of the plugin.
 	 * @since     1.0.0
 	 */
-	public function get_version() {
+	public function get_version()
+	{
 		return $this->version;
 	}
-
 }

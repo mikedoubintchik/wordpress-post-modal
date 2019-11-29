@@ -88,6 +88,7 @@ Yes, you can have as many as you like.
 
 ## Changelog
 
+* 3.5.1: Added redirection upon plugin activation
 * 3.5.0: Enabled opening consecutive popups and minor bug fixes
 * 3.4.2: Minor update to allow targeting of nested modal-links
 * 3.4.1: Added aria label on modal wrapper
