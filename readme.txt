@@ -88,6 +88,7 @@ Yes, you can have as many as you like.
 4. Easily insert popup link with custom button in Visual Editor
 
 == Changelog ==
+3.5.2: Minor bug fixes
 3.5.1: Added redirection upon plugin activation
 3.5.0: Enabled opening consecutive popups and minor bug fixes
 3.4.2: Minor update to allow targeting of nested modal-links

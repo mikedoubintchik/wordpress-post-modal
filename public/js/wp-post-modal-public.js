@@ -345,7 +345,7 @@
               }
               // use the default method
               else {
-\                $.get(postLink, function(html) {
+                $.get(postLink, function(html) {
                   var content = $(html).find(dataDivID),
                     htmlContent =
                       html.indexOf("<html") > -1
