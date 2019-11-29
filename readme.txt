@@ -3,7 +3,7 @@ Contributors: allurewebsolutions
 Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.0
-Tested up to: 5.2.2
+Tested up to: 5.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,7 @@ Yes, you can have as many as you like.
 4. Easily insert popup link with custom button in Visual Editor
 
 == Changelog ==
+3.5.0: Enabled opening consecutive popups and minor bug fixes
 3.4.2: Minor update to allow targeting of nested modal-links
 3.4.1: Added aria label on modal wrapper
 3.4.0: Added accessibility support for modal

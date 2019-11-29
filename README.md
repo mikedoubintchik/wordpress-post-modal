@@ -8,18 +8,18 @@ Perfect for showing basic content pages without redirecting a user to the page.
 
 ## Features
 
- * Loads only the_content() field -- excludes header/footer/sidebars/etc.
- * Optionally load custom fields using a custom page template [See Documentation](https://allurewebsolutions.com/open-wordpress-post-modal-without-plugin#customize)
- * Trigger popup on page load using a URL a parameter
- * A page can have multiple popup links
- * Scroll to a specified anchor once the popup opens
- * Show external pages in popup
- * Show only a specific section from an external page
- * Works with shortcodes and some plugins, including Contact Form 7, BuddyPress, Visual Composer
- * Dynamically change URL in address bar to that of the the popped up page
- * Toggle simple styling
- * Visual Editor button for easy popup link creation
- * Set a breakpoint below which the page will load normally instead of a popup
+* Loads only the_content() field -- excludes header/footer/sidebars/etc.
+* Optionally load custom fields using a custom page template [See Documentation](https://allurewebsolutions.com/open-wordpress-post-modal-without-plugin#customize)
+* Trigger popup on page load using a URL a parameter
+* A page can have multiple popup links
+* Scroll to a specified anchor once the popup opens
+* Show external pages in popup
+* Show only a specific section from an external page
+* Works with shortcodes and some plugins, including Contact Form 7, BuddyPress, Visual Composer
+* Dynamically change URL in address bar to that of the the popped up page
+* Toggle simple styling
+* Visual Editor button for easy popup link creation
+* Set a breakpoint below which the page will load normally instead of a popup
 
 ## Useful Links
 
@@ -36,6 +36,7 @@ Perfect for showing basic content pages without redirecting a user to the page.
 ## Frequently Asked Questions
 
 #### Where is the documentation?
+
 [See Documentation](http://wp-post-modal.allureprojects.com/documentation)
 
 #### Will these Popups be blocked by an Ad Blocker
@@ -87,6 +88,7 @@ Yes, you can have as many as you like.
 
 ## Changelog
 
+* 3.5.0: Enabled opening consecutive popups and minor bug fixes
 * 3.4.2: Minor update to allow targeting of nested modal-links
 * 3.4.1: Added aria label on modal wrapper
 * 3.4.0: Added accessibility support for modal
@@ -105,10 +107,7 @@ Yes, you can have as many as you like.
 * 2.2: Add functionality to update URL in address bar
 * 2.1.10: Allow preceding forward slash on anchor links, check if modal is open before running close modal function on window click
 * 2.1.9: Refactor post with anchor functionality
-* 2.1.8: Minor fix to move body to previously scrolled position after popup is closed
-
-with port number
-
+* 2.1.8: Minor fix to move body to previously scrolled position after popup is closed with port number
 * 2.1.7: Changed slide down effect to fade in, prevented body scrolling when popup is open, recognize development URLs
 * 2.1.6: Added support for anchor links and open with modal through URL
 * 2.1.5: Add iframe method for loading more complicated external pages

@@ -33,11 +33,19 @@ class WP_Post_Modal_Activator
     public static function activate()
     {
         // set default state of styling to true
-        if (get_option('wp_post_modal_styling') === false || get_option('wp_post_modal_styling') === '')
-            update_option('wp_post_modal_styling', '1');
+        if (get_option('wp_post_modal_breakpoint') === false || get_option('wp_post_modal_breakpoint') === '')
+            update_option('wp_post_modal_breakpoint', '0');
+
+        // set default wrapping to enabled
+        if (get_option('wp_post_modal_wrapping') === false || get_option('wp_post_modal_wrapping') === '')
+            update_option('wp_post_modal_wrapping', '0');
+
+        // enable visual editor button by default
+        if (get_option('wp_post_modal_button') === false || get_option('wp_post_modal_button') === '')
+            update_option('wp_post_modal_button', '0');
 
         // TODO: redirect to settings page after plugin activation
         wp_redirect(admin_url('options-general.php?page=wp-post-modal'));
+        exit;
     }
-
 }
