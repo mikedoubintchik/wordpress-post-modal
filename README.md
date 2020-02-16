@@ -88,6 +88,7 @@ Yes, you can have as many as you like.
 
 ## Changelog
 
+* 3.5.3: Updated how admin notices are dismissed
 * 3.5.2: Minor bug fixes
 * 3.5.1: Added redirection upon plugin activation
 * 3.5.0: Enabled opening consecutive popups and minor bug fixes

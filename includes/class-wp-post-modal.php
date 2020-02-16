@@ -161,11 +161,17 @@ class WP_Post_Modal
 
 		$this->loader->add_filter('plugin_action_links_' . plugin_basename(plugin_dir_path(__DIR__) . $this->plugin_name . '.php'), $plugin_admin, 'add_settings_link');
 
-		$this->loader->add_filter('admin_notices', $plugin_admin, 'admin_notice_installed');
-		$this->loader->add_filter('network_admin_notices', $plugin_admin, 'admin_notice_installed');
+		$admin_installed_notice = get_option('dismiss_admin_notice_installed');
+		if (empty($admin_installed_notice) || (time() - $admin_installed_notice > 1209600)) {
+			$this->loader->add_filter('admin_notices', $plugin_admin, 'admin_notice_installed');
+			$this->loader->add_filter('network_admin_notices', $plugin_admin, 'admin_notice_installed');
+		}
 
-		$this->loader->add_filter('admin_notices', $plugin_admin, 'admin_notice_remote');
-		$this->loader->add_filter('network_admin_notices', $plugin_admin, 'admin_notice_remote');
+		$admin_remote_notice = get_option('dismiss_admin_notice_remote');
+		if (empty($admin_remote_notice) || (time() - $admin_installed_notice > 1209600 * 2)) {
+			$this->loader->add_filter('admin_notices', $plugin_admin, 'admin_notice_remote');
+			$this->loader->add_filter('network_admin_notices', $plugin_admin, 'admin_notice_remote');
+		}
 
 		if (get_option('wp_post_modal_button', true) !== '1') {
 			$this->loader->add_filter('mce_buttons', $plugin_admin, 'register_custom_mce_buttons');
@@ -179,6 +185,10 @@ class WP_Post_Modal
 				wp_redirect(admin_url('options-general.php?page=wp-post-modal'));
 			});
 		}
+
+		$this->loader->add_action('wp_ajax_dismiss_admin_notice_installed',  $plugin_admin, 'dismiss_admin_notice_installed');
+
+		$this->loader->add_action('wp_ajax_dismiss_admin_notice_remote',  $plugin_admin, 'dismiss_admin_notice_remote');
 	}
 
 	/**
