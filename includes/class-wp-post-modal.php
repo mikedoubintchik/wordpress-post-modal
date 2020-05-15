@@ -162,13 +162,13 @@ class WP_Post_Modal
 		$this->loader->add_filter('plugin_action_links_' . plugin_basename(plugin_dir_path(__DIR__) . $this->plugin_name . '.php'), $plugin_admin, 'add_settings_link');
 
 		$admin_installed_notice = get_option('dismiss_admin_notice_installed');
-		if (empty($admin_installed_notice) || (time() - $admin_installed_notice > 1209600)) {
+		if (empty($admin_installed_notice) || (time() - $admin_installed_notice > 60 * 60 * 24 * 15)) {
 			$this->loader->add_filter('admin_notices', $plugin_admin, 'admin_notice_installed');
 			$this->loader->add_filter('network_admin_notices', $plugin_admin, 'admin_notice_installed');
 		}
 
 		$admin_remote_notice = get_option('dismiss_admin_notice_remote');
-		if (empty($admin_remote_notice) || (time() - $admin_installed_notice > 1209600 * 2)) {
+		if (empty($admin_remote_notice) || (time() - $admin_installed_notice > 60 * 60 * 24 * 15)) {
 			$this->loader->add_filter('admin_notices', $plugin_admin, 'admin_notice_remote');
 			$this->loader->add_filter('network_admin_notices', $plugin_admin, 'admin_notice_remote');
 		}

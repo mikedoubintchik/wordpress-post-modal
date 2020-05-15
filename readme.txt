@@ -3,7 +3,7 @@ Contributors: allurewebsolutions
 Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.0
-Tested up to: 5.3
+Tested up to: 5.4.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,7 @@ Yes, you can have as many as you like.
 4. Easily insert popup link with custom button in Visual Editor
 
 == Changelog ==
+3.5.4: Made all links clickable in popup (images, h tags, etc.)
 3.5.3: Updated how admin notices are dismissed
 3.5.2: Minor bug fixes
 3.5.1: Added redirection upon plugin activation

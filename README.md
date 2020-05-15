@@ -8,24 +8,24 @@ Perfect for showing basic content pages without redirecting a user to the page.
 
 ## Features
 
-* Loads only the_content() field -- excludes header/footer/sidebars/etc.
-* Optionally load custom fields using a custom page template [See Documentation](https://allurewebsolutions.com/open-wordpress-post-modal-without-plugin#customize)
-* Trigger popup on page load using a URL a parameter
-* A page can have multiple popup links
-* Scroll to a specified anchor once the popup opens
-* Show external pages in popup
-* Show only a specific section from an external page
-* Works with shortcodes and some plugins, including Contact Form 7, BuddyPress, Visual Composer
-* Dynamically change URL in address bar to that of the the popped up page
-* Toggle simple styling
-* Visual Editor button for easy popup link creation
-* Set a breakpoint below which the page will load normally instead of a popup
+- Loads only the_content() field -- excludes header/footer/sidebars/etc.
+- Optionally load custom fields using a custom page template [See Documentation](https://allurewebsolutions.com/open-wordpress-post-modal-without-plugin#customize)
+- Trigger popup on page load using a URL a parameter
+- A page can have multiple popup links
+- Scroll to a specified anchor once the popup opens
+- Show external pages in popup
+- Show only a specific section from an external page
+- Works with shortcodes and some plugins, including Contact Form 7, BuddyPress, Visual Composer
+- Dynamically change URL in address bar to that of the the popped up page
+- Toggle simple styling
+- Visual Editor button for easy popup link creation
+- Set a breakpoint below which the page will load normally instead of a popup
 
 ## Useful Links
 
-* [Demo Site](https://wp-post-modal.allureprojects.com/)
-* [Contact us for feedback and bug reports](https://allurewebsolutions.com/contact)
-* [Guidelines for submitting a support request](https://allurewebsolutions.com/open-wordpress-post-modal-without-plugin#support)
+- [Demo Site](https://wp-post-modal.allureprojects.com/)
+- [Contact us for feedback and bug reports](https://allurewebsolutions.com/contact)
+- [Guidelines for submitting a support request](https://allurewebsolutions.com/open-wordpress-post-modal-without-plugin#support)
 
 ## Installation
 
@@ -88,44 +88,45 @@ Yes, you can have as many as you like.
 
 ## Changelog
 
-* 3.5.3: Updated how admin notices are dismissed
-* 3.5.2: Minor bug fixes
-* 3.5.1: Added redirection upon plugin activation
-* 3.5.0: Enabled opening consecutive popups and minor bug fixes
-* 3.4.2: Minor update to allow targeting of nested modal-links
-* 3.4.1: Added aria label on modal wrapper
-* 3.4.0: Added accessibility support for modal
-* 3.3.1: Added plugin setting to disable native content wrapping
-* 3.3.0: Added filter for changing default wrapping div id
-* 3.2.6: Added data-div functionality for internal popups
-* 3.2.5: Fix bug with popup being empty
-* 3.2.4: Added setting for disabling body scrolling
-* 3.2.3: Disabled popup for IE11
-* 3.2.2: Fixed custom templates to work with URL parameter
-* 3.2.1: Minor bug fix
-* 3.2.0: Added setting for container ID, fixed minor JS bug, fixed bug with notifications
-* 3.1.0: Added setting to toggle loading animation
-* 3.0.1: Fix scrolling bug
-* 3.0: Many improvements in plugin code
-* 2.2: Add functionality to update URL in address bar
-* 2.1.10: Allow preceding forward slash on anchor links, check if modal is open before running close modal function on window click
-* 2.1.9: Refactor post with anchor functionality
-* 2.1.8: Minor fix to move body to previously scrolled position after popup is closed with port number
-* 2.1.7: Changed slide down effect to fade in, prevented body scrolling when popup is open, recognize development URLs
-* 2.1.6: Added support for anchor links and open with modal through URL
-* 2.1.5: Add iframe method for loading more complicated external pages
-* 2.1.4: Made Visual Editor button optional in plugin settings, improved error handling in ajax requests, refactor admin notice dismissal
-* 2.1.3: Minor styling fixes
-* 2.1.2: Close popup with esc key
-* 2.1.1: Update remote admin notice functionality
-* 2.1: Add legacy method with fallback, admin notices, remote notice, added support for buddypress profiles
-* 2.0.5: Fix link when only slug is used
-* 2.0.4: Works with all custom post types
-* 2.0.3: Bug fix for if visual composer installed active
-* 2.0.2: Minor styling fixes
-* 2.0.1: AJAX method for loading external content
-* 2.0: Version 2.0 contains new plugin settings, insert popup button in Visual Editor, refactored to using WP Rest API, and more!
-* 1.4.2: Add click outside modal functionality
-* 1.4.1: Bug fix
-* 1.4: Add color overlay
-* 1.0: Initial release
+- 3.5.4: Made all links clickable in popup (images, h tags, etc.)
+- 3.5.3: Updated how admin notices are dismissed
+- 3.5.2: Minor bug fixes
+- 3.5.1: Added redirection upon plugin activation
+- 3.5.0: Enabled opening consecutive popups and minor bug fixes
+- 3.4.2: Minor update to allow targeting of nested modal-links
+- 3.4.1: Added aria label on modal wrapper
+- 3.4.0: Added accessibility support for modal
+- 3.3.1: Added plugin setting to disable native content wrapping
+- 3.3.0: Added filter for changing default wrapping div id
+- 3.2.6: Added data-div functionality for internal popups
+- 3.2.5: Fix bug with popup being empty
+- 3.2.4: Added setting for disabling body scrolling
+- 3.2.3: Disabled popup for IE11
+- 3.2.2: Fixed custom templates to work with URL parameter
+- 3.2.1: Minor bug fix
+- 3.2.0: Added setting for container ID, fixed minor JS bug, fixed bug with notifications
+- 3.1.0: Added setting to toggle loading animation
+- 3.0.1: Fix scrolling bug
+- 3.0: Many improvements in plugin code
+- 2.2: Add functionality to update URL in address bar
+- 2.1.10: Allow preceding forward slash on anchor links, check if modal is open before running close modal function on window click
+- 2.1.9: Refactor post with anchor functionality
+- 2.1.8: Minor fix to move body to previously scrolled position after popup is closed with port number
+- 2.1.7: Changed slide down effect to fade in, prevented body scrolling when popup is open, recognize development URLs
+- 2.1.6: Added support for anchor links and open with modal through URL
+- 2.1.5: Add iframe method for loading more complicated external pages
+- 2.1.4: Made Visual Editor button optional in plugin settings, improved error handling in ajax requests, refactor admin notice dismissal
+- 2.1.3: Minor styling fixes
+- 2.1.2: Close popup with esc key
+- 2.1.1: Update remote admin notice functionality
+- 2.1: Add legacy method with fallback, admin notices, remote notice, added support for buddypress profiles
+- 2.0.5: Fix link when only slug is used
+- 2.0.4: Works with all custom post types
+- 2.0.3: Bug fix for if visual composer installed active
+- 2.0.2: Minor styling fixes
+- 2.0.1: AJAX method for loading external content
+- 2.0: Version 2.0 contains new plugin settings, insert popup button in Visual Editor, refactored to using WP Rest API, and more!
+- 1.4.2: Add click outside modal functionality
+- 1.4.1: Bug fix
+- 1.4: Add color overlay
+- 1.0: Initial release

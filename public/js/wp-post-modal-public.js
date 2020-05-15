@@ -1,25 +1,19 @@
-(function($) {
+(function ($) {
   "use strict";
 
   // added to support accessibility for screen reader users
   var clickedURL;
 
-  /**
-   * Check if URL is external function
-   *
-   * @returns {boolean}
-   */
-  $.fn.isExternal = function() {
+  // Check if URL is external function
+  $.fn.isExternal = function () {
     var host = window.location.hostname;
     var link = $("<a>", {
-      href: this.attr("href")
+      href: this.attr("href"),
     })[0].hostname;
     return link !== host;
   };
 
-  /**
-   * Trapping user in modal for web accessibility
-   */
+  // Trapping user in modal for web accessibility
   function trapFocus() {
     $(".close-modal").focus();
 
@@ -29,7 +23,7 @@
       firstFocusableEl = focusableEls[0],
       lastFocusableEl = focusableEls[focusableEls.length - 1];
 
-    document.addEventListener("keydown", function(e) {
+    document.addEventListener("keydown", function (e) {
       var isTabPressed = e.key === "Tab" || e.keyCode === 9;
 
       if (!isTabPressed) return;
@@ -48,20 +42,12 @@
     });
   }
 
-  /**
-   * Check if modal is open
-   */
+  // Check if modal is open
   function popupOpen() {
     return $(".modal-wrapper").hasClass("show");
   }
 
-  /**
-   * Basename function for JS
-   *
-   * @param path
-   * @param suffix
-   * @returns {*}
-   */
+  // Basename function for JS
   function basename(path, suffix) {
     var b = path;
     var lastChar = b.charAt(b.length - 1);
@@ -78,12 +64,7 @@
     return b;
   }
 
-  /**
-   * Get URL Paramenters
-   *
-   * @param sParam
-   * @returns {*}
-   */
+  // Get URL Paramenters
   var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
       sURLVariables = sPageURL.split("&"),
@@ -99,15 +80,13 @@
     }
   };
 
-  /**
-   * Suppress modal link redirect in WP Customizer
-   */
+  // Suppress modal link redirect in WP Customizer
   function modalCustomizer() {
     if (typeof wp.customize !== "undefined") {
       var body = $("body");
       body.off("click.preview");
 
-      body.on("click.preview", "a[href]:not(.modal-link)", function(e) {
+      body.on("click.preview", "a[href]:not(.modal-link)", function (e) {
         var link = $(this);
         e.preventDefault();
         wp.customize.preview.send("scroll", 0);
@@ -117,7 +96,7 @@
   }
 
   // Document Ready
-  $(function() {
+  $(function () {
     // Detect windows width function
     var $window = $(window),
       $document = $(document),
@@ -125,9 +104,7 @@
       currentURL = window.location.pathname,
       disablePopup = !!window.MSInputMethodContext && !!document.documentMode;
 
-    /**
-     * Show modal functionality
-     */
+    // Show modal functionality
     function showModal(postLink, external) {
       scrollPos = window.pageYOffset;
       if (fromPHP.disableScrolling) $("body, html").addClass("no-scroll");
@@ -135,7 +112,7 @@
       $(".modal").addClass("show");
 
       // trap focus inside modal
-      setTimeout(function() {
+      setTimeout(function () {
         trapFocus();
       }, 1000);
 
@@ -147,9 +124,7 @@
       }
     }
 
-    /**
-     * Close modal functionality
-     */
+    // Close modal functionality
     function hideModal(currentURL) {
       var body = $("body");
 
@@ -161,45 +136,44 @@
       }
 
       // hide popup
-      $(".modal-wrapper")
-        .removeClass("show")
-        .hide();
+      $(".modal-wrapper").removeClass("show").hide();
       $(".modal").removeClass("show");
       $("#modal-content").empty();
 
       // return to previous tab location for screen reader users
       if (clickedURL) clickedURL.focus();
 
-      // return oiginal page url in address bar
+      // return original page url in address bar
       if (window.location.pathname !== currentURL) {
         history.replaceState("", "", currentURL);
       }
     }
 
+    // close modal
     $document
-      .keyup(function(e) {
+      .keyup(function (e) {
         // close modal when pressing esc
         if (e.keyCode === 27 && $(".modal-wrapper").hasClass("show"))
           hideModal(currentURL);
       })
+      // when clicking anywhere on page
+      .on("click", function (e) {
+        const currentTargetIsLink =
+          event.target instanceof HTMLAnchorElement ||
+          event.path[1].className === "modal-link";
+
+        if (popupOpen() && !currentTargetIsLink) hideModal(currentURL);
+      })
       // Close modal when clicking on close button
-      .on("click", ".close-modal", function() {
+      .on("click", ".close-modal", function () {
         hideModal(currentURL);
       })
-      // when clicking outside of modal
-      .on("click", ".modal", function(e) {
+      // when clicking inside of modal don't close
+      .on("click", ".modal, .modal-content", function (e) {
         e.stopPropagation();
       });
 
-    // when clicking outside of modal
-    $(window).on("click", function(e) {
-      var currentTargetIsLink = event.target instanceof HTMLAnchorElement;
-      if (popupOpen() && !currentTargetIsLink) hideModal(currentURL);
-    });
-
-    /**
-     * Check width
-     */
+    // Initialize entire modal functionality
     function initModal() {
       // if the window is greater than breakpoint then show modal, otherwise go to linked page as normal
       if ($window.width() >= fromPHP.breakpoint) {
@@ -216,12 +190,10 @@
             );
           }
 
-          $.get(modalUrl, function(html) {
+          $.get(modalUrl, function (html) {
             var htmlContent =
               html.indexOf("<html") > -1
-                ? $(html)
-                    .find(fromPHP.containerID)
-                    .html()
+                ? $(html).find(fromPHP.containerID).html()
                 : html;
 
             $("#modal-content").html(htmlContent);
@@ -231,14 +203,12 @@
           $(".modal-wrapper").fadeIn("fast", showModal);
         }
 
-        /**
-         * When clicking a modal-link
-         */
-        $("body").on("click", ".modal-link", function(e) {
+        // When clicking a modal-link
+        $("body").on("click", ".modal-link", function (e) {
           // Define variables
           var modalContent = $("#modal-content");
           var $this =
-            $(this).attr("href") != null ? $(this) : $("a", this).first();
+            $(this).attr("href") !== null ? $(this) : $("a", this).first();
           var postLink = $this.attr("href");
           var postSlug =
             postLink.lastIndexOf("/#") > -1
@@ -280,7 +250,7 @@
             }
             // load external content normally
             else {
-              $.ajaxPrefilter(function(options) {
+              $.ajaxPrefilter(function (options) {
                 if (options.crossDomain && jQuery.support.cors) {
                   var http =
                     window.location.protocol === "http:" ? "http:" : "https:";
@@ -290,12 +260,8 @@
                 }
               });
 
-              $.get(postLink, function(html) {
-                modalContent.html(
-                  $(html)
-                    .find(dataDivID)
-                    .html()
-                );
+              $.get(postLink, function (html) {
+                modalContent.html($(html).find(dataDivID).html());
               });
             }
           }
@@ -322,17 +288,17 @@
                   fromPHP.siteUrl +
                     "/wp-json/wp-post-modal/v1/any-post-type?slug=" +
                     postSlug,
-                  function(response) {
+                  function (response) {
                     $.when(modalContent.html(response.post_content)).done(
-                      function() {
+                      function () {
                         // scroll to anchor
-                        setTimeout(function() {
+                        setTimeout(function () {
                           if (postAnchor) {
                             $(".modal-wrapper").animate(
                               {
                                 scrollTop: $(
                                   "#modal-content " + postAnchor
-                                ).offset().top
+                                ).offset().top,
                               },
                               300
                             );
@@ -345,25 +311,23 @@
               }
               // use the default method
               else {
-                $.get(postLink, function(html) {
+                $.get(postLink, function (html) {
                   var content = $(html).find(dataDivID),
                     htmlContent =
                       html.indexOf("<html") > -1
-                        ? $(html)
-                            .find(dataDivID)
-                            .html()
+                        ? $(html).find(dataDivID).html()
                         : html;
 
                   if (content[0]) {
-                    $.when(modalContent.html(htmlContent)).done(function() {
+                    $.when(modalContent.html(htmlContent)).done(function () {
                       // scroll to anchor
-                      setTimeout(function() {
+                      setTimeout(function () {
                         if (postAnchor) {
                           $(".modal-wrapper").animate(
                             {
                               scrollTop: $(
                                 "#modal-content " + postAnchor
-                              ).offset().top
+                              ).offset().top,
                             },
                             300
                           );
@@ -373,20 +337,18 @@
                   }
                   // fallback to load method
                   else {
-                    modalContent.load(postLink, function() {
+                    modalContent.load(postLink, function () {
                       modalContent.html(
-                        $(modalContent.html())
-                          .find(dataDivID)
-                          .html()
+                        $(modalContent.html()).find(dataDivID).html()
                       );
 
-                      setTimeout(function() {
+                      setTimeout(function () {
                         if (postAnchor) {
                           $(".modal-wrapper").animate(
                             {
                               scrollTop: $(
                                 "#modal-content " + postAnchor
-                              ).offset().top
+                              ).offset().top,
                             },
                             300
                           );
@@ -400,7 +362,7 @@
           }
 
           // show modal
-          $(".modal-wrapper").fadeIn("fast", function() {
+          $(".modal-wrapper").fadeIn("fast", function () {
             // if url state plugin setting is active
             showModal(fromPHP.urlState ? postLink : "", $this.isExternal());
           });
@@ -413,7 +375,7 @@
   });
 
   // Window load
-  $(window).on("load", function() {
+  $(window).on("load", function () {
     modalCustomizer();
   });
 })(jQuery);
