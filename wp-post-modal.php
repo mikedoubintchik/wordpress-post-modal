@@ -16,7 +16,7 @@
  * Plugin Name:       WP Post Popup
  * Plugin URI:        https://allurewebsolutions.com
  * Description:       This plugin allows any content to be pulled into a modal window dynamically. To use, just create a link with class "modal-link".
- * Version:           3.5.4
+ * Version:           3.5.5
  * Author:            Allure Web Solutions
  * Author URI:        https://allurewebsolutions.com
  * License:           GPL-2.0+
@@ -27,7 +27,7 @@
 
 // If this file is called directly, abort.
 if (!defined('WPINC')) {
-	die;
+    die;
 }
 
 /**
@@ -36,8 +36,8 @@ if (!defined('WPINC')) {
  */
 function activate_wp_post_modal()
 {
-	require_once plugin_dir_path(__FILE__) . 'includes/class-wp-post-modal-activator.php';
-	WP_Post_Modal_Activator::activate();
+    require_once plugin_dir_path(__FILE__) . 'includes/class-wp-post-modal-activator.php';
+    WP_Post_Modal_Activator::activate();
 }
 
 /**
@@ -46,8 +46,8 @@ function activate_wp_post_modal()
  */
 function deactivate_wp_post_modal()
 {
-	require_once plugin_dir_path(__FILE__) . 'includes/class-wp-post-modal-deactivator.php';
-	WP_Post_Modal_Deactivator::deactivate();
+    require_once plugin_dir_path(__FILE__) . 'includes/class-wp-post-modal-deactivator.php';
+    WP_Post_Modal_Deactivator::deactivate();
 }
 
 register_activation_hook(__FILE__, 'activate_wp_post_modal');
@@ -71,8 +71,8 @@ require plugin_dir_path(__FILE__) . 'includes/class-wp-post-modal.php';
 function run_wp_post_modal()
 {
 
-	$plugin = new WP_Post_Modal();
-	$plugin->run();
+    $plugin = new WP_Post_Modal();
+    $plugin->run();
 }
 
 run_wp_post_modal();

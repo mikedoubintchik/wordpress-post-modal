@@ -376,6 +376,6 @@
 
   // Window load
   $(window).on("load", function () {
-    modalCustomizer();
+    if (fromPHP.customizing) modalCustomizer();
   });
 })(jQuery);
