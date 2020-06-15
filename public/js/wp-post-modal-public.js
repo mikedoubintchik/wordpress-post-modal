@@ -157,7 +157,7 @@
           hideModal(currentURL);
       })
       // when clicking anywhere on page
-      .on("click", function (e) {
+      .on("click", function (event) {
         const currentTargetIsLink =
           event.target instanceof HTMLAnchorElement ||
           event.path[1].className === "modal-link";

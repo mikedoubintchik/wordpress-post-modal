@@ -88,6 +88,7 @@ Yes, you can have as many as you like.
 
 ## Changelog
 
+- 3.5.6: Bug fix
 - 3.5.5: Bug fix
 - 3.5.4: Made all links clickable in popup (images, h tags, etc.)
 - 3.5.3: Updated how admin notices are dismissed
