@@ -157,10 +157,10 @@
           hideModal(currentURL);
       })
       // when clicking anywhere on page
-      .on("click", function (event) {
+      .on("click", function (e) {
         const currentTargetIsLink =
-          event.target instanceof HTMLAnchorElement ||
-          event.path[1].className === "modal-link";
+          e.target instanceof HTMLAnchorElement ||
+          e.originalEvent.path[1].className === "modal-link";
 
         if (popupOpen() && !currentTargetIsLink) hideModal(currentURL);
       })
