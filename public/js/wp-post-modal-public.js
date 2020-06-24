@@ -153,20 +153,26 @@
     $document
       .keyup(function (e) {
         // close modal when pressing esc
-        if (e.keyCode === 27 && $(".modal-wrapper").hasClass("show"))
+        if (
+          e.keyCode === 27 &&
+          $(".modal-wrapper").hasClass("show") &&
+          popupOpen()
+        )
           hideModal(currentURL);
       })
       // when clicking anywhere on page
       .on("click", function (e) {
-        const currentTargetIsLink =
-          e.target instanceof HTMLAnchorElement ||
-          e.originalEvent.path[1].className === "modal-link";
+        if (popupOpen()) {
+          const currentTargetIsLink =
+            e.target instanceof HTMLAnchorElement ||
+            e.originalEvent.path[1].className === "modal-link";
 
-        if (popupOpen() && !currentTargetIsLink) hideModal(currentURL);
+          if (!currentTargetIsLink) hideModal(currentURL);
+        }
       })
       // Close modal when clicking on close button
       .on("click", ".close-modal", function () {
-        hideModal(currentURL);
+        if (popupOpen()) hideModal(currentURL);
       })
       // when clicking inside of modal don't close
       .on("click", ".modal, .modal-content", function (e) {
