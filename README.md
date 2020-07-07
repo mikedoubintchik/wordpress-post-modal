@@ -88,6 +88,7 @@ Yes, you can have as many as you like.
 
 ## Changelog
 
+- 3.6.0: Added plugin setting for custom modal link class
 - 3.5.8: Bug fix
 - 3.5.7: Bug fix
 - 3.5.6: Bug fix

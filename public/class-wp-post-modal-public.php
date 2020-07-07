@@ -116,6 +116,7 @@ class WP_Post_Modal_Public
             'iframe' => get_option('wp_post_modal_iframe'),
             'urlState' => get_option('wp_post_modal_urlstate'),
             'containerID' => '#' . (get_option('wp_post_modal_container') ? get_option('wp_post_modal_container') : 'modal-ready'),
+            'modalLinkClass' => (get_option('wp_post_modal_modal_link_class') ? get_option('wp_post_modal_modal_link_class') : 'modal-link'),
             'isAdmin' => is_admin(),
             'customizing' => is_customize_preview(),
         ));

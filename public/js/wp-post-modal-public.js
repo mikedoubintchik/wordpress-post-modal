@@ -86,12 +86,16 @@
       var body = $("body");
       body.off("click.preview");
 
-      body.on("click.preview", "a[href]:not(.modal-link)", function (e) {
-        var link = $(this);
-        e.preventDefault();
-        wp.customize.preview.send("scroll", 0);
-        wp.customize.preview.send("url", link.prop("href"));
-      });
+      body.on(
+        "click.preview",
+        `a[href]:not(.${fromPHP.modalLinkClass})`,
+        function (e) {
+          var link = $(this);
+          e.preventDefault();
+          wp.customize.preview.send("scroll", 0);
+          wp.customize.preview.send("url", link.prop("href"));
+        }
+      );
     }
   }
 
@@ -165,7 +169,7 @@
         if (popupOpen()) {
           const currentTargetIsLink =
             e.target instanceof HTMLAnchorElement ||
-            e.originalEvent.path[1].className === "modal-link";
+            e.originalEvent.path[1].className === fromPHP.modalLinkClass;
 
           if (!currentTargetIsLink) hideModal(currentURL);
         }
@@ -183,7 +187,7 @@
     function initModal() {
       // if the window is greater than breakpoint then show modal, otherwise go to linked page as normal
       if ($window.width() >= fromPHP.breakpoint) {
-        var modalUrl = getUrlParameter("modal-link");
+        var modalUrl = getUrlParameter(fromPHP.modalLinkClass);
 
         // if using URL parameter to open modal
         if (modalUrl) {
@@ -210,11 +214,13 @@
         }
 
         // When clicking a modal-link
-        $("body").on("click", ".modal-link", function (e) {
+        $("body").on("click", `.${fromPHP.modalLinkClass}`, function (e) {
           // Define variables
           var modalContent = $("#modal-content");
           var $this =
-            $(this).attr("href") !== null ? $(this) : $("a", this).first();
+            $(this).attr("href") !== undefined
+              ? $(this)
+              : $(this).find("a").first();
           var postLink = $this.attr("href");
           var postSlug =
             postLink.lastIndexOf("/#") > -1
