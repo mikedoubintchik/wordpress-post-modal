@@ -169,7 +169,10 @@
         if (popupOpen()) {
           const currentTargetIsLink =
             e.target instanceof HTMLAnchorElement ||
-            e.originalEvent.path[1].className === fromPHP.modalLinkClass;
+            e.target.parentNode.className.indexOf(fromPHP.modalLinkClass) >=
+              0 ||
+            (e.originalEvent.path &&
+              e.originalEvent.path[1].className === fromPHP.modalLinkClass);
 
           if (!currentTargetIsLink) hideModal(currentURL);
         }
