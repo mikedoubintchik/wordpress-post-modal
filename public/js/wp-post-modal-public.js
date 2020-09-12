@@ -18,7 +18,7 @@
     $(".close-modal").focus();
 
     var focusableEls = document.querySelectorAll(
-        '.modal a[href]:not([disabled]), .modal button:not([disabled]), .modal textarea:not([disabled]), .modal input[type="text"]:not([disabled]), .modal input[type="radio"]:not([disabled]), .modal input[type="checkbox"]:not([disabled]), .modal select:not([disabled])'
+        '.wp-post-modal a[href]:not([disabled]), .wp-post-modal button:not([disabled]), .wp-post-modal textarea:not([disabled]), .wp-post-modal input[type="text"]:not([disabled]), .wp-post-modal input[type="radio"]:not([disabled]), .wp-post-modal input[type="checkbox"]:not([disabled]), .wp-post-modal select:not([disabled])'
       ),
       firstFocusableEl = focusableEls[0],
       lastFocusableEl = focusableEls[focusableEls.length - 1];
@@ -113,7 +113,7 @@
       scrollPos = window.pageYOffset;
       if (fromPHP.disableScrolling) $("body, html").addClass("no-scroll");
       $(".modal-wrapper").addClass("show");
-      $(".modal").addClass("show");
+      $(".wp-post-modal").addClass("show");
 
       // trap focus inside modal
       setTimeout(function () {
@@ -141,7 +141,7 @@
 
       // hide popup
       $(".modal-wrapper").removeClass("show").hide();
-      $(".modal").removeClass("show");
+      $(".wp-post-modal").removeClass("show");
       $("#modal-content").empty();
 
       // return to previous tab location for screen reader users
@@ -182,7 +182,7 @@
         if (popupOpen()) hideModal(currentURL);
       })
       // when clicking inside of modal don't close
-      .on("click", ".modal, .modal-content", function (e) {
+      .on("click", ".wp-post-modal, .modal-content", function (e) {
         e.stopPropagation();
       });
 

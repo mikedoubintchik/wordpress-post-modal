@@ -1,234 +1,234 @@
 /** default styles **/
 html.no-scroll,
 body.no-scroll {
-    position: fixed;
-    overflow: hidden;
-    width: 100%;
-    cursor: pointer;
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
+  cursor: pointer;
 }
 
 .close-modal {
-    display: none;
-    border: 0;
-    margin-top: 10px;
+  display: none;
+  border: 0;
+  margin-top: 10px;
 }
 
 .close-modal:focus {
-    outline: 1px dashed skyblue;
-    border-radius: 5px;
+  outline: 1px dashed skyblue;
+  border-radius: 5px;
 }
 
 .modal-wrapper {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 9999; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 9999; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
 }
 
-.modal {
-    display: none;
+.wp-post-modal {
+  display: none;
 }
 
 /** activate modal **/
 .modal-wrapper.show,
-.modal.show,
-.modal.show .close-modal {
-    display: block !important;
+.wp-post-modal.show,
+.wp-post-modal.show .close-modal {
+  display: block !important;
 }
 
 /** styled modal **/
 .modal-wrapper.styled {
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
 }
 
-.modal-wrapper.styled .modal {
-    position: relative;
-    background-color: #fefefe;
-    margin: 10vh auto; /* 10vh from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 70%; /* Could be more or less, depending on screen size */
-    transition: all 2s ease;
+.modal-wrapper.styled .wp-post-modal {
+  position: relative;
+  background-color: #fefefe;
+  margin: 10vh auto; /* 10vh from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 70%; /* Could be more or less, depending on screen size */
+  transition: all 2s ease;
 }
 
-.modal-wrapper.styled .modal .close-modal {
-    background: transparent;
-    position: absolute;
-    top: -6px;
-    right: 10px;
-    font-size: 2.0em;
-    color: #333;
-    cursor: pointer;
-    z-index: 1;
+.modal-wrapper.styled .wp-post-modal .close-modal {
+  background: transparent;
+  position: absolute;
+  top: -6px;
+  right: 10px;
+  font-size: 2em;
+  color: #333;
+  cursor: pointer;
+  z-index: 1;
 }
 
-.modal-wrapper.styled .modal .loading {
-    display: block;
-    width: 100px;
-    margin: auto;
-    padding: 25vh 0;
+.modal-wrapper.styled .wp-post-modal .loading {
+  display: block;
+  width: 100px;
+  margin: auto;
+  padding: 25vh 0;
 }
 
-.modal-wrapper.styled .modal .entry-content p {
-    font-size: 16px;
-    text-rendering: optimizeLegibility;
-    line-height: 1.5em;
-    margin-bottom: 0.8em;
+.modal-wrapper.styled .wp-post-modal .entry-content p {
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+  line-height: 1.5em;
+  margin-bottom: 0.8em;
 }
 
 .modal-wrapper.styled .modal-content {
-    padding: 0 0.7em 0 0.5em;
+  padding: 0 0.7em 0 0.5em;
 }
 
-.modal-wrapper.styled .modal h1 {
-    font-size: 2.5em;
-    margin: 0.3em 0;
+.modal-wrapper.styled .wp-post-modal h1 {
+  font-size: 2.5em;
+  margin: 0.3em 0;
 }
 
-.modal-wrapper.styled .modal h2 {
-    font-size: 2.0em;
-    margin: 0.3em 0;
+.modal-wrapper.styled .wp-post-modal h2 {
+  font-size: 2em;
+  margin: 0.3em 0;
 }
 
-.modal-wrapper.styled .modal h3 {
-    font-size: 1.75em;
-    margin: 0.3em 0;
+.modal-wrapper.styled .wp-post-modal h3 {
+  font-size: 1.75em;
+  margin: 0.3em 0;
 }
 
-.modal-wrapper.styled .modal h4 {
-    font-size: 1.50em;
-    margin: 0.3em 0;
+.modal-wrapper.styled .wp-post-modal h4 {
+  font-size: 1.5em;
+  margin: 0.3em 0;
 }
 
-.modal-wrapper.styled .modal h5 {
-    font-size: 1.25em;
-    margin: 0.3em 0;
+.modal-wrapper.styled .wp-post-modal h5 {
+  font-size: 1.25em;
+  margin: 0.3em 0;
 }
 
-.modal-wrapper.styled .modal h6 {
-    font-size: 1.0em;
-    margin: 0.3em 0;
-    line-height: 1.5em;
+.modal-wrapper.styled .wp-post-modal h6 {
+  font-size: 1em;
+  margin: 0.3em 0;
+  line-height: 1.5em;
 }
 
-.modal-wrapper.styled .modal ul li, .modal-wrapper.styled .modal ol li {
-    line-height: 1em;
-    padding-bottom: 0.5em;
-    text-align: justify;
+.modal-wrapper.styled .wp-post-modal ul li,
+.modal-wrapper.styled .wp-post-modal ol li {
+  line-height: 1em;
+  padding-bottom: 0.5em;
+  text-align: justify;
 }
 
-.modal-wrapper.styled .modal ul li {
-    list-style: disc;
-    margin-left: 30px;
+.modal-wrapper.styled .wp-post-modal ul li {
+  list-style: disc;
+  margin-left: 30px;
 }
 
-.modal-wrapper.styled .modal ol li {
-    list-style: decimal;
-    margin-left: 30px;
+.modal-wrapper.styled .wp-post-modal ol li {
+  list-style: decimal;
+  margin-left: 30px;
 }
 
-.modal-wrapper.styled .modal ol ol {
-    padding: 0.6em;
+.modal-wrapper.styled .wp-post-modal ol ol {
+  padding: 0.6em;
 }
 
-.modal-wrapper.styled .modal dt {
-    font-weight: bold;
-    text-decoration: underline;
+.modal-wrapper.styled .wp-post-modal dt {
+  font-weight: bold;
+  text-decoration: underline;
 }
 
-.modal-wrapper.styled .modal dd {
-    margin: 0;
-    padding: 0.5em 0 0.5em 0;
+.modal-wrapper.styled .wp-post-modal dd {
+  margin: 0;
+  padding: 0.5em 0 0.5em 0;
 }
 
-.modal-wrapper.styled .modal blockquote {
-    display: block;
-    background: #fff;
-    padding: 15px 20px 15px 45px;
-    margin: 0 0 20px;
-    position: relative;
+.modal-wrapper.styled .wp-post-modal blockquote {
+  display: block;
+  background: #fff;
+  padding: 15px 20px 15px 45px;
+  margin: 0 0 20px;
+  position: relative;
 
-    /*Font*/
-    font-family: Georgia, serif;
-    font-size: 16px;
-    line-height: 1.2;
-    color: #666;
-    text-align: justify;
+  /*Font*/
+  font-family: Georgia, serif;
+  font-size: 16px;
+  line-height: 1.2;
+  color: #666;
+  text-align: justify;
 
-    /*Borders - (Optional)*/
-    border-left: 7px solid #009c7b;
-    border-right: 1px solid #009c7b;
+  /*Borders - (Optional)*/
+  border-left: 7px solid #009c7b;
+  border-right: 1px solid #009c7b;
 
-    /*Box Shadow - (Optional)*/
-    -moz-box-shadow: 2px 2px 15px #ccc;
-    -webkit-box-shadow: 2px 2px 15px #ccc;
-    box-shadow: 2px 2px 15px #ccc;
+  /*Box Shadow - (Optional)*/
+  -moz-box-shadow: 2px 2px 15px #ccc;
+  -webkit-box-shadow: 2px 2px 15px #ccc;
+  box-shadow: 2px 2px 15px #ccc;
 }
 
-.modal-wrapper.styled .modal blockquote::before {
-    content: "\201C"; /*Unicode for Left Double Quote*/
+.modal-wrapper.styled .wp-post-modal blockquote::before {
+  content: "\201C"; /*Unicode for Left Double Quote*/
 
-    /*Font*/
-    font-family: Georgia, serif;
-    font-size: 60px;
-    font-weight: bold;
-    color: #999;
+  /*Font*/
+  font-family: Georgia, serif;
+  font-size: 60px;
+  font-weight: bold;
+  color: #999;
 
-    /*Positioning*/
-    position: absolute;
-    left: 10px;
-    top: 5px;
+  /*Positioning*/
+  position: absolute;
+  left: 10px;
+  top: 5px;
 }
 
-.modal-wrapper.styled .modal blockquote::after {
-    /*Reset to make sure*/
-    content: "";
+.modal-wrapper.styled .wp-post-modal blockquote::after {
+  /*Reset to make sure*/
+  content: "";
 }
 
-.modal-wrapper.styled .modal blockquote a {
-    text-decoration: none;
-    background: #eee;
-    cursor: pointer;
-    padding: 0 3px;
-    color: #c76c0c;
+.modal-wrapper.styled .wp-post-modal blockquote a {
+  text-decoration: none;
+  background: #eee;
+  cursor: pointer;
+  padding: 0 3px;
+  color: #c76c0c;
 }
 
-.modal-wrapper.styled .modal blockquote a:hover {
-    color: #666;
+.modal-wrapper.styled .wp-post-modal blockquote a:hover {
+  color: #666;
 }
 
-.modal-wrapper.styled .modal blockquote em {
-    font-style: italic;
+.modal-wrapper.styled .wp-post-modal blockquote em {
+  font-style: italic;
 }
 
-.modal-wrapper.styled .modal blockquote cite {
-    color: #999999;
-    font-size: 14px;
-    display: block;
-    margin-top: 5px;
+.modal-wrapper.styled .wp-post-modal blockquote cite {
+  color: #999999;
+  font-size: 14px;
+  display: block;
+  margin-top: 5px;
 }
 
-.modal-wrapper.styled .modal blockquote cite:before {
-    content: "\2014 \2009";
+.modal-wrapper.styled .wp-post-modal blockquote cite:before {
+  content: "\2014 \2009";
 }
 
-.modal-wrapper.styled .modal table {
-
-    color: #757575;
-    font-size: 1em;
-    line-height: 2;
-    margin: 0 0 24px;
-    width: 100%;
+.modal-wrapper.styled .wp-post-modal table {
+  color: #757575;
+  font-size: 1em;
+  line-height: 2;
+  margin: 0 0 24px;
+  width: 100%;
 }
 
-.modal-wrapper.styled .modal input[type=password] {
-    margin: 5px 0 10px;
-    width: 25%;
-    padding: 7px 0 7px 4px;
-    border: 1px solid #E3E3E3;
+.modal-wrapper.styled .wp-post-modal input[type="password"] {
+  margin: 5px 0 10px;
+  width: 25%;
+  padding: 7px 0 7px 4px;
+  border: 1px solid #e3e3e3;
 }

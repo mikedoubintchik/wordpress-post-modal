@@ -3,7 +3,7 @@ Contributors: allurewebsolutions
 Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.0
-Tested up to: 5.5
+Tested up to: 5.5.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,7 @@ Yes, you can have as many as you like.
 4. Easily insert popup link with custom button in Visual Editor
 
 == Changelog ==
+3.6.2: Namespaced modal class
 3.6.1: Fixed modal close in Firefox
 3.6.0: Added plugin setting for custom modal link class
 3.5.8: Bug fix
