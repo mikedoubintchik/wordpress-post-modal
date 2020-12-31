@@ -153,6 +153,7 @@ class WP_Post_Modal_Public
         register_rest_route($this->plugin_name . '/v1', '/any-post-type/', array(
             'methods' => 'GET',
             'callback' => array($this, 'get_content_by_slug'),
+            'permission_callback' => '__return_true',
             'args' => array(
                 'slug' => array(
                     'required' => false,

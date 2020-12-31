@@ -88,6 +88,7 @@ Yes, you can have as many as you like.
 4. Easily insert popup link with custom button in Visual Editor
 
 == Changelog ==
+3.6.3: Minor fix
 3.6.2: Namespaced modal class
 3.6.1: Fixed modal close in Firefox
 3.6.0: Added plugin setting for custom modal link class
