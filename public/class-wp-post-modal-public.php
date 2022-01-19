@@ -55,7 +55,6 @@ class WP_Post_Modal_Public
 
         $this->plugin_name = $plugin_name;
         $this->version = $version;
-
     }
 
     /**
@@ -79,7 +78,6 @@ class WP_Post_Modal_Public
          */
 
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/wp-post-modal-public.css', array(), $this->version, 'all');
-
     }
 
     /**
@@ -141,7 +139,6 @@ class WP_Post_Modal_Public
         $HTML .= '</div>';
 
         echo $HTML;
-
     }
 
     /**
@@ -160,7 +157,6 @@ class WP_Post_Modal_Public
                 ),
             ),
         ));
-
     }
 
     /**
@@ -183,12 +179,16 @@ class WP_Post_Modal_Public
         $slug = $request['slug'];
 
         // get title by slug
-        $return = get_page_by_path($slug, ARRAY_A, get_post_types());
+        $post = get_page_by_path($slug, ARRAY_A, get_post_types());
 
-        if ($return['post_content']) {
+        if (!empty($post['post_password'])) {
+            $response = new WP_Error('post_password_protected', 'Post is password protected', array('status' => 403));
+        } elseif ($post['post_status'] === "private") {
+            $response = new WP_Error('post_private', 'Post is private', array('status' => 403));
+        } elseif ($post['post_content']) {
             // render shortcodes from Visual Composer
-            $return['post_content'] = apply_filters('the_content', $return['post_content']);
-            $response = new WP_REST_Response($return);
+            $post['post_content'] = apply_filters('the_content', $post['post_content']);
+            $response = new WP_REST_Response($post);
         } else {
             $response = new WP_Error('post_empty', 'Post is empty', array('status' => 404));
         }
