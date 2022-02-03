@@ -138,7 +138,7 @@ class WP_Post_Modal_Public
         $HTML .= '</div>';
         $HTML .= '</div>';
 
-        echo $HTML;
+        echo esc_html($HTML);
     }
 
     /**
