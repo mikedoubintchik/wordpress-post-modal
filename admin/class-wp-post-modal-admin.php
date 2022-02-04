@@ -509,8 +509,7 @@ class WP_Post_Modal_Admin
      */
     public function wp_post_modal_styling_example_cb()
     {
-        echo '<img src="' .
-            plugins_url('admin/class-wp-post-modal-admin.php', __FILE__) . '/wp-post-modal/admin/images/modal-styling-example.jpg" width="300px" />';
+        echo '<img src="' . plugins_url(__FILE__, '/images/modal-styling-example.jpg') . '" width="300px" />';
     }
 
     /**
@@ -630,7 +629,7 @@ class WP_Post_Modal_Admin
         if (isset($_GET['settings-updated'])) {
         ?>
             <div class="notice notice-success is-dismissible">
-                <?php echo esc_html($message); ?>
+                <?php echo html_entity_decode(esc_html($message)); ?>
                 <button type="button" class="notice-dismiss">
                     <span class="screen-reader-text">Dismiss this notice.</span>
                 </button>
@@ -647,7 +646,7 @@ class WP_Post_Modal_Admin
         $message = '<h4>Thanks for installing WP Post Popup!</h4><p>Please <a href="https://wordpress.org/support/plugin/wp-post-modal/reviews/" target="_blank">click here</a> to give us a review :)</p>';
         ?>
         <div class="notice notice-success is-dismissible admin-notice-installed">
-            <?php echo esc_html($message); ?>
+            <?php echo html_entity_decode(esc_html($message)); ?>
             <button type="button" class="notice-dismiss">
                 <span class="screen-reader-text">Dismiss this notice.</span>
             </button>
@@ -671,7 +670,7 @@ class WP_Post_Modal_Admin
     ?>
         <div class="notice notice-success is-dismissible admin-notice-remote">
             <div class="notice-content">
-                <?php echo esc_html($message); ?>
+                <?php echo html_entity_decode(esc_html($message)); ?>
             </div>
 
             <button type="button" class="notice-dismiss">
