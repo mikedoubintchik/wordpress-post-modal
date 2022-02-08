@@ -183,9 +183,9 @@ class WP_Post_Modal_Public
 
         if (!empty($post['post_password'])) {
             $response = new WP_Error('post_password_protected', 'Post is password protected', array('status' => 403));
-        } elseif ($post['post_status'] === "private") {
-            $response = new WP_Error('post_private', 'Post is private', array('status' => 403));
-        } elseif ($post['post_content']) {
+        } elseif ($post['post_status'] !== "published") {
+            $response = new WP_Error('post_private', 'Post is not published', array('status' => 403));
+        } elseif ($post['post_content'] && $post['post_status'] === "published") {
             // render shortcodes from Visual Composer
             $post['post_content'] = apply_filters('the_content', $post['post_content']);
             $response = new WP_REST_Response($post);
