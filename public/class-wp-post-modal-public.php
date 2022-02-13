@@ -188,7 +188,9 @@ class WP_Post_Modal_Public
         } elseif ($post['post_content'] && $post['post_status'] === "published") {
             // render shortcodes from Visual Composer
             $post['post_content'] = apply_filters('the_content', $post['post_content']);
-            $response = new WP_REST_Response($post);
+            $filtered_post = array_intersect_key($post, array_flip(array('post_content')));
+
+            $response = new WP_REST_Response($filtered_post);
         } else {
             $response = new WP_Error('post_empty', 'Post is empty', array('status' => 404));
         }
