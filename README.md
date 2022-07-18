@@ -88,6 +88,7 @@ Yes, you can have as many as you like.
 
 ## Changelog
 
+- 3.7.1: Bug Fix
 - 3.7.0: Security fixes
 - 3.6.3: Minor fix
 - 3.6.2: Namespaced modal class
