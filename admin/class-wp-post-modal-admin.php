@@ -509,7 +509,7 @@ class WP_Post_Modal_Admin
      */
     public function wp_post_modal_styling_example_cb()
     {
-        echo '<img src="' . plugins_url('/images/modal-styling-example.jpg',__FILE__) . '" width="300px" />';
+        echo '<img src="' . plugins_url(__FILE__, '/images/modal-styling-example.jpg') . '" width="300px" />';
     }
 
     /**
