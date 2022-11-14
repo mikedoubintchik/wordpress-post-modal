@@ -15,6 +15,8 @@ Turn any page / post / external page into a popup instantly!
 
 Perfect for showing basic content pages without redirecting a user to the page.
 
+See the plugin in action: [https://demo.tastewp.com/wp-post-modal](https://demo.tastewp.com/wp-post-modal)
+
 == Features ==
  * Loads only the_content() field -- excludes header/footer/sidebars/etc.
  * Optionally load custom fields using a custom page template [See Documentation](https://allurewebsolutions.com/open-wordpress-post-modal-without-plugin#customize)
@@ -89,6 +91,8 @@ Yes, you can have as many as you like.
 4. Easily insert popup link with custom button in Visual Editor
 
 == Changelog ==
+5.7.2: WordPress 6.1 Support
+5.7.1: Bug fix
 5.7.0: Security fixes
 3.6.3: Minor fix
 3.6.2: Namespaced modal class
