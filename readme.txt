@@ -3,8 +3,8 @@ Contributors: allurewebsolutions
 Tags: modal, popup
 Donate link: https://allurewebsolutions.com/product/donation
 Requires at least: 3.0
-Tested up to: 6.1
-Stable tag: 3.7.1
+Tested up to: 6.2
+Stable tag: 3.7.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,7 @@ See the plugin in action: [https://demo.tastewp.com/wp-post-modal](https://demo.
 
 == Useful Links ==
 * [Demo Site](https://wp-post-modal.allureprojects.com/)
+* [Demo of the Admin Panel](https://demo.tastewp.com/wp-post-modal)
 * [Contact us for feedback and bug reports](https://allurewebsolutions.com/contact)
 * [Guidelines for submitting a support request](https://allurewebsolutions.com/open-wordpress-post-modal-without-plugin#support)
 
@@ -91,6 +92,7 @@ Yes, you can have as many as you like.
 4. Easily insert popup link with custom button in Visual Editor
 
 == Changelog ==
+5.7.3: WordPress 6.2 Support
 5.7.2: WordPress 6.1 Support
 5.7.1: Bug fix
 5.7.0: Security fixes

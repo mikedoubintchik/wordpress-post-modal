@@ -24,6 +24,7 @@ Perfect for showing basic content pages without redirecting a user to the page.
 ## Useful Links
 
 - [Demo Site](https://wp-post-modal.allureprojects.com/)
+- [Demo of the Admin Panel](https://demo.tastewp.com/wp-post-modal)
 - [Contact us for feedback and bug reports](https://allurewebsolutions.com/contact)
 - [Guidelines for submitting a support request](https://allurewebsolutions.com/open-wordpress-post-modal-without-plugin#support)
 
@@ -88,6 +89,7 @@ Yes, you can have as many as you like.
 
 ## Changelog
 
+- 3.7.3: WordPress 6.2 Support
 - 3.7.2: WordPress 6.1 Support
 - 3.7.1: Bug Fix
 - 3.7.0: Security fixes
